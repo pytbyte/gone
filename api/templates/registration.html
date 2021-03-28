@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- SITE TITTLE -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyBlock -Profile</title>
+  
+  <!-- PLUGINS CSS STYLE -->
+  <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Owl Carousel -->
+  <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <!-- Fancy Box -->
+  <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+  <!-- CUSTOM CSS -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- FAVICON -->
+  <link href="img/favicon.png" rel="shortcut icon">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body class="body-wrapper">
+
+
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-expand-lg  navigation">
+					<a class="navbar-brand" href="index.html">
+						<h1 style="color:gold"><strong>MyBlock</strong></h1>
+						<p >Classified Marketplace</p>
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ml-auto main-nav ">
+							<li class="nav-item ">
+								<a class="nav-link" href="index.html">Home</a>
+							</li>
+							
+							<li class="nav-item active">
+								<a class="nav-link " href="#">Create Business</a>
+							</li>
+							
+							
+						</ul>
+						<ul class="navbar-nav ml-auto mt-10">
+							<li class="nav-item">
+								<a class="nav-link login-button" href="index.html">Login</a>
+							</li>
+							
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!--==================================
+=            User Profile            =
+===================================-->
+
+<section class="user-profile section">
+	<div class="container">
+		<center>
+		
+	
+			<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+				<!-- Edit Personal Info -->
+				<div class="widget personal-info">
+					<h3 class="widget-header user">Add Business Information</h3>
+					<form action="#">
+
+                       <!-- File chooser -->
+						<div class="form-group choose-file">
+						<center>
+							<label for="input-logo"><img src="images/user/user-thumb.jpg" alt="" class="rounded-circle" style="width:180px;height:180px;"></label>
+						    <input type="file"  id="input-logo" hidden="true">
+						</center>
+						</div>
+
+						<!-- First Name -->
+						<div class="form-group">
+						    <label for="business-name">Business Name*</label>
+						    <input type="text" class="form-control" id="business-name" placeholder=" Official Business Name">
+						</div>
+
+                        <!-- business catgory -->
+						<div class="form-group">
+						    <div class="widget product-shorting" style="height:auto;">
+							<h4 class="widget-header">Business Type</h4>
+							
+								<div class="form-check">
+								  <label class="form-check-label">
+								    <input class="form-check-input" type="checkbox" value="">
+								    Product Shop
+								  </label>
+								</div>
+								<span>
+								<div class="form-check">
+								  <label class="form-check-label">
+								    <input class="form-check-input" type="checkbox" value="">
+								    Service Provider
+								  </label>
+								</div>
+								</span>
+								<div class="form-check">
+								  <label class="form-check-label">
+								    <input class="form-check-input" type="checkbox" value="">
+								    Event Planning
+								  </label>
+								</div>
+								<br>
+						    
+						<label for="business-category">Business Category*</label>
+						<input type="text" class="form-control" id="business-category" placeholder="Business Category">
+                         </div>
+						</div>
+
+
+         				<!-- Phone Number -->
+						<div class="form-group">
+						    <label for="phone-number">Phone Number* </label>
+						    <input type="text" class="form-control" id="phone-number" placeholder=" Phone number">
+                        
+							<div class="widget personal-info">
+							<!-- Whatsapp Number -->
+							<div class="form-group">
+							    <label for="Whatsapp-number">Whatsapp Number (optional)</label>
+							    <input type="text" class="form-control" id="Whatsapp-number" placeholder=" Whatsapp number" >
+							</div>
+	                        
+							<!-- Checkbox -->
+							<div class="form-check" >
+							  <label class="form-check-label" for="hide-profile" style="color:red;">
+							    <input class="form-check-input" type="checkbox" value="" id="hide-profile">
+							    Hide whatsapp number from Public
+							  </label>
+							</div>
+							</div>
+					    </div>
+
+						
+                        <!-- business email -->
+						<div class="form-group">
+						    <label for="current-email">Business Email*</label>
+						    <input type="email" class="form-control" id="current-email" placeholder="Business email address">
+						</div>
+
+                     
+
+						<!-- Location -->
+						<div class="form-group">
+						    <label for="location">Business Location</label>
+						    <input type="text" class="form-control" id="location" placeholder=" eg: 9West, 4th Floor, Nairobi Kenya">
+						</div>
+						<!-- Submit button -->
+						<button class="btn btn-transparent">Save My Changes</button>
+					</form>
+				</div>
+				
+				
+			</div>
+		</div>
+		</center>
+	</div>
+</section>
+
+<!--============================
+=            Footer            =
+=============================-->
+
+<!-- Footer Bottom -->
+<footer class="footer-bottom">
+    <!-- Container Start -->
+    <div class="container">
+     
+ 
+          <!-- Social Icons -->
+          <ul class="social-media-icons text-right">
+              <li><a class="fa fa-facebook" href=""></a></li>
+              <li><a class="fa fa-twitter" href=""></a></li>
+              <li><a class="fa fa-pinterest-p" href=""></a></li>
+              <li><a class="fa fa-vimeo" href=""></a></li>
+            </ul>
+        
+      </div>
+    </div>
+    <!-- Container End -->
+    <!-- To Top -->
+    <div class="top-to">
+      <a id="top" class="" href=""><i class="fa fa-angle-up"></i></a>
+    </div>
+</footer>
+
+
+  <!-- JAVASCRIPTS -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="plugins/tether/js/tether.min.js"></script>
+  <script src="plugins/raty/jquery.raty-fa.js"></script>
+  <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
+  <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+  <script src="plugins/slick-carousel/slick/slick.min.js"></script>
+  <script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
+  <script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+  <script src="js/scripts.js"></script>
+
+</body>
+
+</html>

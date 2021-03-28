@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- SITE TITTLE -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MyBlock -Profile</title>
+  
+  <!-- static/plugins CSS STYLE -->
+  <link href="static/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="static/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Owl Carousel -->
+  <link href="static/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="static/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <!-- Fancy Box -->
+  <link href="static/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="static/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="static/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+  <!-- CUSTOM CSS -->
+  <link href="static/css/style.css" rel="stylesheet">
+
+  <!-- FAVICON -->
+  <link href="img/favicon.png" rel="shortcut icon">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body class="body-wrapper">
+
+
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-expand-lg  navigation">
+					<a class="navbar-brand" href="index.html">
+						<h1 style="color:gold"><strong>MyBlock</strong></h1>
+						<p >Classified Marketplace</p>
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ml-auto main-nav ">
+									
+							
+						</ul>
+						<ul class="navbar-nav ml-auto mt-10">
+							<li class="nav-item">
+								<a class="nav-link login-button" href="registration.html">Register</a>
+							</li>
+							
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!--==================================
+=            User Profile            =
+===================================-->
+
+<section class="user-profile section">
+	<div class="container">
+		<center>
+		
+	
+			<div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+				<!-- Edit Personal Info -->
+				<div class="widget personal-info">
+					<h3 class="widget-header user">MyBlock account verification </h3>
+					<br>
+					 <form action = "/confirm_account" method="post">
+
+                       <!--profile photo -->
+                       {% if user_data.image_url%}
+						<img src="static/all_images/default/default.jpg" alt="" class="rounded-circle" style="width:180px;height:180px;">
+						{% else %}
+						<img src="{{user_data.image_url}}" alt="" class="rounded-circle" style="width:180px;height:180px;">
+
+						{% endif %}
+						<br>
+
+                        {% for message in get_flashed_messages() %}
+                        <div text-center>
+                        <div style="color:red;" class="alert-error">{{ message }}</div>
+                        </div>
+                        {% endfor %}
+                        <br>
+						<!-- otp -->
+						<div class="form-group">
+						    <label for="otp"> OTP*</label><br>
+						    <input id="otp" type="int" class="input" placeholder="Enter OTP here: " name="otp" required >
+						</div>
+
+						<!-- Submit button -->
+						<button class="btn btn-transparent">validate</button>
+					</form>
+				</div>			
+				<div><p class="text-center"> Didn't recieve code? <a href="/verify"> resend</a> </p></div> 
+				
+			</div>
+		</div>
+		</center>
+
+	</div>
+</section>
+
+<!--============================
+=            Footer            =
+=============================-->
+
+<!-- Footer Bottom -->
+<footer class="footer-bottom">
+    <!-- Container Start -->
+    <div class="container">
+     
+ 
+          <!-- Social Icons -->
+          <ul class="social-media-icons text-right">
+              <li><a class="fa fa-facebook" href=""></a></li>
+              <li><a class="fa fa-twitter" href=""></a></li>
+              <li><a class="fa fa-pinterest-p" href=""></a></li>
+              <li><a class="fa fa-vimeo" href=""></a></li>
+            </ul>
+        
+      </div>
+    </div>
+    <!-- Container End -->
+    <!-- To Top -->
+    <div class="top-to">
+      <a id="top" class="" href=""><i class="fa fa-angle-up"></i></a>
+    </div>
+</footer>
+
+
+  <!-- JAVASCRIPTS -->
+  <script src="static/plugins/jquery/jquery.min.js"></script>
+  <script src="static/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="static/plugins/tether/js/tether.min.js"></script>
+  <script src="static/plugins/raty/jquery.raty-fa.js"></script>
+  <script src="static/plugins/bootstrap/dist/js/popper.min.js"></script>
+  <script src="static/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="static/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+  <script src="static/plugins/slick-carousel/slick/slick.min.js"></script>
+  <script src="static/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="static/plugins/fancybox/jquery.fancybox.pack.js"></script>
+  <script src="static/plugins/smoothscroll/SmoothScroll.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+  <script src="static/js/scripts.js"></script>
+
+</body>
+
+</html>

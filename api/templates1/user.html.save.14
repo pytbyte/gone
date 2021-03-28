@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+<head >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="js/leaflet.awesome-markers.js"></script>
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.css" />
+
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
+<script src="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.js"></script>
+
+
+<link href="static/css/assets/bootstrap.min.css" rel="stylesheet" />
+<div id="mapwrap" >
+  <div id="toolbar">
+   <div class="text-center" style="color: grey ;font-size: 16px;" > :::  #MyBlock  ::: </div><p> </p>
+
+    <div class="hamburger">
+
+      <span> MENU</span>
+    </div>
+    <div id="tourstops">
+     
+        <div class="profile-photo">
+        <div class="picture">
+          {% if user_data.image_url %}
+           <img src="{{user_data.image_url}}" class="picture">
+          {% else %}
+      
+            <img src="static/images/default/default.jpg" class="picture">
+          {% endif %}
+
+        </div>
+       <center><strong><h5>{{user_data.username}}</h5> {% if user_data.bio %}{{user_data.bio}}{% endif %}</strong></center><br>
+         <div class="nav nav-tabs">
+              <strong>                        
+              <li class="active"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-cog">  Settings</span></a></li>
+              <li><a href="#" data-toggle="modal" data-target="#myModal11"> <span class="glyphicon glyphicon-shopping-cart"> Services</span></a></li>
+              <li><a href="#" data-toggle="modal" data-target="#myModal00"><span class="glyphicon glyphicon-shopping-cart">  Product Deals </span></a></li>
+              <li><a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-calendar">  Events</span></a></li>
+              <li><a href="/business" ><span class="glyphicon glyphicon-briefcase">  Business</span></a></li>
+               </strong>
+             
+           <br>
+        </div>
+           <input id="user_lat"   style="display:none">
+           
+         
+          <br>
+
+    </div>
+      
+    </div>
+  </div>
+  <div id="leafletmap"></div>
+</div>
+
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/67683/ccbuildings.js"></script>
+
+
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css" />
+<link rel="stylesheet" href="static/css/style.css" />
+<link rel="stylesheet" href="static/css/ionicons.min.css" />
+<link rel="stylesheet" href="static/css/font-awesome.min.css" />
+
+
+<script src="static/js/jquery-3.1.1.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/jquery.appear.min.js"></script>
+<script src="static/js/jquery.incremental-counter.js"></script>
+<script src="static/js/script.js"></script>
+
+
+<div class="modal fade" id="myModal11" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">X</span>
+                </button>
+
+
+
+             <br>
+           </div>
+            <p class="text-center"></p>
+
+          <div class="modal-body>
+          <div class="text-center">
+ {% for service in service_data %}
+ {% if service.image_url %}
+<style>
+
+   .productCard {
+      box-shadow: grey;
+      max-width: 500px;
+      margin: 1px;
+      text-align: center;
+      font-family: arial;
+      background-color: #d2d1d1;
+   }
+   .productDetails {
+      color: rgb(26, 0, 51);
+      font-weight: bold;
+      font-size: 14px;
+   }
+   button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 5px;
+      color: white;
+      background-color: red;
+      text-align: center;
+      cursor: pointer;
+      width: 50%;
+      font-size: 14px;
+   }
+   button:hover, a:hover {
+      opacity: 0.7;
+   }
+</style>
+
+<div class="productCard">
+<div id="image_container"   tabindex="1" autofocus="autofocus">
+<div id="objects">
+{% if service.image_url %}
+<img src="{{service.image_url}}" class="object"/>
+{% endif %}
+{% if service.image_url1 %}
+<img src="{{service.image_url1}}" class="object"/>
+{% endif %}
+{% if service.image_url2 %}
+<img src="{{service.image_url2}}" class="object"/>
+{% endif %}
+{% if service.image_url3 %}
+<img src="{{service.image_url3}}" class="object"/>
+{% endif %}
+{% if service.image_.url4 %}
+<img src="{{service.image_url4}}" class="object"/>
+{% endif %}
+
+</div>
+</div>
+
+<h5 class="modal-title text-center"><strong> {{service.service_title}}</strong>
+<br>{{service.service_description}}<br>{{service.price}}</h5><br>
+<p><button><a href="/checkout"> Buy Now </a></button></p>
+<br>
+
+{% endif  %}
+ {% endfor %}
+
+
+          </div>
+        </div>
+<!-- // bss-slides  class="bss-slides demo1"      -->
+<script src="https://leemark.github.io/better-simple-slideshow/demo/js/hammer.min.js"></script><!-- for swipe support on touch interfaces -->
+
+<style>
+.bss-slides{
+  background: #0000
+  position: relative;
+  display: inline-block;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+}
+.bss-slides:focus{
+ outline: 0;
+}
+.bss-slides figure{
+  position: absolute;
+  top: 0;
+  width: auto;
+  display: inline-block;
+}
+.bss-slides figure:first-child{
+  position: relative;
+}
+.bss-slides figure img{
+  opacity: 0;
+  -webkit-transition: opacity 1.2s;
+  transition: opacity 1.2s;
+  position: relative;
+/*-webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  */
+}
+.bss-slides .bss-show {
+  z-index: 3;
+}
+.bss-slides .bss-show img{
+  opacity: 1;
+ /* -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;*/
+}
+
+.bss-slides figcaption{
+  position: absolute;
+  font-family: sans-serif;
+  font-size: .8em;
+  bottom: .75em;
+  right: .35em;
+  padding: .25em;
+  color: #fff;
+  background: #000;
+  background: rgba(0,0,0, .25);
+  border-radius: 12px;
+  opacity: 1;
+  -webkit-transition: opacity 1.2s;
+  transition: opacity 1.2s;
+}
+.bss-slides .bss-show figcaption{
+  z-index: 2;
+  opacity: 1;
+}
+.bss-slides figcaption a{
+  color: #fff;
+}
+.bss-next, .bss-prev{
+  color: #fff;
+  position: absolute;
+  background: #000;
+  background: rgba(0,0,0, .6);
+  top: 50%;
+  z-index: 4;
+  font-size: 2em;
+  margin-top: -1.2em;
+  opacity: 1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.bss-next:hover, .bss-prev:hover{
+  cursor: pointer;
+  opacity: 1;
+}
+.bss-next{
+  right: 0;
+  padding: 10px 5px 15px 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.bss-prev{
+  left: 0;
+  padding: 10px 10px 15px 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.bss-fullscreen{
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: rgba(0,0,0,.3) url(https://leemark.github.io/better-simple-slideshow/img/arrows-alt_ffffff_64.png);
+  -webkit-background-size: contain;
+  background-size: contain;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+  opacity: 1;
+}
+.bss-fullscreen:hover{
+  opacity: .8;
+}
+:-webkit-full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+:-moz-full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    background-size: contain;
+}
+:-ms-fullscreen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    background-size: contain;
+}
+:full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+:-webkit-full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+:-moz-full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    background-size: contain;
+}
+:-ms-fullscreen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    background-size: contain;
+}
+:fullscreen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+
+</style>
+
+<style>
+
+#image_container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  /* Styling */
+  background: transparent;
+
+  height:250px;
+  object-fit:contain;
+
+
+
+}
+                                                          #objects {                                                  width: auto;
+  white-space: nowrap;                                    
+  /* Styling */
+  background:"transparent";
+  height: 250px;
+  object-fit: contain;                                    }                                                                                                                   .object {                                                   display: inline-block;                                                                                              /* Styling */                                             background:"transparent";                                 border: 4px solid white;                                  image-fit: contain;                                       width: 280px;
+  height:280px;
+                                                          }                                                         </style>
+                                                                     </center>
+           </div>
+    </div>                                                </div>
+</div>
+
+
+
+
+      <!-- Modal -->
+<div class="modal fade" id="myModal00" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">X</span>
+                </button>
+
+
+
+             <br>
+           </div>
+            <p class="text-center"></p>
+
+          <div class="modal-body>
+          <div class="text-center">
+ {% for product in  product_data %}
+ {% if product.image_url %}
+<style>
+
+   .productCard {
+      box-shadow: grey;
+      max-width: 500px;
+      margin: 1px;
+      text-align: center;
+      font-family: arial;
+      background-color: #d2d1d1;
+   }
+   .productDetails {
+      color: rgb(26, 0, 51);
+      font-weight: bold;
+      font-size: 14px;
+   }
+   button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 5px;
+      color: white;
+      background-color: red;
+      text-align: center;
+      cursor: pointer;
+      width: 50%;
+      font-size: 14px;
+   }
+   button:hover, a:hover {
+      opacity: 0.7;
+   }
+</style>
+
+<div class="productCard">
+<div id="image_container"   tabindex="1" autofocus="autofocus">
+<div id="objects">
+{% if product.image_url %}
+<img src="{{product.image_url}}" class="object"/>
+{% endif %}
+{% if product.image_url1 %}
+<img src="{{product.image_url1}}" class="object"/>
+{% endif %}
+{% if product.image_url2 %}
+<img src="{{product.image_url2}}" class="object"/>
+{% endif %}
+{% if product.image_url3 %}
+<img src="{{product.image_url3}}" class="object"/>
+{% endif %}
+{% if product.image_url4 %}
+<img src="{{product.image_url4}}" class="object"/>
+{% endif %}
+
+</div>
+</div>
+
+<h5 class="modal-title text-center"><strong> {{product.product_title}}</strong>
+<br>{{product.product_description}}<br>{{product.price}}</h5><br>
+<p><button><a href="/checkout"> Buy Now </a></button></p>
+<br>
+
+{% endif  %}
+ {% endfor %}
+
+
+          </div>
+        </div>
+<!-- // bss-slides  class="bss-slides demo1"      -->
+<script src="https://leemark.github.io/better-simple-slideshow/demo/js/hammer.min.js"></script><!-- for swipe support on touch interfaces -->
+
+<style>
+.bss-slides{
+  background: #0000
+  position: relative;
+  display: inline-block;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+}
+.bss-slides:focus{
+ outline: 0;
+}
+.bss-slides figure{
+  position: absolute;
+  top: 0;
+  width: auto;
+  display: inline-block;
+}
+.bss-slides figure:first-child{
+  position: relative;
+}
+.bss-slides figure img{
+  opacity: 0;
+  -webkit-transition: opacity 1.2s;
+  transition: opacity 1.2s;
+  position: relative;
+/*-webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  */
+}
+.bss-slides .bss-show {
+  z-index: 3;
+}
+.bss-slides .bss-show img{
+  opacity: 1;
+ /* -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;*/
+}
+
+.bss-slides figcaption{
+  position: absolute;
+  font-family: sans-serif;
+  font-size: .8em;
+  bottom: .75em;
+  right: .35em;
+  padding: .25em;
+  color: #fff;
+  background: #000;
+  background: rgba(0,0,0, .25);
+  border-radius: 12px;
+  opacity: 1;
+  -webkit-transition: opacity 1.2s;
+  transition: opacity 1.2s;
+}
+.bss-slides .bss-show figcaption{
+  z-index: 2;
+  opacity: 1;
+}
+.bss-slides figcaption a{
+  color: #fff;
+}
+.bss-next, .bss-prev{
+  color: #fff;
+  position: absolute;
+  background: #000;
+  background: rgba(0,0,0, .6);
+  top: 50%;
+  z-index: 4;
+  font-size: 2em;
+  margin-top: -1.2em;
+  opacity: 1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.bss-next:hover, .bss-prev:hover{
+  cursor: pointer;
+  opacity: 1;
+}
+.bss-next{
+  right: 0;
+  padding: 10px 5px 15px 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.bss-prev{
+  left: 0;
+  padding: 10px 10px 15px 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.bss-fullscreen{
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: rgba(0,0,0,.3) url(https://leemark.github.io/better-simple-slideshow/img/arrows-alt_ffffff_64.png);
+  -webkit-background-size: contain;
+  background-size: contain;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+  opacity: 1;
+}
+.bss-fullscreen:hover{
+  opacity: .8;
+}
+:-webkit-full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+:-moz-full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    background-size: contain;
+}
+:-ms-fullscreen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    background-size: contain;
+}
+:full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+:-webkit-full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+:-moz-full-screen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    background-size: contain;
+}
+:-ms-fullscreen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    background-size: contain;
+}
+:fullscreen .bss-fullscreen{
+    background: rgba(0,0,0,.4) url(https://leemark.github.io/better-simple-slideshow/img/compress_ffffff_64.png);
+    -webkit-background-size: contain;
+    background-size: contain;
+}
+
+</style>
+
+<style>
+
+#image_container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+  /* Styling */
+  background: transparent;
+
+  height:250px;
+  object-fit:contain;
+
+
+
+}
+                                                          #objects {                                                  width: auto;
+  white-space: nowrap;                                    
+  /* Styling */
+  background:"transparent";
+  height: 250px;
+  object-fit: contain;                                    }                                                                                                                   .object {                                                   display: inline-block;                                                                                              /* Styling */                                             background:"transparent";                                 border: 4px solid white;                                  image-fit: contain;                                       width: 280px;
+  height:280px;
+                                                          }                                                         </style>
+                                                                     </center>
+           </div>
+    </div>                                                </div>
+</div>  
+
+
+
+      
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+      
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h5 class="modal-title text-center" id="exampleModalLabel"> ::: Profile ::: </h5>
+              </div>
+              <div class="modal-body"> 
+
+                                    
+               <center>
+                            
+                 <form id="profile_upload" action="/profile_upload"" method="post" role="form" enctype="multipart/form-data">
+             <link href="static/css/modal.css" rel="stylesheet">          
+            <div class="form-groulass=" col-lg-5 col-md-5">               
+            <div class=text-center>
+                                 <br>
+                                     profile picture 
+                                    <div class="input">
+
+
+                                      <div class="input-group-btn">
+                                        <div class="fileUpload btn btn-danger fake-shadow">
+
+                                          <input id="file" name="file" type="file" class="attachment_upload">
+                                          </div>
+                                       </div>
+                          <br>
+
+                                        <button class="submit-btn">upload </button>
+                      </form>
+                      <br>
+                    {% if user_data.image_url %}
+                      <form  id="update_user" action="/update_user" method="post" role="form" >
+                           
+                        <div id="firsts">
+
+
+                           
+                      <br>
+                         Bio
+                      <br>
+                               <textarea placeholder="somthing about you.." name="bio" id="bio" style="width:230px; color:blue; " > 
+                             </textarea>    
+                        
+                         <br>
+                             <input name="username" id="username" placeholder="Username" type="text">
+                         <br>                              
+                             <input name="email" id="email" placeholder="Email" type="text">
+                           <br>
+                             <input name="contact" id="contact" placeholder="Contact" type="text">
+                           <br>                         
+
+                        
+                          <input id="submits" type="submit" value="Submit">
+                           
+                        </div>
+                               
+                     </form>
+                  {% endif %}
+                   <br>
+       
+</center>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="myModalmsg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style:"background:transparent;">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h5 class="modal-title text-center" id="exampleModalLabel"> <strong> ::: Profile  ::: </strong> </h5>
+    </div>
+     <div class="modal-body">
+                <center>
+                            
+            
+             <link href="static/css/modal.css" rel="stylesheet">          
+            <div class="form-groulass=" col-lg-5 col-md-5">               
+            <div class=text-center>
+                <center>
+                      <br>
+                    {% if user_data.image_url %}
+                      <img src="{{user_data.image_url}}" class="picture_src" >
+                    {% else %}
+      
+                      <img src="static/images/default/default.jpg"  class="picture-src">
+                    {% endif %}
+                      <h5 class="modal-title text-center">
+
+                      <center>
+                        <br>
+                          {{user_data.username}}
+                        <br>
+                        <br>
+                          {{user_data.email}}
+                        <span>
+                          {{user_data.contact}}
+                        </span>
+                        <br>
+
+                    {% if user_data.bio %}
+                      <br>
+                         {{ user_data.bio}}
+                      <br>
+                    {% endif %} }
+
+                               
+
+</center>
+</div>
+</div>                           
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h5 class="modal-title text-center" id="exampleModalLabel"> Post </h5>
+    </div>
+    <div class="modal-body"> 
+
+   <div class="wrap-collabsible"> <input id="collapsibleproduct" class="toggle" type="checkbox">
+     <label for="collapsibleproduct" class="lbl-toggle" tabindex="0"> Product </label>
+      <div class="collapsible-content">
+       <div class="content-inner">
+      </div>
+     </div>
+    </div>
+
+
+{% if service_data %}
+<div class="wrap-collabsible"> <input id="collapsibleservice" class="toggle" type="checkbox">
+<label for="collapsibleservice" class="lbl-toggle" tabindex="0"> Service </label>
+<div class="collapsible-content">
+<div class="content-inner">
+
+               <center>
+
+                 <form id="service_upload" action="/service_upload" method="post" role="form" enctype="multipart/form-data"  name="files[]" multiple="true" autocomplete="off" require >
+             <link href="static/css/modal.css" rel="stylesheet">
+            <div class="form-groulass=" col-lg-5 col-md-5">
+            <div class=text-center>
+                                 <br>
+                                    <div class="input">
+
+
+                                      <div class="input-group-btn">
+                                        <div class="fileUpload btn btn-danger fake-shadow">
+
+                                          <input id="logo-id" name="file" type="file" class="attachment_upload">
+                                          </div>
+                                       </div>
+                          <br>
+
+                             <input name= "service_name" id="service_name" placeholder="Service Name" type="text">
+                           <br>
+                             <input name="price" id="price" placeholder="price" type="text">
+                           <br>
+
+                               
+                              <textarea name="service_description" id="service_decsription"  style="color:blue; width:250px;" placeholder="a brief description of your service">
+                              </textarea>
+                           <br>
+
+                          <input id="submits" type="submit" value="Submit">
+
+                        </div>
+                       </center>
+
+                     </form>
+
+                   <br>
+
+</center>
+</p>
+</div>
+</div>
+</div>
+
+{% endif %}
+                
+ <div class="wrap-collabsible"> <input id="collapsiblecategory" class="toggle" type="checkbox">
+<label for="collapsiblecategory" class="lbl-toggle" tabindex="0">
+Category</label>
+<div class="collapsible-content">
+<div class="content-inner">
+<p>
+ <article>
+                    <form id="uploadcategory" action="/categoryupload" method="post" role="form" enctype="multipart/form-data">
+                          
+                               <p>
+                                
+  <fieldset>
+
+  <label>
+   Select your categories of interest.
+   (ctrl-click to select multiple lines)
+  </label>
+  <select id = "selLanguage" multiple = "multiple" size = "10" style="width:240px; center>
+  {% for category in categorydata %} <option value = "{{categorydata.categoryname}}">"{{categorydata.categoryname}}"</option>
+  {% endfor %}  
+  </select>
+<br>
+  <button type = "submit" onclick = "showChoices()">
+   Submit 
+  </button>
+  </fieldset>
+ 
+ <div id = "output">
+ <h2>" your interests: " </h2>
+ </div>
+
+ <script type = "text/javascript">
+n  //from multi-select.html
+  function showChoices(){
+  //retrieve data
+  var selLanguage = document.getElementById("selLanguage");
+  //set up output string
+  var result = "";
+  result += "<ul> ";
+  //step through options
+  for (i = 0; i < selLanguage.length; i++){
+   //examine current option
+   currentOption = selLanguage[i];
+   //print it if it has been selected
+   if (currentOption.selected == true){
+   result += " <li>" + currentOption.value + "</li> ";
+   } // end if
+  } // end for loop
+  //finish off the list and print it out
+  result += "</ul> ";
+  output = document.getElementById("output");
+  output.innerHTML = result;
+  } // end showChoices
+ </script>
+                                    </p>
+
+                    </form>
+
+<div class="wrap-collabsible"> <input id="collapsiblenewcategory" class="toggle" type="checkbox">
+<label for="collapsiblenewcategory" class="lbl-toggle" tabindex="0">
+create Category</label>
+<div class="collapsible-content">
+<div class="content-inner">
+<p>
+ <article>                     
+
+ <form    id="customcategory" action="/customcategory" method="post" role="form" >
+                        <div id="firsts"><center>
+
+                             <input name= "categoryname" id="categoryname" placeholder=" category name" type="text">     
+                           
+<br>
+  <input id="submits" type="submit" value="Submit">
+</center>
+ </div>
+                    </form>
+
+        </article>
+
+</p>
+</div>
+</div>
+</div>
+</div>
+    
+</body>
+</html> 
+<script type="text/javascript">
+  
+        //attempt to fetch cuurnt location
+    
+
+    
+         // Creating a map object
+         var mymap =  new L.map('leafletmap');
+
+         mymap.locate({setView: true,
+                       enableHighAccuracy: true, 
+                       maxZoom: 18, 
+                       watch:false, 
+                       timeout: 60000,
+                       maximumAge:0
+                      });
+                           
+         
+         
+
+         // Creating a Layer object
+        var googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+           maxZoom: 18,
+           subdomains:['mt0','mt1','mt2','mt3']
+            }).addTo(mymap);
+         function onLocationFound(e) {
+                                    
+                  var radiu = e.accuracy / 2;
+                  // js set radius to 0 decimal places.
+                  var radius = radiu.toFixed(0)
+                  var marker= L.marker(e.latlng)
+                  var redIcon = L.icon.pulse({ color: "red", fillColor: "blue", animate: true});                      
+                  // Adding marker to the map
+                  //$('#myModalmsg').modal('show');             
+                  var greenIcon = L.icon.pulse({ color: "green", fillColor: "blue", animate: true});  
+
+                  marker.setIcon(redIcon)
+                  marker.bindPopup(' <div style="background-image: url('+"{{user_data.image_url}}"+'); width:200px;height:200px;  background-size: cover;"></div><div class=text-center><strong>{{user_data.username}}<br> About '+ e.latlng +' meters around</strong><br><li class="fa fa-phone"></li>&nbsp; &nbsp;<span><i class="fa fa-envelope" aria-hidden="true"></li>&nbsp; &nbsp;<li class="fa fa-whatsapp"></li>&nbsp; &nbsp;{% if user_data.facebook %}<li class="fa fa-facebook">{% endif %}</li>&nbsp; &nbsp;{% if user_data.instagram %}<li class="fa fa-instagram"></li></span>{% endif %}</div>').openPopup();
+                  marker.addTo(mymap)
+
+                 var ll = markerA.getLatLng();
+                 document.querySelector('#user_lat').value = ll;
+
+                  points.setAttribute('value', ll);
+
+
+
+                  }
+
+
+                            
+
+            mymap.on('locationfound', onLocationFound);
+
+
+
+ 
+        
+    
+</script>
+
+<script src="https://npmcdn.com/leaflet-geometryutil"></script>
+  <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
+<script src="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.js"></script>
+
+
+        

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="js/leaflet.awesome-markers.js"></script>
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.css" />
+
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
+<script src="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.js"></script>
+
+
+
+<link href="static/css/assets/bootstrap.min.css" rel="stylesheet" />
+<div id="mapwrap" >
+  <div id="toolbar">
+   <div class="text-center" style="color: grey ;font-size: 16px;" > #MyBlock </div><p></p>
+
+    <div class="hamburger">
+
+      <span> MENU</span>
+    </div>
+    <div id="tourstops">
+     
+        <div class="profile-photo">
+        <div class="picture">
+          {% if user_data.image_url %}
+           <img src="{{user_data.image_url}}" class="picture">
+          {% else %}
+      
+            <img src="static/images/default/default.jpg" class="picture">
+          {% endif %}
+
+        </div>
+        <div class=text-center><strong>{{user_data.username}}<br>Seen: {{user_data.last_seen}}</strong></div>
+         <div >
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-cog" ></span></a></li>
+          
+          <li><a href="#" data-toggle="modal" data-target="#myModal2"><span class="glyphicon glyphicon-globe"></span></a></li>
+          
+          
+          <li><a href="#" data-toggle="modal" data-target="#myModal3"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+           <li><a href="/business" ><span class="glyphicon glyphicon-plus"></span></a></li>
+
+           <input name="latlon" id="latlon"  class="alert-error">
+           </ul>
+          </div>
+          <br>
+
+    </div>
+      <ul>
+      </ul>
+    </div>
+  </div>
+  <div id="leafletmap"></div>
+</div>
+
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/67683/ccbuildings.js"></script>
+
+
+
+<link rel="stylesheet" href="static/css/bootstrap.min.css" />
+<link rel="stylesheet" href="static/css/style.css" />
+<link rel="stylesheet" href="static/css/ionicons.min.css" />
+<link rel="stylesheet" href="static/css/font-awesome.min.css" />
+
+
+<script src="static/js/jquery-3.1.1.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/jquery.appear.min.js"></script>
+<script src="static/js/jquery.incremental-counter.js"></script>
+<script src="static/js/script.js"></script>
+
+
+
+
+      <!-- Modal -->
+  
+
+
+
+      <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+      
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+            </div>
+          <div class="modal-body>
+                  <div class="bss-slides demo1" tabindex="1" autofocus="autofocus">
+            <figure>
+		      <img src="https://leemark.github.io/better-simple-slideshow/demo/img/medium.jpg" width="100%" /><figcaption>"Medium" by <a href="https://www.flickr.com/photos/thomashawk/14586158819/">Thomas Hawk</a>.</figcaption> 
+            </figure>
+            <figure>
+		      <img src="https://leemark.github.io/better-simple-slideshow/demo/img/colorado.jpg" width="100%" /><figcaption>"Colorado" by <a href="https://www.flickr.com/photos/stuckincustoms/88370744">Trey Ratcliff</a>.</figcaption> 
+            </figure>
+            <figure>
+		      <img src="https://leemark.github.io/better-simple-slideshow/demo/img/monte-vista.jpg" width="100%" /><figcaption>"Early Morning at the Monte Vista Wildlife Refuge, Colorado" by <a href="https://www.flickr.com/photos/davesoldano/8572429635">Dave Soldano</a>.</figcaption> 
+            </figure>
+            <figure>
+		      <img src="https://leemark.github.io/better-simple-slideshow/demo/img/sunrise.jpg" width="100%" /><figcaption>"Sunrise in Eastern Colorado" by <a href="https://www.flickr.com/photos/35528040@N04/6673031153">Pam Morris</a>.</figcaption> 
+            </figure>
+            <figure>
+		      <img src="https://leemark.github.io/better-simple-slideshow/demo/img/colorado-colors.jpg" width="100%" /><figcaption>"colorado colors" by <a href="https://www.flickr.com/photos/cptspock/2857543585">Jasen Miller</a>.</figcaption> 
+            </figure>
+        </div> <!-- // bss-slides -->
+<script src="https://leemark.github.io/better-simple-slideshow/demo/js/hammer.min.js"></script><!-- for swipe support on touch interfaces -->
+<style>
+
+</style>
+          </div>
+    </div>
+</div>
+</div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+      
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+                <h5 class="modal-title text-center" id="exampleModalLabel"> Settings </h5>
+              </div>
+              <div class="modal-body"> 
+            
+    <div class="wrap-collabsible"> <input id="collapsibleprofile" class="toggle" type="checkbox">
+<label for="collapsibleprofile" class="lbl-toggle" tabindex="0">
+Personal Account</label>
+<div class="collapsible-content">
+<div class="content-inner">
+<p>
+<article>
+                 <form id="profile_upload" action="/profile_upload"" method="post" role="form" enctype="multipart/form-data">
+                        <link href="static/css/modal.css" rel="stylesheet">
+                        <div class="container">
+                          <div class="row">
+
+                              <div class=text-center>
+                                  <div class="form-group">
+                                    <div class=" col-lg-5 col-md-5">
+                                    <div class="input">
+
+
+                                      <div class="input-group-btn">
+                                        <div class="fileUpload btn btn-danger fake-shadow">
+
+                                          <input id="logo-id" name="file" type="file" class="attachment_upload">
+                                          </div>
+                                       </div>
+
+
+                                        <button class="submit-btn">upload logo </button>
+                      </form>
+
+                      <form    id="update_user" action="/update_user" method="post" role="form" >
+                           <link href="static/css/modal.css" rel="stylesheet">
+                        <div id="firsts"><center>
+
+                             <input name= "username" id="username" placeholder="Name" type="text">
+                          <br>
+                             <input name="email" id="email" placeholder="Email"" type="text">
+                           <br>
+                             <input name="contact" id="contact" placeholder="Contact" type="text">
+                           <br>
+                            
+                          <input id="submits" type="submit" value="Submit">
+                           </center>
+                        </div>
+             
+                     </form>
+
+                   <br>
+        </article>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h5 class="modal-title text-center" id="exampleModalLabel"> Post </h5>
+    </div>
+    <div class="modal-body"> 
+
+ <div class="wrap-collabsible"> <input id="collapsibleproduct" class="toggle" type="checkbox">
+<label for="collapsibleproduct" class="lbl-toggle" tabindex="0">
+Product </label>
+<div class="collapsible-content">
+<div class="content-inner">
+<p>
+ <article>
+                    <form id="productupload" action="/productupload" method="post" role="form" enctype="multipart/form-data">
+                        <link href="static/css/modal.css" rel="stylesheet">
+                        <div class="container">
+                          <div class="row">
+
+                              <div class=text-center>
+                                  <div class="form-group">
+                                    <div class=" col-lg-5 col-md-5">
+                                      <div class="input">
+
+
+                                      <div class="input-group-btn">
+                                        <div class="fileUpload btn btn-danger fake-shadow">
+
+                                          <input id="logo-id" name="file" type="file" class="attachment_upload">
+                                          </div>
+                                       </div>
+
+
+                                        <button class="submit-btn">upload product image(s)</button>
+
+
+                    </form>
+
+                      <form    id="productupdate" action="/productupdate" method="post" role="form" >
+                           <link href="static/css/modal.css" rel="stylesheet">
+                          <div id="firsts"><center>
+
+  <input name= "productname" id="productname" placeholder="product name" type="text">
+<br>
+  <input name="productcost"  id="productcost" placeholder="product cost" type="text">
+<br>
+  <textarea id="productdsc" name="productdsc" rows="4" cols="50" style="text-color:black;" placeholder="product description">
+</textarea>
+<br>
+   <input id="submits" type="submit" value="Submit">
+</center>
+ </div>
+                    </form>
+
+        </article>
+
+</p>
+</div>
+</div>
+</div>
+
+<div class="wrap-collabsible"> <input id="collapsibleservice" class="toggle" type="checkbox">
+<label for="collapsibleservice" class="lbl-toggle" tabindex="0"> Service </label>
+<div class="collapsible-content">
+<div class="content-inner">
+<p>
+
+    <article>
+                    <form id="serviceupload" action="/serviceupload" method="post" role="form" enctype="multipart/form-data">
+                        <link href="static/css/modal.css" rel="stylesheet">
+                        <div class="container">
+                          <div class="row">
+
+                              <div class=text-center>
+                                  <div class="form-group">
+                                    <div class=" col-lg-5 col-md-5">
+                                      
+                                    <div class="input">
+
+
+                                      <div class="input-group-btn">
+                                        <div class="fileUpload btn btn-danger fake-shadow">
+
+                                          <input id="logo-id" name="file" type="file" class="attachment_upload">
+                                          </div>
+                                       </div>
+                                        
+
+                                        <button class="submit-btn">upload service image(s)</button>
+
+
+  </form>
+
+                      <form    id="service_update" action="/update_user" method="post" role="form" >
+                           <link href="static/css/modal.css" rel="stylesheet">
+                          <div id="firsts"><center>
+
+                             <input name= "servicename" id="fname" placeholder="service name"" type="text">
+                          <br>
+                             <input name="servicecost" id="servicecost" placeholder="service cost" type="text">
+                          <br>
+                             <textarea id="servicedsc" name="servicedsc" rows="4" cols="50" style="text-color:black;"  placeholder="service description" type="text">
+                            </textarea>
+                          <br>
+                           <input id="submits" type="submit" value="Submit">
+                          </center></div>
+
+                    </form>
+        <br>
+        </article>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+                
+ <div class="wrap-collabsible"> <input id="collapsiblecategory" class="toggle" type="checkbox">
+<label for="collapsiblecategory" class="lbl-toggle" tabindex="0">
+Category</label>
+<div class="collapsible-content">
+<div class="content-inner">
+<p>
+ <article>
+                    <form id="uploadcategory" action="/categoryupload" method="post" role="form" enctype="multipart/form-data">
+                        <link href="static/css/modal.css" rel="stylesheet">
+                       
+                               <p>
+                                
+  <fieldset>
+
+  <label>
+   Select your categories of interest.
+   (ctrl-click to select multiple lines)
+  </label>
+  <select id = "selLanguage" multiple = "multiple" size = "10" style="width:240px; center>
+  {% for category in categorydata %} <option value = "{{categorydata.categoryname}}">"{{categorydata.categoryname}}"</option>
+  {% endfor %}  
+  </select>
+<br>
+  <button type = "submit" onclick = "showChoices()">
+   Submit 
+  </button>
+  </fieldset>
+ 
+ <div id = "output">
+ <h2>" your interests: " </h2>
+ </div>
+
+ <script type = "text/javascript">
+  //from multi-select.html
+  function showChoices(){
+  //retrieve data
+  var selLanguage = document.getElementById("selLanguage");
+  //set up output string
+  var result = "";
+  result += "<ul> ";
+  //step through options
+  for (i = 0; i < selLanguage.length; i++){
+   //examine current option
+   currentOption = selLanguage[i];
+   //print it if it has been selected
+   if (currentOption.selected == true){
+   result += " <li>" + currentOption.value + "</li> ";
+   } // end if
+  } // end for loop
+  //finish off the list and print it out
+  result += "</ul> ";
+  output = document.getElementById("output");
+  output.innerHTML = result;
+  } // end showChoices
+ </script>
+                                    </p>
+
+                    </form>
+
+<div class="wrap-collabsible"> <input id="collapsiblenewcategory" class="toggle" type="checkbox">
+<label for="collapsiblenewcategory" class="lbl-toggle" tabindex="0">
+create Category</label>
+<div class="collapsible-content">
+<div class="content-inner">
+<p>
+ <article>                     
+
+ <form    id="customcategory" action="/customcategory" method="post" role="form" >
+                           <link href="static/css/modal.css" rel="stylesheet">
+                          <div id="firsts"><center>
+
+                             <input name= "categoryname" id="categoryname" placeholder=" category name" type="text">     
+                           
+<br>
+  <input id="submits" type="submit" value="Submit">
+</center>
+ </div>
+                    </form>
+
+        </article>
+
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</body>
+</html> 
+<script type="text/javascript">
+  
+        //attempt to fetch cuurnt location
+    
+
+    
+         // Creating a map object
+         var mymap =  new L.map('leafletmap');
+
+         mymap.locate({setView: true,
+                       enableHighAccuracy: true, 
+                       maxZoom: 18, 
+                       watch:false, 
+                       timeout: 60000,
+                       maximumAge:0
+                      });
+                           
+         
+         
+
+         // Creating a Layer object
+        var googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+           maxZoom: 18,
+           subdomains:['mt0','mt1','mt2','mt3']
+            }).addTo(mymap);
+         function onLocationFound(e) {
+                  $('#myModal2').modal('show');
+                  var radiu = e.accuracy / 2;
+                  // js set radius to 0 decimal places.
+                  var radius = radiu.toFixed(0)
+                  var marker= L.marker(e.latlng)
+                  var redIcon = L.icon.pulse({ color: "red", fillColor: "blue", animate: true});                      
+                  // Adding marker to the map
+             
+                  marker.setIcon(redIcon)
+                  marker.bindPopup(' <div style="background-image: url('+"{{user_data.image_url}}"+'); width:200px;height:200px;  background-size: cover;"></div><div class=text-center><strong>{{user_data.username}}<br> About '+ radius +' meters around here</strong><br><i class="fa fa-phone"></i>&nbsp;&nbsp;<span><i class="fa fa-envelope" aria-hidden="true"></i></span></div>').openPopup();
+                  marker.addTo(mymap)
+
+                  }
+
+            mymap.on('locationfound', onLocationFound);
+
+
+
+ 
+        
+    
+</script>
+
+<script src="https://npmcdn.com/leaflet-geometryutil"></script>
+  <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
+<script src="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.js"></script>
+
+
+        
