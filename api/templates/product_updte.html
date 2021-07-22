@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>MyBlock</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/theway/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="static/theway/images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/theway/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/theway/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/theway/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/theway/css/custom.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.static/theway/js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    
+    <!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <a class="navbar-brand" href="/marketplace" ><h1 style="color:gold; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 9px"><strong> classified Marketplace </strong></h4></a>
+                </div>
+                <!-- End Header Navigation -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item"><a class="nav-link" href="/marketplace">Home</a></li>
+                        <li class="dropdown active">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/product_list">Add Product</a></li>
+                                <li><a href="#">MyOrders</a></li>
+                                <li><a href="#">Reports</a></li>
+                              
+                               
+                            </ul>
+                        </li>
+                         <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+                        
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                        
+                        <li class="side-menu"><a href="#">
+            <i class="fa fa-shopping-bag"></i>
+                            <span class="badge" style="color:red;">0</span>
+          </a></li>
+                    </ul>
+                </div>
+                <!-- End Atribute Navigation -->
+            </div>
+            
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <!-- End Top Search -->
+  <div class="cart-box-main">
+        <div class="container">
+<section class="user-profile section">
+  <div class="container">
+    <center>
+    
+  
+      <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
+        <!-- Edit Personal Info -->
+        <div class="widget personal-info">
+          <h3 class="widget-header user">List a Product</h3>
+          {% for message in get_flashed_messages() %}
+                        <div text-center style="color:red;">
+                         <div class="alert-error" style="color:red;">{{ message }}</div>
+                        </div>
+                       {% endfor %}
+
+          <form id="formAjax" action="/product_list" method="post" enctype="multipart/form-data">
+                    <script data-require="jquery" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <div id="image_container">
+             <div id="objects">
+              
+               <div id="image_preview" class="object" >
+                </div>
+              
+              </div>
+             </div>
+
+                       <!-- File chooser -->
+            <div class="form-group choose-file">
+            <center>
+              <input type="file" id="myserfile" name="files[]" multiple style="display:none" onchange="preview_image()" />
+    
+                            <button id="myButton" type="button" style="border-radius: 5px; background-color: #fff; color: green;">+ Add Files</button>
+
+
+                            <br>
+                            
+            </center>
+
+
+
+            <script>
+
+               
+$(function(){
+  let inputFile = $('#myserfile');
+  let button = $('#myButton');
+  let buttonSubmit = $('#submit');
+  let filesContainer = $('#image_preview');
+  let files = [];
+  inputFile.change(function() {
+    let newFiles = []; 
+    for(let index = 0; index < inputFile[0].files.length; index++) {
+      let file = inputFile[0].files[index];
+      newFiles.push(file);
+      files.push(file);
+    }
+    
+    newFiles.forEach(file => {
+      let fileElement = $('#image_preview').append("<img src='"+URL.createObjectURL(file)+"'class='0bject' width='350px'  height='350px' >");
+      fileElement.data('fileData', file);
+      filesContainer.append(fileElement);
+      
+      fileElement.click(function(event) {
+        let fileElement = $(event.target);
+        let indexToRemove = files.indexOf(fileElement.data('fileData'));
+        fileElement.remove();
+        files.splice(indexToRemove, 1);
+      });
+    });
+  });
+  
+  button.click(function() {
+    inputFile.click();
+  });
+  
+  buttonSubmit.click(function() {
+    let formData = new FormData();
+    let ins = document.getElementById('myserfile').files.length;
+    for (var x = 0; x < ins; x++) {
+  form_data.append("files[]", document.getElementById('myserfile').files[x]);
+    }    
+    console.log('Sending...');
+    
+    $.ajax({
+      url: 'https://seetheblock.online/service_upload',
+      data: formData,
+      type: 'POST',
+      success: function(data) { console.log('SUCCESS !!!'); },
+      error: function(data) { console.log('ERROR !!!'); },
+      cache: false,
+      processData: false,
+      contentType: false
+    });
+  });
+});
+
+
+
+
+       
+</script>
+
+<style>
+
+#image_container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  
+  /* Styling */
+  background: transparent;
+  
+  height:340px;
+  
+
+  
+}
+
+#objects {
+  width: auto;
+  white-space: nowrap; 
+
+  /* Styling */
+  background:"transparent";
+  height: 340;
+}
+
+.object {
+  display: inline-block;
+  
+  /* Styling */
+  background:"transparent";
+  border: 1px solid white;
+  image-fit: contain;
+  width: 350px;
+  height:350px;
+  
+}
+
+ 
+
+</style>
+
+
+            </div>
+            {% for product in product_data %%}
+
+               <form class="mt-3 collapse review-form-box" id="formBank">
+                    <div class="form-row">
+                      <script type="text/javascript">
+                      function selector(){
+                          var y= document.getElementById("Categories");
+                          var cat = y.options[y.selectedIndex].text;
+                          document.getElementById("product_category").value =cat;
+                        }
+                                                      
+                    </script>
+                        <div class="form-group col-md-6">
+                            <label for="product_name" class="mb-0"></label>
+                            <input type="text" class="form-control" id="product_name" name="product_name"  > </div>
+
+                        <div class="form-group col-md-6"> 
+                            <label for="Product_cost" class="mb-0"></label>
+                            <input name="product_cost"  type="int" class="form-control" id="Product_cost" name="product_name"  required> </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="message" class="mb-0"></label>
+                            <textarea  name="product_description" class="form-control" id="message" rows="4" style="height:125px;"></textarea></div><br>
+            {% endfor %}
+
+                        <div class="form-group col-md-6">
+                            <input id ="product_category" type="text" name="product_category"  hidden>
+                            <label for="category">Category*</label><br>
+                            <select class="Category" id="Categories" >
+                              <option data-display="Select">Choose...</option>
+                              
+                              <option value="1">Cars</option>
+                              <option value="2">Fashion</option>
+                              
+                            </select>
+                          </div>
+                        
+                        <button id="submit" type="submit" class="btn hvr-hover" onclick= "selector()">Submit</button>
+                        
+                    </div>
+                    
+                </form>
+              </div>
+            </div>
+      </div>
+    </div>
+    </center>
+  </div>
+</section>
+
+ 
+
+    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
+    <!-- ALL JS FILES -->
+    <script src="static/theway/js/jquery-3.2.1.min.js"></script>
+    <script src="static/theway/js/popper.min.js"></script>
+    <script src="static/theway/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="static/theway/js/jquery.superslides.min.js"></script>
+    <script src="static/theway/js/bootstrap-select.js"></script>
+    <script src="static/theway/js/inewsticker.js"></script>
+    <script src="static/theway/js/bootsnav.js."></script>
+    <script src="static/theway/js/images-loded.min.js"></script>
+    <script src="static/theway/js/isotope.min.js"></script>
+    <script src="static/theway/js/owl.carousel.min.js"></script>
+    <script src="static/theway/js/baguetteBox.min.js"></script>
+    <script src="static/theway/js/jquery-ui.js"></script>
+    <script src="static/theway/js/jquery.nicescroll.min.js"></script>
+    <script src="static/theway/js/form-validator.min.js"></script>
+    <script src="static/theway/js/contact-form-script.js"></script>
+    <script src="static/theway/js/custom.js"></script>
+</body>
+
+</html>

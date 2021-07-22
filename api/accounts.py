@@ -173,10 +173,18 @@ def verify():
    phone = user_data.contact
 
    email = user_data.email
-   msg = Message('#MyBlock Account Verification Code',sender ="heretolearn1@gmail.com", recipients = [email])  
-   msg.body = str('Jambo, use this code to confirm your account' + (str(otp)))  
-   mail.send(msg)  
-   
+
+   """
+    create email template
+    handle email send  quing for scaling
+
+   """
+   msg = Message('#MyBlock sVerification Code',sender ="heretolearn1@gmail.com", recipients = [email])  
+   msg.body = str('Jambo, use this code to confirm your account' + (str(otp))) 
+   print(otp)
+    
+   #mail.send(msg)  
+   return render_template('validate.html',user_data = user_data) 
    
 
    """
@@ -199,7 +207,7 @@ def verify():
           verify.verifications.create(to=phone, channel='call')
 
   """    
-   return render_template('validate.html',user_data = user_data)  
+    
 
 
 @accounts_bp.route('/confirm_account',methods=["GET","POST"])   
@@ -210,7 +218,7 @@ def validate():
 
     if request.method =="GET":
         user_data= Users.query.filter(and_(Users.username == session["current_user"], Users.status ==0)).first()
-        flash(" submit code sent to {{}}".format(user_data.email))
+        flash(" submit code sent to "+ user_data.email) 
         return render_template('validate.html', user_data=user_data)
     
     user_data = Users.query.filter_by(username=session["current_user"]).first() 
@@ -218,6 +226,7 @@ def validate():
     user_otp = request.form['otp']
 
     """
+    SMS otp via Twillo/Africanstalking API
 
     token = request.form['otp']
     phone = user_data.contact
@@ -235,44 +244,57 @@ def validate():
            db.session.add(user_data)
            db.session.commit()
 
-  """
+    """
     if otp == int(user_otp):  
        user_data.authenticated = 1
        db.session.add(user_data)
        db.session.commit()
 
-       product_data = products.query.filter_by(status =0).all()
-       service_data =services.query.filter_by(status =0).all()
+       product_data = Products.query.filter_by(status =0).all()
+       service_data =Services.query.filter_by(status =0).all()
+       business_data = Business.query.filter_by(owner = user_data.username).first()
        #message_data = messages.query.filter(and_(messages.recipient == session["current_user"], messages.status == 0)).first()
-       message="too late to turn back now!"
+       
+       return render_template("user-profile.html",user_data=user_data, business_data=business_data)#,product_data=product_data, service_data=service_data)#message_data=message_data)
 
-       if not  product_data:
-          return render_template("user-profile.html",user_data=user_data)#, service_data=service_data,message_data=message_data)
-
-       if not  service_data:
-          return render_template("user-profile.html",user_data=user_data)#,product_data=product_data,message_data=message_data)
-
-       if not  product_data or service_data or message_data:
-          flash("there are no products/services yet.")
-          return render_template("user-profile.html",user_data=user_data)
-
-       return render_template("user-profile.html",user_data=user_data)#,product_data=product_data, service_data=service_data)#message_data=message_data)
-
-   
+    flash(" The OTP code is either Invalidor expired! \nrequest a new one or retry")
     return render_template('validate.html',user_data=user_data)
 
 
 
 
 @accounts_bp.route("/", methods=('GET', 'POST'))
-def register():
-    if request.method == 'GET':
-      Product_data = Products.query.filter_by(status=0).all()
-      if Product_data:
-         return render_template('index.html', product_data=Product_data)
-      else:
-         return render_template('index.html')
+def slash():
+    if request.method == 'GET': 
+       
 
+       return render_template('index.html')
+
+
+
+
+@accounts_bp.route("/marketplace", methods=('GET', 'POST'))
+def marketplace():
+    if request.method == 'GET':
+       product_data = Products.query.filter_by(status =0).all()
+       service_data =Services.query.filter_by(status =0).all()
+       user_data = Users.query.filter_by(username = session['current_user']).first()
+       business_data = Business.query.filter_by(owner = user_data.username).first()
+       business = Business.query.filter_by(owner=user_data.username).first()
+
+       categories = []
+       
+       for product in product_data:
+          if product.product_category not in categories:
+             categories.append(product.product_category)
+       
+       return render_template('shop.html', user_data = user_data, product_data= product_data, business_data= business_data, categories=categories,business=business)
+
+
+@accounts_bp.route("/create", methods=('GET', 'POST'))
+def register():
+    if request.method == 'GET':      
+       return render_template('user.html')
 
     #variable diclaration and definations  
     data=request.form
@@ -282,7 +304,7 @@ def register():
     contact = request.form['contact'] 
     email = request.form["email"]
     contact = data['contact']
-    whatsapp = data['whatsapp'] 
+    #full_name = data['full_name'] 
     #interests = data.get('interests'),
     status = 0,
     admin = 1 ,
@@ -293,20 +315,20 @@ def register():
     
     #check contact length
     if len(contact) < 10 or  len(contact) >13:
-        flash(" wrong phone number.Check and try again.")
-        return render_template('user-profile.html')    
+        flash(" Invalid phone number.\n Check and try again.")
+        return render_template('user.html')    
 
     #check email for correctness,
     if Users.query.filter_by(email= email).first():
           flash("email address  registered already!")
-          return render_template("user-profile.html")
+          return render_template("user.html")
 
     regex= '^.+@[^\.].*\.[a-z]{2,}$'      
     if  (re.search(regex,email)):
         email=email
     else:  
         flash("invalid email address!")
-        return  render_template("user-profile.html")
+        return  render_template("user.html")
     
 
     # duplicate value error handling 
@@ -324,12 +346,12 @@ def register():
         #response creation  
         if  username in existing_usernames :          
                 flash(" username : {} already taken. Try a unique one".format(username))
-                return render_template('user-profile.html') 
+                return render_template('user.html') 
          
           
         if  contact in existing_contacts :           
                flash(" contact : {}is  already registered before!".format(contact))          
-               return render_template('user-profile.html')      
+               return render_template('user.html')      
 
 
     #user creation
@@ -361,7 +383,7 @@ def register():
 
         dest = created_user.id
        
-        UPLOAD_ = '/home/pato/myblock-01/api/static/all_images/personal/profile'
+        UPLOAD_ = '/home/pato/myblock-01/api/static/media/personal/profile'
         os.chdir(UPLOAD_)
         dest = dest
         UPLOAD_FOLDER =UPLOAD_+str(dest)
@@ -369,7 +391,7 @@ def register():
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         if not os.path.isdir("%s" % dest):
             os.mkdir("%s" % dest)
-        return redirect(url_for('accounts.login'))  
+    return redirect(url_for('accounts.login'))  
 
 
 
@@ -398,13 +420,13 @@ def login():
             return render_template('login.html')
 
         if  Users.query.filter(and_(Users.contact==contact, Users.status==0)).first() is None:
-            flash("contact {{}} is unregisterd!".format(contact))
+            flash("contact is not registerd in this system!")
             return render_template('login.html')
 
         #confirm credentials and login  user
         user = Users.query.filter(and_(Users.contact == contact, Users.status == 0)).first()
         if user is None or not user.check_password(password):
-             flash(' WRONG ACCOUNT CREDNTIALS !. try again!')
+             flash(' INVALID ACCOUNT CREDNTIALS !')
              return render_template('login.html')
 
 
@@ -426,22 +448,63 @@ def login():
         expires = datetime.timedelta(days=1)
         access_token = create_access_token(identity=username,expires_delta=expires) 
         user_data = Users.query.filter_by(contact=contact).first() 
-      
+        
  
         if not user_data.authenticated :
               
               flash("Jambo  {} ,Enter OTP code sent to {}.".format(user.username,user.email))
-              verify()
-              return redirect(url_for("accounts.verify")) #render_template('user-profile.html',user_id=user.id,access_token=access_token,user_data =user_data, product_data = product_data)
-        user_data = Users.query.filter_by(username = session['current_user']).first()
-      
+              #verify()
+              return redirect(url_for("accounts.verify")) 
 
+        user_data = Users.query.filter_by(username = session['current_user']).first()
+        business_data =Business.query.filter_by(status = 0).all()
+        product_data =Products.query.filter_by(status = 0).all()
+        business = Business.query.filter_by(owner=user_data.username).first()
+        categories = []
+       
+        for product in product_data:
+          if product.product_category not in categories:
+             categories.append(product.product_category)
 
 
         
 
-        return render_template('user-profile.html',user_data =user_data)#product_data = product_data,service_data=service_data,message_data=message_data)
+        return render_template('shop.html',user_data =user_data , product_data = product_data, categories=categories, business_data=business_data,business=business)
 
+"""
+
+----------------------------- logout ---------------------------
+
+"""
+@accounts_bp.route('/logout', methods=('GET', 'POST'))
+def logout():
+        if request.method == 'GET':
+          logout_user()
+          return render_template('login.html')
+
+"""
+
+----------------------------- student ---------------------------
+
+"""
+@accounts_bp.route('/students', methods=('GET', 'POST'))
+def students():
+        if request.method == 'GET':
+          
+          user_data = Users.query.filter_by(username = session['current_user']).first()
+          business_data= Business.query.filter_by(owner = session['current_user']).first()
+          product_data =Products.query.filter_by(status = 0).all()
+          business = Business.query.filter_by(owner=user_data.username).first()
+          categories = []
+         
+          for product in product_data:
+            if product.product_category not in categories:
+               categories.append(product.product_category)
+
+          
+          return render_template('student2.html',user_data=user_data, business_data=business_data,categories=categories,product_data=product_data)#, user_data =user_data, product_data = product_data,service_data=service_data,message_data=message_data)
+
+          
 
 
 
@@ -462,11 +525,11 @@ def update_user():
 
         data= request.form
         user_id = user_data.id
-        name= data.get('full_name')
+        full_name= data.get('full_name')
         email = data.get('email')
         username = data.get('username')
         contact = data.get('contact')
-        whatsapp = data.get('whatsapp')
+        
         admin = 1 ,
         last_seen =sasa
         
@@ -476,7 +539,7 @@ def update_user():
         #check contact length and usage
         if contact:
             if len(contact) <10 and len(contact) >13:
-              flash(" contact {{}} is invalid !".format(contact))
+              flash(" contact length is invalid !")
          
               return render_template("user-profile.html",user_data=user_data)
 
@@ -484,7 +547,7 @@ def update_user():
         if Users.query.filter(and_(Users.contact ==contact,Users.status==0)).first() is not None:
             user_ =Users.query.filter(and_(Users.contact ==contact, Users.status==0)).first()
             if user_.username != session["current_user"]:
-              flash("contact {{}} is registered by {{}}!".format(contact,user_.username))
+              flash("contact is already registered by other user !")
             
               return render_template("user-profile.html",user_data=user_data)
 
@@ -495,7 +558,7 @@ def update_user():
         #check email for correctness and usage,
         if  Users.query.filter(and_(Users.email == email,Users.status ==0)).first() is not  None:
             user_=Users.query.filter(and_(Users.email == email, Users.status==0)).first()      
-            flash("email {{}} is registered to {{}}.".format(email,user_.username))  
+            flash("email is registered to other user")  
             
             return render_template("user-profile.html",user_data=user_data)
 
@@ -506,7 +569,7 @@ def update_user():
            email = email
         else:
             if email:
-              flash("email {{}} is invalid!".format(email))
+              flash("email format is invalid!")
                 
               return render_template("user-profile.html",user_data=user_data)
 
@@ -517,34 +580,25 @@ def update_user():
         _user = Users.query.filter_by(status = 0).all()
   
         existing_emails = []
-        existing_whatsapp = []
+        existing_full_name = []
         existing_contacts = []
         original_email =[]  
         original_contact =[]
-        original_whatsapp =[]
+        original_full_name =[]
      
-        if not user_data.whatsapp:
-                # update user_dat 
-                user_data.whatsapp = whatsapp
-                try:
-                    db.session.commit()
-
-                #handle error and retain pre edit data (rollback)
-                except exc.IntegrityError as e :
-                    db.session.rollback()
-
+        
                
         if user_data.username == session['current_user']: 
                 existing_emails.append(user_data.email)
                 existing_contacts.append(user_data.contact) 
-                existing_whatsapp.append(user_data.whatsapp)
+                existing_full_name.append(user_data.name)
 
 
         if user_data.username == session["current_user"]:
                 original_email =user_data.email 
                 original_username =user_data.username
                 original_contact =user_data.contact
-                original_whatsapp =user_data.whatsapp
+                original_full_name =user_data.name
 
         #preserve unchanged fileds
         if not email:
@@ -554,18 +608,17 @@ def update_user():
         
         if not username:
           username =user_data.username
-        if not whatsapp:
-          whatsapp =user_data.whatsapp
-
+        if not full_name:
+          full_name =user_data.name
+         
         user_data.email = email
         user_data.contact = contact
         user_data.username = username
-        user_data.whatsapp = whatsapp
+        user_data.name = full_name
 
         #check who is saving
         if user_data.username != session["current_user"]:
-            flash("you are not allowed to edit this data")
-            
+            flash("you are not allowed to edit this data")            
             return render_template("user-profile.html",user_data=user_data)
 
         user_data.last_seen = sasa,
@@ -579,7 +632,17 @@ def update_user():
             db.session.rollback()
       
         user_data = Users.query.filter_by(username = session['current_user']).first()
-        return render_template('user-profile.html',user_data=user_data)#, user_data =user_data, product_data = product_data,service_data=service_data,message_data=message_data)
+        business_data= Business.query.filter_by(owner = session['current_user']).first()
+        product_data =Products.query.filter_by(status = 0).all()
+        business = Business.query.filter_by(owner=user_data.username).first()
+        categories = []
+       
+        for product in product_data:
+          if product.product_category not in categories:
+             categories.append(product.product_category)
+
+        
+        return render_template('user-profile.html',user_data=user_data, business_data=business_data,categories=categories,product_data=product_data)#, user_data =user_data, product_data = product_data,service_data=service_data,message_data=message_data)
 
         
 
@@ -609,7 +672,7 @@ def update_password():
         user = Users.query.filter_by(username = session['current_user']).first()
         if user is None or not user.check_password(password):
                         
-            flash(" wrong Current password ")
+            flash(" InvalidCurrent password ")
             
             return render_template("user-profile.html",user_data=user_data)
 
@@ -658,15 +721,346 @@ def upload_prof_pic():
         file = request.files["file"]
         extension = os.path.splitext(file.filename)[1]
         f_name = str(uuid.uuid4()) + extension
-        file.save(os.path.join('/home/pato/myblock-01/api/static/all_images/personal/profile/'+str(user_data.id)+"/", f_name))
+        file.save(os.path.join('/home/pato/myblock-01/api/static/media/personal/profile/'+str(user_data.id)+"/", f_name))
         if  not request.files["file"]:
            user_data.image_url=old_image
         if request.files["file"]:
-           user_data.image_url = ('static/all_images/personal/profile/'+str(user_data.id)+"/"+f_name)
+           user_data.image_url = ('static/media/personal/profile/'+str(user_data.id)+"/"+f_name)
         db.session.commit()
- 
+   
     user_data =Users.query.filter_by(username=session["current_user"]).first()
-    return render_template('user-profile.html',users_=user_data)
+    business_data = Business.query.filter_by(owner = user_data.id).first()
+    return render_template('user-profile.html',user_data=user_data,business_data=business_data)
+
+
+
+
+@accounts_bp.route("/business", methods=('GET', 'POST'))
+def register_business():
+    if request.method == 'GET':
+      user_data = Users.query.filter_by(username = session["current_user"]).first()
+      business_data = Business.query.filter_by(owner = user_data.id).first()
+      product_data = Products.query.filter_by(status = 0).all()
+      return render_template('business.html', user_data=user_data , business_data=business_data, product_data=product_data)
+
+
+    #variable diclaration and definations  
+    data=request.form
+    businessname = request.form['business_name'] 
+    owner = session["current_user"]
+    business_category = request.form['business_category']
+    
+    businessemail = request.form["email"]
+    businesscontact = request.form['phone']
+    currency = request.form['currency']
+    businesslocation= request.form['location']
+    businessdsc = request.form['business_description']
+    status = 0,
+    admin = 1 ,
+    last_seen =sasa
+    registered_on =sasa
+  
+ 
+    user_data = Users.query.filter_by(username = session["current_user"]).first()
+    #check contact length
+    if len(businesscontact) < 10 or  len(businesscontact) >13:
+        flash(" wrong phone number.Check and try again.")
+        user_data = Users.query.filter_by(username = session["current_user"]).first()
+        business_data = Business.query.filter_by(owner = user_data.id).first()
+        product_data = Products.query.filter_by(status = 0).all()
+        return render_template('business.html', user_data=user_data , business_data=business_data, product_data=product_data)   
+
+    #check email for correctness,
+    if Business.query.filter_by(businessemail = businessemail).first():
+        flash("email address  registered already!")
+        user_data = Users.query.filter_by(username = session["current_user"]).first()
+        business_data = Business.query.filter_by(owner = user_data.id).first()
+        product_data = Products.query.filter_by(status = 0).all()
+        return render_template('business.html', user_data=user_data , business_data=business_data, product_data=product_data)
+
+    regex= '^.+@[^\.].*\.[a-z]{2,}$'      
+    if  (re.search(regex,businessemail)):
+        businessemail=businessemail
+    else:  
+        flash("invalid email address!")
+        user_data = Users.query.filter_by(username = session["current_user"]).first()
+        business_data = Business.query.filter_by(owner = user_data.id).first()
+        product_data = Products.query.filter_by(status = 0).all()
+        return render_template('business.html', user_data=user_data , business_data=business_data, product_data=product_data)
+    
+
+    # duplicate value error handling 
+
+    _business = Business.query.filter_by(status = 0).all()
+    existing_businessnames = []
+    existing_contacts = []
+        
+
+    for _business_ in _business:
+        existing_businessnames.append(_business_.businessname)
+        existing_contacts.append(_business_.businesscontact)   
+  
+    
+        #response creation  
+        if  businessname in existing_businessnames :          
+                flash(" business_name : {} already taken. Try a unique one".format(business_name))
+                user_data = Users.query.filter_by(username = session["current_user"]).first()
+                business_data = Business.query.filter_by(owner = user_data.id).first()
+                product_data = Products.query.filter_by(status = 0).all()
+                return render_template('business.html', user_data=user_data , business_data=business_data, product_data=product_data)
+         
+          
+        if  businesscontact in existing_contacts :           
+               flash(" contact : {}is  already registered before!".format(businesscontact)) 
+               user_data = Users.query.filter_by(username = session["current_user"]).first()
+               business_data = Business.query.filter_by(owner = user_data.id).first()
+               product_data = Products.query.filter_by(status = 0).all()
+               return render_template('business.html', user_data=user_data , business_data=business_data, product_data=product_data)         
+                  
+
+
+    #user creation
+    new_business = Business(
+        businessname = request.form['business_name'] ,
+        owner = session["current_user"],
+        businesscategory = request.form['business_category'],
+        businessemail = request.form["email"],
+        businesscontact = data['phone'],
+        currency =data['currency'],
+        businesslocation= data['location'],
+        businessdsc = data['business_description'],
+        status = 0,
+        admin = 1 ,
+        last_seen =sasa,
+        registered_on =sasa 
+        )   
+
+    # check new_business existance
+    business_data =  Business.query.filter(and_(Business.businessemail == businessemail , Business.businesscontact == businesscontact ,Business.businessname ==businessname)).first() 
+    if business_data:
+        flash("Account data belongs to {{}}, kindly login.".fomart(business_data.businessname))
+        user_data = Users.query.filter_by(username = session["current_user"]).first()
+        business_data = Business.query.filter_by(owner = user_data.id).first()
+        product_data = Products.query.filter_by(status = 0).all()
+        return render_template('business.html', user_data=user_data , business_data=business_data, product_data=product_data)
+
+    #save new user
+    if not business_data:
+       db.session.add(new_business)
+       db.session.commit()
+ 
+    created_business =   Business.query.filter(and_(Business.businessemail ==businessemail , Business.businesscontact == businesscontact ,Business.businessname ==businessname)).first() 
+    if created_business.status == 0 :
+
+
+
+
+
+        dest1 = created_business.id
+       
+        UPLOAD_ = '/home/pato/myblock-01/api/static/media/business/logo'
+        os.chdir(UPLOAD_)
+        dest = dest1
+        UPLOAD_FOLDER =UPLOAD_+str(dest)
+        app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        if not os.path.isdir("%s" % dest1):
+            os.mkdir("%s" % dest1)
+        
+
+        db.session.commit()
+        return redirect(url_for('accounts.marketplace'))  
+
+
+
+
+
+
+
+
+"""
+------------------  LOGO PHOTO --------------------
+
+""" 
+
+
+@accounts_bp.route('/business_upload',  methods=('GET', 'POST'))
+
+def upload_logo_pic():
+    """
+    uploads logo picture to session['current_user'].
+    """
+    if 'logged_in' not in session:
+        flash("your session has expired! kindly login")
+        return render_template("login.html")
+ 
+    #get current_user
+    username = session['current_user']
+    business_data =Business.query.filter_by(owner =username).first()
+    
+    if request.method == 'POST':
+        id = business_data.id
+    
+        if not request.files["file"]:
+            flash(" no file selected for upload. ")            
+            return render_template("business_profile.html",business_data=business_data)
+
+            
+        file = request.files["file"]
+        extension = os.path.splitext(file.filename)[1]
+        f_name = str(uuid.uuid4()) + extension
+        file.save(os.path.join('/home/pato/myblock-01/api/static/media/business/logo/'+str(business_data.id)+"/", f_name))
+
+        user_data =Users.query.filter_by(username=session["current_user"]).first()
+        business_data = Business.query.filter_by(owner = session["current_user"]).first()
+        business_data.logo_url = ('static/media/business/logo/'+str(business_data.id)+"/"+f_name)
+        db.session.commit()
+
+    user_data =Users.query.filter_by(username=session["current_user"]).first()
+    business_data = Business.query.filter_by(owner = session["current_user"]).first()
+    return render_template('business.html',business_data=business_data,user_data=user_data)
+
+
+
+
+
+"""
+------------------  UPDATE USER --------------------
+
+"""
+
+
+@accounts_bp.route('/update_business', methods=('GET', 'POST'))
+def update_business():
+        if "logged_in" not in session:
+           flash(" your session has expired! kindly login")
+           return render_template("login.html")
+
+        business_data = Business.query.filter_by(owner= session['current_user']).first()
+        if request.method == 'GET':
+            user_data = Users.query.filter_by(username = session["current_user"]).first()
+            business_data = Business.query.filter_by(owner = user_data.username).first()
+            product_data = Products.query.filter_by(status = 0).all()
+            return render_template('business_profile.html', user_data=user_data , business_data=business_data, product_data=product_data)
+
+        data= request.form
+        _businessid = business_data.id
+        
+        businessemail = data.get('businessemail')
+        businessname= data.get('businessname')
+        businesscontact = data.get('businesscontact')
+       
+        
+        admin = 1 ,
+        last_seen =sasa
+        
+
+        x = session['current_user'] #get_jwt_identity()
+
+        #check businesscontact length and usage
+        if businesscontact:
+            if len(businesscontact) <10 and len(businesscontact) >13:
+              flash(" businesscontact {{}} is invalid !".format(businesscontact))
+         
+              return render_template("business.html",business_data=business_data)
+
+
+        if Business.query.filter(and_(Business.businesscontact ==businesscontact,Business.status==0)).first() is not None:
+            _business =Business.query.filter(and_(Business.businesscontact ==businesscontact, Business.status==0)).first()
+            if _business.businessname!= session["current_user"]:
+              flash("businesscontact {{}} is registered by {{}}!".format(businesscontact,_business.businessname))
+            
+              return render_template("business.html",business_data=business_data)
+
+            return render_template('business.html',Business_=Business_)#, business_data =business_data, product_data = product_data,service_data=service_data,message_data=message_data)
+
+               
+
+        #check businessemail for correctness and usage,
+        if  Business.query.filter(and_(Business.businessemail == businessemail,Business.status ==0)).first() is not  None:
+            _business=Business.query.filter(and_(Business.businessemail == businessemail, Business.status==0)).first()      
+            flash("businessemail {{}} is registered to {{}}.".format(businessemail,_business.businessname))  
+            
+            return render_template("business.html",business_data=business_data)
+
+
+        
+        regex = '^.+@[^\.].*\.[a-z]{2,}$'
+        if businessemail and (re.search(regex,data['businessemail'])):
+           businessemail = businessemail
+        else:
+            if businessemail:
+              flash("businessemail {{}} is invalid!".format(businessemail))
+                
+              return render_template("business.html",business_data=business_data)
+
+
+
+        #  maintain values
+        _business=Business.query.filter(and_(Business.businessemail == businessemail,Business.status ==0)).first()
+        _user = Business.query.filter_by(status = 0).all()
+  
+        existing_businessemails = []
+       
+        existing_businesscontacts = []
+        original_businessemail =[]  
+        original_businesscontact =[]
+        
+     
+        
+
+               
+        if business_data.businessname== session['current_user']: 
+                existing_businessemails.append(business_data.businessemail)
+                existing_businesscontacts.append(business_data.businesscontact) 
+            
+
+
+        if business_data.businessname== session["current_user"]:
+                original_businessemail =business_data.businessemail 
+                original_businessname=business_data.businessname
+                original_businesscontact =business_data.businesscontact
+                
+
+        #preserve unchanged fileds
+        if not businessemail:
+           businessemail =business_data.businessemail
+        if not businesscontact:
+           businesscontact = business_data.businesscontact
+        
+        if not businessname:
+          businessname=business_data.businessname
+       
+
+        business_data.businessemail = businessemail
+        business_data.businesscontact = businesscontact
+        business_data.businessname= businessname
+        
+
+        #check who is saving
+        if request.method == 'POST':
+            if business_data.owner!= session["current_user"]:
+                flash("you are not allowed to edit this data")
+                
+                return render_template("business.html",business_data=business_data)
+
+        business_data.last_seen = sasa,
+        
+        # update _businessdat 
+        try:
+            db.session.commit()
+
+        #handle error and retain pre edit data (rollback)
+        except exc.IntegrityError as e :
+            db.session.rollback()
+      
+        business_data = Business.query.filter_by(businessname= session['current_user']).first()
+        user_data = Users.query.filter_by(username=session["current_user"]).first()
+        return render_template('map.html',business_data=business_data,user_data=user_data)#, business_data =business_data, product_data = product_data,service_data=service_data,message_data=message_data)
+
+        
+
+
 
 
 
@@ -686,175 +1080,18 @@ def dashboard():
       return render_template("login.html")
 
     if request.method =="GET":
-       user_data = Users.query.filter_by(username=session["current_user"]).first()  
-      
-       return render_template("dashboard.html", user_data=user_data)
+       user_data = Users.query.filter_by(username=session["current_user"]).first() 
+       business = Business.query.filter_by(owner = user_data.username).first() 
+       product_data = Products.query.filter(and_(Products.status ==0,Products.author_id ==business.id)).all()
 
+       categories = []
+       
+       for product in product_data:
+          if product.product_category not in categories:
+             categories.append(product.product_category)
 
-
-
-
-
-"""
-------------------  PRODUCTS--------------------
-
-""" 
-@accounts_bp.route('/products',methods = ["POST","GET"])  
-def products():
-    if "logged_in" not in session:
-      flash("your session has expired! kindly login")
-      return render_template("login.html")
-
-    if request.method =="GET":
-       user_data = Users.query.filter_by(username=session["current_user"]).first()  
-      
-       return render_template("products.html", user_data=user_data)
-
-
-
-
-
-"""
-------------------  PRODUCT-LIST --------------------
-
-""" 
-@accounts_bp.route('/product_list',methods = ["POST","GET"])  
-def product_list():
-    if "logged_in"  not in session:
-      flash("your session has expired! kindly login")
-      return render_template("login.html")
-
-    if request.method =="GET":
-       user_data = Users.query.filter_by(username=session["current_user"]).first()       
-       return render_template("product_list.html", user_data=user_data)
-
-    username =session["current_user"]
-    user_data =Users.query.filter_by(username= username).first()
-
-    # create product  photo directory
-    UPLOAD_ = '/home/pato/myblock-01/api/static/all_images/business/products/'
-    os.chdir(UPLOAD_)
-    dest = user_data.id
-    UPLOAD_FOLDER =UPLOAD_+str(dest)
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    if not os.path.isdir("%s" % dest):
-        os.mkdir("%s" % dest)
-        os.chdir(BASE_DIR)
-
-    if request.method == 'POST':
-          
-        #get  userdata
-        username =session["current_user"]
-        user_data =Users.query.filter_by(username= username).first()    
-        
-        data= request.form
-        author_id = user_data.id
-        product_title= data.get('product_name')
-        product_description = data.get('product_description')
-        product_category = data.get('product_category')
-        price = data.get('product_cost')
-        status = 0
-        timestamp =sasa
-
-         
-        new_product = Products(
-            product_title = product_title,
-            product_description = product_description,
-            author_id = author_id,            
-            product_category = product_category,
-            price = price,
-            status = 0,
-            timestamp = sasa
-            )
-        
-        db.session.add(new_product)
-        db.session.commit()
 
       
-        product_data = db.session.query(Products).filter(and_(Products.product_title == product_title, Products.price ==price)).first()
-        username =session["current_user"]
-        user_data =Users.query.filter_by(username= username).first()
+       return render_template("dashboard.html", user_data=user_data, product_data=product_data, business=business,categories=categories)
 
 
-        id = user_data.id
-        links =[]
-        if "files[]" not in request.files:
-           flash(" missing product image")
-           return render_template("product_list.html", user_data=user_data)
-
-        count = 0
-        upfile = request.files.getlist('files[]')
-        for file in upfile:
-            if file.filename != '':
-               extension = os.path.splitext(file.filename)[1]
-               f_name = str(uuid.uuid4()) + extension
-               file.save(os.path.join('/home/pato/myblock-01/api/static/all_images/business/products/'+str(user_data.id)+"/", f_name))
-               image_url= ('static/all_images/business/products/'+str(user_data.id)+"/"+f_name)
-              
-               links.append(image_url)
-        
-        stack = [string for string in links if string != ""]
-
-        if len(links) == 1:  #<  str(range(len(stack))) :
-               product_data.image_url=links[0]  
-               db.session.commit()            
-               
-        if len(links) >= 1:  #<  str(range(len(stack))) :
-               product_data.image_url=links[0]
-               db.session.commit() 
-               
-
-        if len(links) >= 2: #< str(range(len(stack))) :
-               product_data.image_url1= links[1]
-               db.session.commit() 
-              
-        if len(links) >= 3: #< str(range(len(stack))):
-               product_data.image_url2= links[2]
-               db.session.commit() 
-               
-        if len(links) >= 4: #< str (rartnge(len(stack))):
-               product_data.image_url3= links[3]
-               db.session.commit() 
-               
-        if len(links) >= 5: #<=  str(range(len(stack))):
-               product_data.image_url4= links[4]
-               db.session.commit() 
-              
-    return render_template("product_list.html", user_data=user_data) 
-
-
-
-
-"""
-------------------  SERVICES--------------------
-
-""" 
-@accounts_bp.route('/services',methods = ["POST","GET"])  
-def services():
-    if "logged_in" not in session:
-      flash("your session has expired! kindly login")
-      return render_template("login.html")
-
-    if request.method =="GET":
-       user_data = Users.query.filter_by(username=session["current_user"]).first()  
-      
-       return render_template("services.html", user_data=user_data)
-
-
-
-
-"""
-------------------  events--------------------
-
-""" 
-@accounts_bp.route('/events',methods = ["POST","GET"])  
-def events():
-    if "logged_in" not in session:
-      flash("your session has expired! kindly login")
-      return render_template("login.html")
-
-    if request.method =="GET":
-       user_data = Users.query.filter_by(username=session["current_user"]).first()  
-      
-       return render_template("events.html", user_data=user_data)

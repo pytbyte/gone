@@ -1,78 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Basic -->
+
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- SITE TITTLE -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MyBlock -Profile</title>
-  
-  <!-- static/plugins CSS STYLE -->
-  <link href="static/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
-  <!-- Bootstrap -->
-  <link href="static/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- Owl Carousel -->
-  <link href="static/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="static/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
-  <!-- Fancy Box -->
-  <link href="static/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="static/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-  <link href="static/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
-  <!-- CUSTOM CSS -->
-  <link href="static/css/style.css" rel="stylesheet">
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FAVICON -->
-  <link href="static/img/favicon.png" rel="shortcut icon">
+    <!-- Site Metas -->
+    <title>MyBlock</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/theway/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="static/theway/images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/theway/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/theway/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/theway/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/theway/css/custom.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.static/theway/js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
 </head>
 
-<body class="body-wrapper">
+<body>
 
+    
+    <!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                    <a class="navbar-brand" href="/marketplace" ><h1 style="color:gold; font-weight: 900; font-size: 42px"><i class="fa fa-cube" ></i> MyBlock</h1><h4 style="font-size: 15px"><strong> classified Marketplace </strong></h4></a>
+                </div>
+                <!-- End Header Navigation -->
 
-<section>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <nav class="navbar navbar-expand-lg  navigation">
-          <a class="navbar-brand" href="/">
-            <h1 style="color:gold"><strong>MyBlock</strong></h1>
-            <p >Classified Marketplace</p>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto main-nav ">
-              
-              
-              
-            </ul>
-            <ul class="navbar-nav ml-auto mt-10">
-              <li class="nav-item">
-                <a class="nav-link login-button" href="/login" ><i class="fa fa-power-off">Logout</i></a>
-              </li>
-              
-            </ul>
-          </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        <li class="nav-item"><a class="nav-link" href="/marketplace">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a></li>
+                        
+                         <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+                        
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+                <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                        
+                        <li class="side-menu"><a href="#">
+            <i class="fa fa-shopping-bag"></i>
+                            <span class="badge" style="color:red;">0</span>
+          </a></li>
+                    </ul>
+                </div>
+                <!-- End Atribute Navigation -->
+            </div>
+            
         </nav>
-      </div>
-    </div>
-  </div>
-</section>
-<!--==================================
-=            User Profile            =
-===================================-->
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
 
+    <!-- Start Top Search -->
+    <div class="top-search">
+        <div class="container">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+    <!-- End Top Search -->
+  <div class="cart-box-main">
+        <div class="container">
 <section class="user-profile section">
   <div class="container">
     <center>
@@ -82,6 +104,11 @@
         <!-- Edit Personal Info -->
         <div class="widget personal-info">
           <h3 class="widget-header user">List a Product</h3>
+          {% for message in get_flashed_messages() %}
+                        <div text-center style="color:red;">
+                         <div class="alert-error" style="color:red;">{{ message }}</div>
+                        </div>
+                       {% endfor %}
 
           <form id="formAjax" action="/product_list" method="post" enctype="multipart/form-data">
                     <script data-require="jquery" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -117,7 +144,6 @@ $(function(){
   let buttonSubmit = $('#submit');
   let filesContainer = $('#image_preview');
   let files = [];
-  
   inputFile.change(function() {
     let newFiles = []; 
     for(let index = 0; index < inputFile[0].files.length; index++) {
@@ -164,6 +190,11 @@ $(function(){
     });
   });
 });
+
+
+
+
+       
 </script>
 
 <style>
@@ -202,81 +233,83 @@ $(function(){
   
 }
 
+ 
+
 </style>
 
+
             </div>
 
+               <form class="mt-3 collapse review-form-box" id="formBank">
+                    <div class="form-row">
+                      <script type="text/javascript">
+                      function selector(){
+                          var y= document.getElementById("Categories");
+                          var cat = y.options[y.selectedIndex].text;
+                          document.getElementById("product_category").value =cat;
+                        }
+                                                      
+                    </script>
+                        <div class="form-group col-md-6">
+                            <label for="product_name" class="mb-0">Product Name*</label>
+                            <input name="product_name" type="text" class="form-control" id="product_name" placeholder="Product name" required> </div>
 
-           
-            <!-- First Name -->
-            <div class="form-group">
-                
-            <input name="product_name" type="text" class="form-control" id="Product-name" placeholder=" Product Name *"required><br>
+                        <div class="form-group col-md-6"> 
+                            <label for="Product_cost" class="mb-0">Product Price*</label>
+                            <input name="product_cost"  type="int" class="form-control" id="Product_cost" placeholder="Product Price" required> </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="message" class="mb-0">Product description*</label>
+                            <textarea  name="product_description" class="form-control" id="message" placeholder="Product Description *" rows="4" style="height:125px;" required></textarea></div><br>
+
+
+                        <div class="form-group col-md-6">
+                            <input id ="product_category" type="text" name="product_category"  hidden>
+                            <label for="category">Category*</label><br>
+                            <select class="Category" id="Categories" >
+                              <option data-display="Select">Choose...</option>
+                              
+                              <option value="1">Cars</option>
+                              <option value="2">Fashion</option>
+                              
+                            </select>
+                          </div>
                         
-             
-            <input name="product_category" type="text" class="form-control" id="Product-category" placeholder="Product Category *"required><br>
-
-            <input name="product_cost" type="text" class="form-control" id="Product-cost" placeholder="Product cost *" required><br>
-
-            
-             <textarea  name="product_description" class="form-control" id="message" placeholder="Product Description *" rows="4" style="height:125px;" required></textarea>
-                                  
-
-                </div>
+                        <button id="submit" type="submit" class="btn hvr-hover" onclick= "selector()">Submit</button>
+                        
+                    </div>
+                    
+                </form>
+              </div>
             </div>
-            <!-- Submit button -->
-            <button id="submit" class="btn btn-transparent">Submit Product</button>
-          </form>
-        </div>
-        
-        
       </div>
     </div>
     </center>
   </div>
 </section>
 
-<!--============================
-=            Footer            =
-=============================-->
-
-<!-- Footer Bottom -->
-<footer class="footer-bottom">
-    <!-- Container Start -->
-    <div class="container">
-     
  
-          <!-- Social Icons -->
-         
-        
-      </div>
-    </div>
-    <!-- Container End -->
-    <!-- To Top -->
-    <div class="top-to">
-      <a id="top" class="" href=""><i class="fa fa-angle-up"></i></a>
-    </div>
-</footer>
 
+    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
-
-
-
-  <!-- JAVASCRIPTS -->
-  <script src="static/plugins/jquery/jquery.min.js"></script>
-  <script src="static/plugins/jquery-ui/jquery-ui.min.js"></script>
-  <script src="static/plugins/tether/js/tether.min.js"></script>
-  <script src="static/plugins/raty/jquery.raty-fa.js"></script>
-  <script src="static/plugins/bootstrap/dist/js/popper.min.js"></script>
-  <script src="static/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="static/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-  <script src="static/plugins/slick-carousel/slick/slick.min.js"></script>
-  <script src="static/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-  <script src="static/plugins/fancybox/jquery.fancybox.pack.js"></script>
-  <script src="static/plugins/smoothscroll/SmoothScroll.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
-  <script src="static/js/scripts.js"></script>
-
+    <!-- ALL JS FILES -->
+    <script src="static/theway/js/jquery-3.2.1.min.js"></script>
+    <script src="static/theway/js/popper.min.js"></script>
+    <script src="static/theway/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="static/theway/js/jquery.superslides.min.js"></script>
+    <script src="static/theway/js/bootstrap-select.js"></script>
+    <script src="static/theway/js/inewsticker.js"></script>
+    <script src="static/theway/js/bootsnav.js."></script>
+    <script src="static/theway/js/images-loded.min.js"></script>
+    <script src="static/theway/js/isotope.min.js"></script>
+    <script src="static/theway/js/owl.carousel.min.js"></script>
+    <script src="static/theway/js/baguetteBox.min.js"></script>
+    <script src="static/theway/js/jquery-ui.js"></script>
+    <script src="static/theway/js/jquery.nicescroll.min.js"></script>
+    <script src="static/theway/js/form-validator.min.js"></script>
+    <script src="static/theway/js/contact-form-script.js"></script>
+    <script src="static/theway/js/custom.js"></script>
 </body>
 
 </html>

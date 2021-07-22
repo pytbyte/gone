@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+a<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -62,7 +62,7 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
 							<li class="nav-item ">
-								<a class="nav-link" href="/">Home</a>
+								<a class="nav-link" href="/marketplace">Home</a>
 							</li>
 							<li class="nav-item" >
 								<a class="nav-link" href="/dashboard">Dashboard</a>
@@ -81,10 +81,7 @@
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
 							
-							<li class="nav-item ">
-								<a class="nav-link add-button" href="product-list.html"><i class="fa fa-plus-circle"></i> Add Product</a>
-							</li>
-
+							
 							<li class="nav-item">
 								<a class="nav-link login-button" href="/login"><i class="fa fa-power-off">Logout</i></a>
 							</li>
@@ -112,6 +109,9 @@
                 <!-- Section title -->
 				<div class="section-title">
 					<h2>MyBlock Product Listings</h2>
+
+								<a class="nav-link add-button" href="/product_list"><i class="fa fa-plus-circle"></i> Add Product</a>
+							
 				 <p> </p>
 				</div>
 		
@@ -123,618 +123,55 @@
 				<div class="row">
 					
 					<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+					
 						
-							<div class="header">
+					
+
+						{% for product in product_data %}
+						
+						<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+									<div class="header">
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
-							<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
+					            <center>
+					            	
+					            	<img src="{{product.image_url}}" alt="" style="width:160px;height:180px;">
+					            </center>
+							     
 						<br>
-
+                        
 									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
+									<a href="#" class="card-title"style="color:red;">{{product.product_title}}</a>
+									
+									<br>
+									<a href="#"class="card-title"style="color:green;">{{product.price}}</a>
+									
 								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
+								<center>
 							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
+												<form   id="personal_data" action="/product_data" method="post" role="form">
+								                 <input type="" name="product_id" value={{product.id}} hidden/>
+												<button style="border-radius:50%"><i class="fa fa-eye" style="color:green; size:19px;"></i>
+												</button>		
+											</form>
+											
 											<li class="list-inline-item">
 												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
+													<i class="fa fa-trash" style="color:red; size: 12px;"></i>
 												</a>
 											</li>
 							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                                </div>
 						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
 
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
 					</div>
-					</div> <!-- /Category List -->
+					</div> 
+					
+					{% endfor %}
+
+					<!-- /Category List -->
 <!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
-<!-- Category list -->
-					<div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-						
-							<div class="header">
-								<div class="widget user-dashboard-profile">
-									<!-- User Image -->
-									<div class="profile-thumb">
-										<img src="static/images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
-									</div>
-
-									<br><p>
-									<a href=""class="card-title"style="color:red;">Business Name</a>
-								</p>
-                                </div>
-							<div class="category-block">
-							<div  class="category-block">
-							<!--business Location -->
-							<p class="category-list">							
-							<a href="" ><i class="fa fa-map" style="color:red;"></i> Business Location</a><br>
-							<a href=""><i class="fa fa-map-marker" style="color:red;"></i> About 28km away</a>
-						    </p>
-                      
-                            </div>
-							<ul class="category-list"style="font-weight: 400;">
-                               
-								<li><a href="category.html"  style="color:green;">Laptops <span style="color:red;">93</span></a></li>
-								<li><a href="category.html"  style="color:green;">Iphone <span style="color:red;">233</span></a></li>
-								<li><a href="category.html" style="color:green;">Microsoft  <span style="color:red;">183</span></a></li>
-								<li><a href="category.html"style="color:green;">Monitors <span style="color:red;">343</span></a></li>
-								
-							</ul>
-							<center>
-							<li class="list-inline-item">
-												<a data-toggle="tooltip" data-placement="top" title="Tooltip on top" class="view" href="">
-													<i class="fa fa-eye" style="color:green;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="edit" href="">
-													<i class="fa fa-pencil" style="color:gold;"></i>
-												</a>		
-											</li>
-											<li class="list-inline-item">
-												<a class="delete" href="">
-													<i class="fa fa-trash" style="color:red;"></i>
-												</a>
-											</li>
-							</center>
-						</div>
-					</div>
-					</div> <!-- /Category List -->
+					
 
 					
 				</div>
@@ -747,28 +184,6 @@
 =            Footer            =
 =============================-->
 
-<!-- Footer Bottom -->
-<footer class="footer-bottom">
-    <!-- Container Start -->
-    <div class="container">
-     
- 
-          <!-- Social Icons -->
-          <ul class="social-media-icons text-right">
-              <li><a class="fa fa-facebook" href=""></a></li>
-              <li><a class="fa fa-twitter" href=""></a></li>
-              <li><a class="fa fa-pinterest-p" href=""></a></li>
-              <li><a class="fa fa-vimeo" href=""></a></li>
-            </ul>
-        
-      </div>
-    </div>
-    <!-- Container End -->
-    <!-- To Top -->
-    <div class="top-to">
-      <a id="top" class="" href=""><i class="fa fa-angle-up"></i></a>
-    </div>
-</footer>
 
 
   <!-- JAVASCRIPTS -->

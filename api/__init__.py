@@ -1,4 +1,3 @@
-
 from flask import  *
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -36,17 +35,15 @@ def create_app(config_class=Config):
         # Import parts of our application
 
         from .accounts import accounts_bp
-        #from .story import story_bp
-        #from .jobs import jobs_bp
-        #from .story import story_bp
-        from .business import business_bp
+       
+        from .Vendor import Vendor_bp
         #from .payment import payments_bp        
         # Register Blueprints
         app.register_blueprint(accounts.accounts_bp)
 
         #app.register_blueprint(jobs.jobs_bp)
         #app.register_blueprint(story.story_bp)
-        app.register_blueprint(business.business_bp)
+        app.register_blueprint(Vendor.Vendor_bp)
         #app.register_blueprint(payment.payments_bp)     
  
         return app

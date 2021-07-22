@@ -45,7 +45,7 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation">
 					
-						<a class="navbar-brand" href="/">
+						<a class="navbar-brand" href="/marketplace">
 						<h1 style="color:gold"><strong>MyBlock</strong></h1>
 						<p >Classified Marketplace</p>
 					</a>
@@ -54,34 +54,12 @@
 					<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav ml-auto main-nav ">
-							<li class="nav-item ">
-								<a class="nav-link" href="/">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/dashboard">Dashboard</a>
-							</li>
-							<li class="nav-item active">
-								<a class="nav-link " href="">User Profile</a>
-							</li>
-							
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="/products">Product</a>
-									<a class="dropdown-item" href="/services">Service</a>
-									<a class="dropdown-item" href="/events">Event</a>
-								</div>
-							</li>
-						</ul>
+						
 						<ul class="navbar-nav ml-auto mt-10">
 							
 							
 							<li class="nav-item">
-								<a class="nav-link login-button" href="/login">Logout</a>
+								<a class="nav-link login-button" href="/logout">Logout</a>
 							</li>
 						</ul>
 					</div>
@@ -100,27 +78,22 @@
 			<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">
 				<div class="sidebar">
 					<!-- User Widget -->
-					<div class="widget user-dashboard-profile">
-						<!-- User Image -->
-						 {% if not user_data.image_url %}
-						<img src="static/all_images/default/default.jpg" alt="" class="rounded-circle" style="width:180px;height:180px;">
-						{% else %}
-						<img src="{{user_data.image_url}}" alt="" class="rounded-circle" style="width:180px;height:180px;">
-
-						{% endif %}
-						<br>
-						<!-- User Name -->
-						<h5 class="text-center">{{ user_data.username}}</h5>
-						<p>{{user_data.contact}}</p>
-					</div>
+					
 					<!-- Dashboard Links -->
 					<div class="widget user-dashboard-menu">
 						<ul>
 							<li>
-								<a href="/"><i class="fa fa-home"></i> Home</a></li>
+								<a href="/marketplace"><i class="fa fa-shopping-cart" style="color:red"></i> Market Place</a></li>
+							{% if business_data.owner == user_data.username %}
 							<li>
-								<a href="/business"> <i class="fa fa-bookmark-o"></i>Business Profile </a>
+								<a href="/update_business"> <i class="fa fa-briefcase" style="color:red"></i> Update Business Profile </a>
 							</li>
+							{% endif %}
+							{% if not  business_data.owner == user_data.username %}
+							<li>
+								<a href="/business"> <i class="fa fa-briefcase" style="color:red"></i> Create Business Profile </a>
+							</li>
+							{% endif %}
 							
 							
 						</ul>
@@ -132,11 +105,12 @@
 				<div class="widget personal-info">
 					<h3 class="widget-header user">Edit Personal Information</h3>
 					<br>
-                        {% for message in get_flashed_messages() %}
+                        
+                        <h3 class="widget-header user">{% for message in get_flashed_messages() %}
                         <div text-center>
                         <div style="color:red;" class="alert-error">{{ message }}</div>
                         </div>
-                        {% endfor %}
+                        {% endfor %}</h3>
 					
 						<!-- File chooser -->
 						<!-- Change Email Address -->
@@ -147,9 +121,9 @@
 						<div class="form-group choose-file">
 						<center>
 							 {% if not user_data.image_url %}
-						<label for="input-file"><img src="static/all_images/default/default.jpg" alt="" class="rounded-circle" style="width:180px;height:180px;"></label>
+						<label for="input-file"><img src="static/all_images/default/default.jpg" alt="" class="rounded-circle" style="width:250px;height:250px;"></label>
 						{% else %}
-						<label for="input-file"><img src="{{user_data.image_url}}" alt="" class="rounded-circle" style="width:180px;height:180px;" ></label>
+						<label for="input-file"><img src="{{user_data.image_url}}" alt="" class="rounded-circle" style="width:250px;height:250px;" ></label>
 
 						{% endif %}
 						
@@ -169,19 +143,20 @@
 
                     <form   id="personal_data" action="/update_user" method="post" role="form" >
 
+                     
 						<!-- First Name -->
 						<div class="form-group">
-						    <label for="official-names">Official Name *</label>
+						    <label for="official-names">Official Name </label>
 						    <input name="full_name" type="text" class="form-control" id="official-names" placeholder=" {{user_data.name}}" >
 						</div>
 						<!-- User Name -->
 						<div class="form-group">
-						    <label for="User-name">User Name *</label>
+						    <label for="User-name">User Name </label>
 						    <input name="username" type="text" class="form-control" id="User-name" placeholder=" {{user_data.username}}" >
 						</div>
 						<!-- New email -->
 						<div class="form-group">
-						    <label for="email">New email</label>
+						    <label for="email">Email</label>
 						    <input name="email" type="email" class="form-control" id="new-email" placeholder="{{user_data.email}}">
 						</div>
 
@@ -192,19 +167,7 @@
 						    <input name="contact" type="text" class="form-control" id="phone-number" placeholder=" {{user_data.contact}}" >
 						</div>
 						
-						<!-- Whatsapp Number -->
-						<div class="form-group">
-						    <label for="Whatsapp-number">Whatsapp Number (optional)</label>
-						    <input name="whatsapp" type="text" class="form-control" id="Whatsapp-number" placeholder=" {{user_data.whatsapp}}" >
-						</div>
-
-						<!-- Checkbox -->
-						<div class="form-check" >
-						  <label class="form-check-label" for="hide-profile" style="color:red;">
-						    <input class="form-check-input" type="checkbox" value="" id="hide-profile">
-						    Hide Profile from Public
-						  </label>
-						</div>
+						
 						<!-- Submit button -->
 						<button class="btn btn-transparent">Save My Changes</button>
 					</form>
@@ -253,19 +216,7 @@
 <!-- Footer Bottom -->
 <footer class="footer-bottom">
     <!-- Container Start -->
-    <div class="container">
-     
- 
-          <!-- Social Icons -->
-          <ul class="social-media-icons text-right">
-              <li><a class="fa fa-facebook" href=""></a></li>
-              <li><a class="fa fa-twitter" href=""></a></li>
-              <li><a class="fa fa-pinterest-p" href=""></a></li>
-              <li><a class="fa fa-vimeo" href=""></a></li>
-            </ul>
-        
-      </div>
-    </div>
+    
     <!-- Container End -->
     <!-- To Top -->
     <div class="top-to">

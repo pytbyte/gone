@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MyBlock -Profile</title>
+  <title>MyBlock </title>
   
   <!-- static/plugins CSS STYLE -->
   <link href="static/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
@@ -44,7 +44,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation">
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" href="/marketplace">
 						<h1 style="color:gold"><strong>MyBlock</strong></h1>
 						<p >Classified Marketplace</p>
 					</a>
@@ -58,7 +58,7 @@
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
 							<li class="nav-item">
-								<a class="nav-link login-button" href="registration.html">Register</a>
+								<a class="nav-link login-button" href="/marketplace">Home</a>
 							</li>
 							
 						</ul>
@@ -85,7 +85,7 @@
 					 <form action = "/confirm_account" method="post">
 
                        <!--profile photo -->
-                       {% if user_data.image_url%}
+            {% if not user_data.image_url%}
 						<img src="static/all_images/default/default.jpg" alt="" class="rounded-circle" style="width:180px;height:180px;">
 						{% else %}
 						<img src="{{user_data.image_url}}" alt="" class="rounded-circle" style="width:180px;height:180px;">
@@ -125,19 +125,7 @@
 <!-- Footer Bottom -->
 <footer class="footer-bottom">
     <!-- Container Start -->
-    <div class="container">
-     
- 
-          <!-- Social Icons -->
-          <ul class="social-media-icons text-right">
-              <li><a class="fa fa-facebook" href=""></a></li>
-              <li><a class="fa fa-twitter" href=""></a></li>
-              <li><a class="fa fa-pinterest-p" href=""></a></li>
-              <li><a class="fa fa-vimeo" href=""></a></li>
-            </ul>
-        
-      </div>
-    </div>
+   
     <!-- Container End -->
     <!-- To Top -->
     <div class="top-to">

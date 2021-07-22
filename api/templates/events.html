@@ -8,24 +8,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MyBlock -Events</title>
   
-  <!-- PLUGINS CSS STYLE -->
-  <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <!-- static/plugins CSS STYLE -->
+  <link href="static/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
   <!-- Bootstrap -->
-  <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Owl Carousel -->
-  <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <link href="static/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="static/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
   <!-- Fancy Box -->
-  <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-  <link href="plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+  <link href="static/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="static/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="static/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="static/css/style.css" rel="stylesheet">
 
   <!-- FAVICON -->
-  <link href="img/favicon.png" rel="shortcut icon">
+  <link href="static/img/favicon.png" rel="shortcut icon">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,41 +44,43 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation">
-					<a class="navbar-brand" href="index.html">
+					<a class="navbar-brand" href="/dashboard">
 						<h1 style="color:gold"><strong>MyBlock</strong></h1>
 						<p >Classified Marketplace</p>
 					</a>
 					<a href="dashboard.html" class="profile-thumb" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span>
-			       <img src="images/user/user-thumb.jpg" alt="" style="width:55px;height:55px;" class="rounded-circle">
+			        {% if not user_data.image_url %}
+						<img src="static/all_images/default/default.jpg" alt=""  style="width:130px;height:130px;">
+						{% else %}
+						<img src="{{user_data.image_url}}" alt=""  style="width:130px;height:130px;">
+
+						{% endif %}
 					</span>
 					</a>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
 							<li class="nav-item ">
-								<a class="nav-link" href="index.html">Home</a>
+								<a class="nav-link" href="/marketplace">Home</a>
 							</li>
 							<li class="nav-item" >
-								<a class="nav-link" href="dashboard.html">Dashboard</a>
+								<a class="nav-link" href="/dashboard">Dashboard</a>
 							</li>
 														
 							<li class="nav-item dropdown dropdown-slide active" >
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									Event Listing <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="products.html">Products</a>
-									<a class="dropdown-item" href="services.html">Services</a>
+									<a class="dropdown-item" href="/products">Products</a>
+									<a class="dropdown-item" href="/services">Services</a>
 								</div>
 							</li>
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
 							
-							<li class="nav-item ">
-								<a class="nav-link add-button" href="event-list.html"><i class="fa fa-plus-circle"></i> Add Event</a>
-							</li>
-
+							
 							<li class="nav-item">
 								<a class="nav-link login-button" href="login.html"><i class="fa fa-power-off">Logout</i></a>
 							</li>
@@ -123,7 +125,7 @@
 									
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -174,7 +176,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -225,7 +227,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -276,7 +278,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -327,7 +329,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -378,7 +380,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -429,7 +431,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -480,7 +482,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -531,7 +533,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -582,7 +584,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -633,7 +635,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -684,7 +686,7 @@
 								<div class="widget user-dashboard-profile">
 									<!-- User Image -->
 									<div class="profile-thumb">
-										<img src="images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
+										<img src="static/all_images/user/user-thumb.jpg" alt="" style="width:85px;height:85px;" class="rounded-circle">
 									</div>
 
 									<br><p>
@@ -765,19 +767,19 @@
 
 
   <!-- JAVASCRIPTS -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <script src="plugins/tether/js/tether.min.js"></script>
-  <script src="plugins/raty/jquery.raty-fa.js"></script>
-  <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
-  <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-  <script src="plugins/slick-carousel/slick/slick.min.js"></script>
-  <script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-  <script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
-  <script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+  <script src="static/plugins/jquery/jquery.min.js"></script>
+  <script src="static/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="static/plugins/tether/js/tether.min.js"></script>
+  <script src="static/plugins/raty/jquery.raty-fa.js"></script>
+  <script src="static/plugins/bootstrap/dist/js/popper.min.js"></script>
+  <script src="static/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="static/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+  <script src="static/plugins/slick-carousel/slick/slick.min.js"></script>
+  <script src="static/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="static/plugins/fancybox/jquery.fancybox.pack.js"></script>
+  <script src="static/plugins/smoothscroll/SmoothScroll.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
-  <script src="js/scripts.js"></script>
+  <script src="static/js/scripts.js"></script>
 
 </body>
 

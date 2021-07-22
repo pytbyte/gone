@@ -57,12 +57,11 @@ class Business( db.Model, UserMixin):
     
     businessname = db.Column(db.VARCHAR(200), unique=True)
     businessemail = db.Column(db.VARCHAR(200), unique=True, nullable=False)
-    businesscontact = db.Column(db.VARCHAR(200), unique=True)
-    
+    businesscontact = db.Column(db.VARCHAR(200), unique=True)    
     authenticated = db.Column(db.Boolean, default=False) 
     businesscategory = db.Column(db.VARCHAR(200))
     businesslocation = db.Column(db.VARCHAR(200))
-    businesswhatsapp = db.Column(db.VARCHAR(200))
+    currency = db.Column(db.VARCHAR(200))
     registered_on = db.Column(db.VARCHAR(200))
     last_seen  = db.Column(db.VARCHAR(200))
     owner  = db.Column(db.VARCHAR(200))
@@ -116,7 +115,7 @@ class Business( db.Model, UserMixin):
 
     def to_json(self):
         if  not self.logo_url :
-            logo_url =  ('static/images/default/default.jpg')
+            logo_url =  ('static/media/logo/default.jpg')
         elif  self.logo_url:
             logo_url =self.logo_url
         json_business = {  
@@ -370,6 +369,26 @@ class flags_(db.Model):
         }
         return json_flag
 
+
+
+#################################### CART ###################################################
+
+
+class Cart(db.Model):
+   
+    __tablename__ = 'cart'
+    id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.VARCHAR(200))
+    item_name= db.Column(db.VARCHAR(200))
+    Total = db.Column(db.VARCHAR(200))
+    item_cost = db.Column(db.VARCHAR(200))
+    quantity = db.Column(db.Integer, default=1)
+    timestamp =db.Column(db.VARCHAR(200))
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    image_url = db.Column(db.VARCHAR(200))
+    
+
+
 #################################### PRODUCT ###################################################
 
 
@@ -397,7 +416,7 @@ class Products(db.Model):
     
     
 ################################### services ########################################################
-class services(db.Model):
+class Services(db.Model):
    
     __tablename__ = 'services'
     id = db.Column(db.Integer, primary_key=True)
@@ -420,7 +439,7 @@ class services(db.Model):
     
     
 ################################### events ########################################################
-class events(db.Model):
+class Events(db.Model):
    
     __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)

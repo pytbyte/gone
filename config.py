@@ -21,5 +21,5 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS = True
     MAIL_USERNAME = "heretolearn1@gmail.com"
-    MAIL_PASSWORD = "TheKamauS!" #os.environ.get('EMAIL_PASS')
+    MAIL_PASSWORD = "TeamPESA" #os.environ.get('EMAIL_PASS')
     DATA_UPLOAD_MAX_MEMORY_SIZE = 150242880 
