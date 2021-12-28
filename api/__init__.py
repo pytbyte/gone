@@ -1,3 +1,4 @@
+
 from flask import  *
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
@@ -20,10 +21,11 @@ mail = Mail()
 jwt = JWTManager()
 
 
+
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
-
 
     db.init_app(app)
     bcrypt.init_app(app)
@@ -35,15 +37,8 @@ def create_app(config_class=Config):
         # Import parts of our application
 
         from .accounts import accounts_bp
-       
-        from .Vendor import Vendor_bp
-        #from .payment import payments_bp        
+             
         # Register Blueprints
-        app.register_blueprint(accounts.accounts_bp)
+        app.register_blueprint(accounts_bp)
 
-        #app.register_blueprint(jobs.jobs_bp)
-        #app.register_blueprint(story.story_bp)
-        app.register_blueprint(Vendor.Vendor_bp)
-        #app.register_blueprint(payment.payments_bp)     
- 
         return app

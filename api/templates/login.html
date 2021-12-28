@@ -48,15 +48,17 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="/marketplace" ><h1 style="color:gold; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 9px"><strong> classified Marketplace </strong></h4></a>
+
+              
+<a class="navbar-brand" href="#" ><h1 style="color:grey; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 15px"><strong> Simple. Reliable. Efficient </strong></h4></a>           
                 </div>
                 <!-- End Header Navigation -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="/marketplace">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/create"> Register</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link" href="/register"> Register</a></li>
                                             
                         
                     </ul>
@@ -65,13 +67,10 @@
 
                 <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
-                    <ul>
-                        
-                        <li class="side-menu"><a href="#">
-						<i class="fa fa-shopping-bag"></i>
-                            <span class="badge" style="color:red;">0</span>
-					</a></li>
-                    </ul>
+                  
+          
+
+</div>
                 </div>
                 <!-- End Atribute Navigation -->
             </div>
@@ -97,11 +96,12 @@
 
                        <!--profile photo -->
                        <center>
-						<img src="static/all_images/default/default.jpg" alt="" class="rounded-circle" style="width:180px;height:180px;"> <br>
+						<img src="static/all_images/default/default.jpg" alt="" class="rounded-circle" style="width:150px;height:150px;"> <br>
 
 					   </center>
 						<br>
 						<strong>
+<h4><strong> User Login</strong></h4>
                         {% for message in get_flashed_messages() %}
                         <div text-center>
                         <div style="color:red;" class="alert-error">{{ message }}</div>
@@ -125,7 +125,7 @@
                             <button class="btn hvr-hover" type="submit" >Login </button>
                             <br>
                            
-                            <a href="recover.html"> forgot password?</a>
+                            <a href="/forgot"> forgot password?</a>
                             </form>
                     </div>
                 </div>

@@ -18,6 +18,7 @@
     <!-- Site Icons -->
     <link rel="shortcut icon" href="static/theway/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="static/theway/images/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="static/theway/css/bootstrap.min.css">
@@ -27,18 +28,43 @@
     <link rel="stylesheet" href="static/theway/css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="static/theway/css/custom.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@[VERSION]/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="js/leaflet.awesome-markers.js"></script>
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.css" />
+
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
+<script src="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.static/theway/js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-</head>
 
-<body>
+   
+
 
     
-    <!-- Start Main Top -->
+
+</head>
+
+
+
+
+<body>
+ <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
@@ -48,26 +74,72 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="/marketplace" ><h1 style="color:gold; font-weight: 900; font-size: 32px"><i class="fa fa-cube"></i> MyBlock</h1><h4 style="font-size: 9px"><strong> classified Marketplace </strong></h4></a>
+                     <a class="navbar-brand" href="#" ><h1 style="color:grey; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 15px"><strong> Simple. Reliable. Efficient </strong></h4></a>
                 </div>
                 <!-- End Header Navigation -->
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
+                 <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                       
+                        <li class="side-menu"><a href="#">
+                        <i class="fa fa-taxi" style="color:red; font-size:16px;"></i>
+                            <span class="badge" style="color:green; font-size:12px;">&nbsp;&nbsp;3</span>
+                        </a></li>
+                    </ul>
+                </div>
+                <!-- End Atribute Navigation -->
+                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="/marketplace">Home</a></li>
-                         <li class="nav-item"><a class="nav-link" href="/product_list">Add Product</a></li>
-                         <li class="nav-item"><a class="nav-link" href="/update_user"> Account Settings</a></li>
-                          
-                           <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
                         
-                              
+                         <li class="dropdown megamenu-fw">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"><i class="fa fa-bullhorn" style="color:black; font-size:22px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;">REQUEST</strong></i></a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#authCenter">
+                                            <h6 class="title">&nbsp;&nbsp; <i class="fa fa-motorcycle" style="color:red; font-size: 20px"> &nbsp;&nbsp; <strong style="font-size:17px; color:black;">RIDER</strong></i></h6>
+                                            
+                                        </div>
+                                        <!-- end col-3 -->
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#cab">
+                                            <h6 class="title"> &nbsp;&nbsp; <i class="fa fa-taxi" style="color:red; font-size: 20px"> &nbsp;&nbsp;<strong style="font-size:17px; color:black;">TAXI</strong></i></h6>
+                                            
+                                        </div>
+                                        <!-- end col-3 -->
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#truck">
+                                            <h6 class="title"> &nbsp;&nbsp;<i class="fa fa-truck" style="color:red; font-size: 20px"> &nbsp;&nbsp; <strong style="font-size:17px; color:black;">TRUCK</strong></i></h6>
+                                            
+                                        </div>
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#truck">
+                                            <h6 class="title">&nbsp;&nbsp;<i class="fa fa-info-circle" style="color:red; font-size:20px"> &nbsp;&nbsp; <strong style="font-size:17px; color:black;">HELP</strong></i></h6>
+                                            
+                                        </div>
+                                        <!-- end col-3 -->
+                                    </div>
+                                    <!-- end row -->
+                                </li>
+                            </ul>
+                        </li>
                         
+                    </ul>
+
+                    <ul class="row">
+
+                     <li class="nav-item"><a class="nav-link" href="/trucks">&nbsp;&nbsp; <i class="fa fa-comment-dots" style=" font-size:16px;"> &nbsp;<strong style="font-size:12px; color:red;"> 2<br>unread messages</strong></i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/trucks">  <i class="fa fa-store-alt" style=" font-size:16px;"> &nbsp;<strong style="font-size:12px; color:red;"> 70<br>hot offers</strong> </i></a></li>                       
+                        <li class="nav-item"><a class="nav-link" href="/login"> <i class="fa fa-power-off" style="color:green; font-size:16px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;"><br>EXIT</strong> </i></a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
 
-              
+
+
+                <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                               
+                </div>
+                <!-- End Atribute Navigation -->
             </div>
             
         </nav>
@@ -75,143 +147,335 @@
     </header>
     <!-- End Main Top -->
 
-    <!-- Start Top Search -->
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </div>
-    <!-- End Top Search -->
-  <div class="cart-box-main">
-        <div class="container">
-  <div class="row new-account-login">
-                <div class="col-sm-6 col-lg-6 mb-3">
-                   
-                    <h5><a data-toggle="collapse" href="#formLogin" role="button" aria-expanded="false" style="color:green;">Product Requests<span class="badge" style="color:red;">(9)</span></a></h5>
-                    <form class="mt-3 collapse review-form-box" id="formLogin">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="InputEmail" class="mb-0">Email Address</label>
-                                <input type="email" class="form-control" id="InputEmail" placeholder="Enter Email"> </div>
-                            <div class="form-group col-md-6">
-                                <label for="InputPassword" class="mb-0">Password</label>
-                                <input type="password" class="form-control" id="InputPassword" placeholder="Password"> </div>
-                        </div>
-                        <button type="submit" class="btn hvr-hover">Login</button>
-                    </form>
-                </div>
-                <div class="col-sm-6 col-lg-6 mb-3">
-                    
-                   <h5> <a data-toggle="collapse" href="#formRegister" role="button" aria-expanded="false"style="color:green;">Transaction Summery</a></h5>
-                    <form class="mt-3 collapse review-form-box" id="formRegister">
-                        <div class="form-row">
-                                            <h5> <a data-toggle="collapse" href="#formBank" role="button" aria-expanded="false">To Bank</a></h5>
-                                            <form class="mt-3 collapse review-form-box" id="formBank">
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="Account_no" class="mb-0">Account_no*</label>
-                                                        <input type="text" class="form-control" id="Account_no" placeholder="Account Number"> </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="ID_No" class="mb-0">ID Number*</label>
-                                                        <input type="text" class="form-control" id="ID_No" placeholder="ID Number"> </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="reg_no" class="mb-0">Business Registration Number*</label>
-                                                        <input type="text" class="form-control" id="reg_no" placeholder="Registration Number"></div><br>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="Acc_name" class="mb-0">Account Name*</label>
-                                                        <input type="text" class="form-control" id="Acc_name" placeholder="Account name"></div><br>
-                                                    <button type="submit" class="btn hvr-hover">Update</button>
-                                                    
-                                                </div>
-                                                
-                                            </form>
 
+    <div id="leafletmap"> </div>
+      <br>
 
-                                            <h5> <a data-toggle="collapse" href="#formmob" role="button" aria-expanded="false" style="color:green;">Request PDF Report</a></h5>
-                                            <form class="mt-3 collapse review-form-box" id="formmob">
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="Mobile" class="mb-0">Mobile number</label>
-                                                        <input type="text" class="form-control" id="Mobile" placeholder="Account Number"> </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="ID_No" class="mb-0">ID Number</label>
-                                                        <input type="text" class="form-control" id="ID_No" placeholder="ID Number"> </div>
-                                                        <button type="submit" class="btn hvr-hover">Update</button>
-                                                    
-                                                </div>
-                                                
-                                            </form>
+        <!-- Modal auth-->
+<div class="modal fade" id="authCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+        <p><h5 class="modal-title" id="exampleModalCenterTitle"style="color:red; font-size:20px;" > REQUEST RIDER <strong> .</strong></i></h5></p>
+       </center>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+             <div class="container">
+              <form  id="formRegister"  action="/" method="Post">
+                        <div class="form-row" >
+                         
+                            <div class="service-block-inner">
+                                <label for="destination" class="mb-0"><strong> Destination</strong></label>
+                                <input  class="form-control" name="destination" id="destination" placeholder="destination"> </div>
+
                             
+                         
+                            <div class="service-block-inner">
+                                <label for="time" class="mb-0"><strong> Time</strong></label>
+                                <input type="time" class="form-control" name="time" id="time" placeholder="departure time"> </div>
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> Budget</strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
+                            
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> Quantity</strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
+
+                             <div class="service-block-inner">
+                                <label for="Inputdetailsm" class="mb-0"> <strong> Details </strong></label>
+                                 <li><textarea class="mb-0" id="Inputdetailsm" name="Inputdetailsm" placeholder="describe your needs" rows="4"></textarea></li></div>
                         </div>
-                       
+                        <button type="submit" class="btn hvr-hover"><i class="fa fa-motorcycle"> . </i></button>
                     </form>
-                </div>
 
-            </div>  
+                 </div>
+                
 
-    <!-- Start Shop Page  -->
-    <div class="shop-box-inner">
-        <div class="container"> 
-                   <div class="row">
-                        
-                        <div class="row product-categorie-box">
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
-                                    <div class="row">
-                                         
-                      
-                                       {% for product in product_data  %}
-                                
-                                       {% if product.image_url %}
-                                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <form   id="personal_data" action="/remove_products" method="post" role="form">
-                                                    <input  class="form-control" name="product_id" id="product_id" value="{{product.id}}" hidden>
-                                                    <div class="type-lb">
-                                                        <button style=" border: 0; background: none; color:red; border: 0px; " class="sale">Remove</button>
-                                                    </form>
-                                                      </div>
-                                                   
-                                                       <form   id="personal_data" action="/product_data" method="post" role="form">
-                                                 <input type="" name="product_id" value={{product.id}} hidden/>
-                                                <button style=" border: 0; background: none;  border: 0px; "><img src="{{product.image_url}}" class="img-fluid" alt="Image" style="width:420px;height:380px;">
-                                                    <div class="mask-icon">
-                                                         <img src="{{product.image_url1}}" class="img-fluid" alt="Image" style="width:420px;height:380px;">
-                                                    </div>                                         
-                                               
-                                                   
-                                                    <strong>
-                                                    <br>
-                                                    <a href="#">{{product.product_description}}</a>
-                                                    <h5 style="color:gold; font-weight: 900; font-size: 12px;"> ksh {{product.price}}</h5>
-                                                    </strong>
-                                                    </button>       
-                                            </form>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        
-                                        {% endif %}
-                                        {% endfor %} 
-                                    </div>
-                                </div>
-                               
 
-                    </div>
-                </div>
+                
             </div>
+            <br>
+          </div>
         </div>
-    </div>
-    <!-- End Shop Page -->
+
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+ 
+
+
+
+             <!-- Modal auth-->
+<div class="modal fade" id="cab" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+        <p><h5 class="modal-title" id="exampleModalCenterTitle"style="color:red; font-size:20px;" > REQUEST TAXI<strong> .</strong></i></h5></p>
+       </center>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+             <div class="container">
+              <form  id="formRegister"  action="/" method="Post">
+                        <div class="form-row" >
+                         
+                            <div class="service-block-inner">
+                                <label for="destination" class="mb-0"><strong> Destination</strong></label>
+                                <input  class="form-control" name="destination" id="destination" placeholder="destination"> </div>
+
+                            
+                         
+                            <div class="service-block-inner">
+                                <label for="time" class="mb-0"><strong> Time</strong></label>
+                                <input type="time" class="form-control" name="time" id="time" placeholder="departure time"> </div>
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> Budget</strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
+                            
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> Passangers</strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
+
+                             <div class="service-block-inner">
+                                <label for="Inputdetailsm" class="mb-0"> <strong> Details </strong></label>
+                                 <li><textarea class="mb-0" id="Inputdetailsm" name="Inputdetailsm" placeholder="describe your needs" rows="4"></textarea></li></div>
+                        </div>
+                        <button type="submit" class="btn hvr-hover"><i class="fa fa-taxi"> . </i></button>
+                    </form>
+
+                 </div>
+                
+
+
+                
+            </div>
+            <br>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+ 
+
+
+
+
+
+
+
+
+          <!-- Modal auth-->
+<div class="modal fade" id="truck" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+        <p><h5 class="modal-title" id="exampleModalCenterTitle"style="color:red; font-size:20px;" > REQUEST TRUCK<strong> .</strong></i></h5></p>
+       </center>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+             <div class="container">
+              <form  id="formRegister"  action="/" method="Post">
+                        <div class="form-row" >
+                         
+                            <div class="service-block-inner">
+                                <label for="destination" class="mb-0"><strong> Destination</strong></label>
+                                <input  class="form-control" name="destination" id="destination" placeholder="destination"> </div>
+
+                            
+                         
+                            <div class="service-block-inner">
+                                <label for="time" class="mb-0"><strong> TIME</strong></label>
+                                <input type="time" class="form-control" name="time" id="time" placeholder="departure time"> </div>
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> BUDGET</strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
+                            
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> Quantity </strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
+
+                             <div class="service-block-inner">
+                                <label for="Inputdetailsm" class="mb-0"> <strong> DETAILS </strong></label>
+                                 <li><textarea class="mb-0" id="Inputdetailsm" name="Inputdetailsm" placeholder="describe your needs" rows="4"></textarea></li></div>
+                        </div>
+                        <button type="submit" class="btn hvr-hover"><i class="fa fa-truck"> . </i></button>
+                    </form>
+
+                 </div>
+                
+
+
+                
+            </div>
+            <br>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+ 
+</div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+
+         <style>
+        
+
+        #leafletmap {
+            width: 100%;
+            height: 89vh;
+
+        }
+    </style>
+
+
+    <script type="text/javascript">
+  
+        //attempt to fetch cuurnt location
+    
+
+    
+         // Creating a map object
+         var mymap =  new L.map('leafletmap');
+         // Creating a Layer object
+        var googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+           maxZoom: 20,
+           subdomains:['mt0','mt1','mt2','mt3']
+            }).addTo(mymap);
+
+         mymap.locate({setView: true,
+                       enableHighAccuracy: true, 
+                       maxZoom: 20, 
+                       watch:false, 
+                       timeout: 60000,
+                       maximumAge:0
+                      });
+                           
+
+
+         
+         function onLocationFound(e) {
+                  var radiu = e.accuracy / 2;
+                  // js set radius to 0 decimal places.
+                  var radi = radiu / 1000
+                  var radius = radi.toFixed(2)
+                  var marker = L.marker(e.latlng)
+                  var redIcon = L.icon.pulse({ color: "red", FillColor: "red", animate: true});
+                  
+                  
+       
+                 
+                  // Adding marker to the map
+             
+                  marker.setIcon(redIcon)
+
+
+          
+marker.bindPopup(' <div> <br><strong><div class="widget change-email mb-0"><h5 class="widget-header user">Edit photo</h3><form id="profile_upload" action="/profile_upload" method="post" role="form" enctype="multipart/form-data"><div class="form-group choose-file"><center><label for="input-file"><i class="fa fa-taxi" style="font-size:190px;"></i></label><input name="file" type="file"  id="input-file" hidden="true" required></center></div><button class="btn btn-transparent">Upload</button></form></div></strong><h5><a class="btn hvr-hover"href="/cabs" style="color:white; font-size:15px;"><strong>Request Product</strong></a> </center></h5><div>').openPopup();
+    
+           
+                  marker.addTo(mymap)
+
+                   var control = L.Routing.control({
+  waypoints: [
+    L.latLng(38.7436056, -9.2304153),
+    L.latLng(38.5334477, -0.1312811)
+  ],
+  router: new L.Routing.osrmv1({
+    language: 'en',
+    profile: 'car'
+  }),
+  geocoder: L.Control.Geocoder.nominatim({})
+}).addTo(mymap);
+
+
+                  }
+         function error() {
+            alert( 'Unable to retrieve your location');
+               }
+            mymap.on('locationfound', onLocationFound);
+
+
+        
+
+
+
+    
+</script>
+
+<script src="https://npmcdn.com/leaflet-geometryutil"></script>
+  <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet-src.js"></script>
+<script src="https://unpkg.com/leaflet-pulse-icon@0.1.0/src/L.Icon.Pulse.js"></script>
 
  
 
-    <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
     <!-- ALL JS FILES -->
     <script src="static/theway/js/jquery-3.2.1.min.js"></script>

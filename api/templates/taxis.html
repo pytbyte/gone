@@ -55,9 +55,13 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-              
-  
-                        <li class="nav-item"><a class="nav-link" href="/login"> Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/dashboard"> <i class="fa fa-home" style="color:red; font-size:22px;">&nbsp;&nbsp; </i></a></li>
+                        
+                         <li class="nav-item"><a class="nav-link" href="/riders">  <i class="fa fa-motorcycle" style="color:grey"> &nbsp;&nbsp; Ridder Account</i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/trucks">  <i class="fa fa-truck" style="color:grey"> &nbsp;&nbsp; Truck Account</i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/trucks">  <i class="fa fa-shopping-cart" style="color:grey"> &nbsp;&nbsp; Business Account</i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/settings">  <i class="fa fa-user" style="color:red; font-size:12px;"> &nbsp;&nbsp; settings</i></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login"> <i class="fa fa-power-off" style="color:red; font-size:12px;">&nbsp;&nbsp; logout</i></a></li>
                                             
                         
                     </ul>
@@ -66,7 +70,7 @@
 
                 <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
-            
+                               
                 </div>
                 <!-- End Atribute Navigation -->
             </div>
@@ -75,6 +79,7 @@
         <!-- End Navigation -->
     </header>
     <!-- End Main Top -->
+
 
     
     <!-- Start Cart  -->
@@ -86,13 +91,14 @@
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="checkout-address">
                         <div class="title-left">
-             <!--profile photo -->
-                               <!--profile photo -->
+             
+			         <!--profile photo -->
                        <center>
-						<img src="static/all_images/default/default.jpg" alt="" class="rounded-circle" style="width:150px;height:150px;"> <br>
+						<i class="fa fa-taxi" style="font-size:100px;"></i> <br>
 
-					   </center>
-						<br>                      <h3>User Account </h3>
+					   </center> <br>                       
+
+					                       <h3>Taxi Account </h3>
 
                         {% for message in get_flashed_messages() %}
                         <div text-center style="color:red;">
@@ -101,33 +107,22 @@
                        {% endfor %}
  
                         </div>
-
-                        
-                        <form class="needs-validation" id="register" action="/register" method="post" role="form" validate>
+                         <form class="needs-validation" id="register" action="/riders" method="post" role="form" validate>
                           
                             <div class="mb-3">
-                                <label for="username">Username *</label>
+                                <label for="registration_no"> Registration_no *</label>
                                 <div class="input-group">
-                                    <input name="username" type="text" class="form-control" id="username" placeholder="" required>
-                                    <div class="invalid-feedback" style="width: 100%;"> Your unique username is required. </div>
+                                    <input name="registration_no" type="text" class="form-control" id="registration_no" placeholder="" required>
+                                    
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="email">Email Address *</label>
-                                <input name="email" type="email" class="form-control" id="email" placeholder="">
-                                <div class="invalid-feedback"> Please enter a valid email address . </div>
+                                <label for="taxi_model">taxi model *</label>
+                                <input name="taxi_model" type="text" class="form-control" id="taxi_model" placeholder="" required="">
+                                
                             </div>
-                            <div class="mb-3">
-                                <label for="contact">Phone Number *</label>
-                                <input name="contact" type="text" class="form-control" id="contact" placeholder="" required>
-                                <div class="invalid-feedback"> Please enter your phone number. </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password">Password*</label>
-                                <input name="password" type="password" class="form-control" id="password" placeholder="" required> </div>
                             
-                            </div>
-                            <button class="btn hvr-hover" type="submit" >NEXT </button>
+                            <button class="btn hvr-hover" type="submit" > Next</button>
                            
                             
                             </form>
@@ -163,5 +158,8 @@
     <script src="static/theway/js/contact-form-script.js"></script>
     <script src="static/theway/js/custom.js"></script>
 </body>
+
+
+     
 
 </html>

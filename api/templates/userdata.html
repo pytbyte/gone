@@ -48,7 +48,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                     <a class="navbar-brand" href="#" ><h1 style="color:grey; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 15px"><strong> Simple. Reliable. Efficient </strong></h4></a>
+                     <a class="navbar-brand" href="#" ><h1 style="color:grey; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 9px"><strong> Simple. Reliable. Efficient </strong></h4></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -56,7 +56,8 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
               
-  
+  <li class="nav-item"><a class="nav-link" href="/riders">Rider Account</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/taxis">Taxi Account</a></li>
                         <li class="nav-item"><a class="nav-link" href="/login"> Login</a></li>
                                             
                         
@@ -86,52 +87,29 @@
                 <div class="col-sm-6 col-lg-6 mb-3">
                     <div class="checkout-address">
                         <div class="title-left">
-             <!--profile photo -->
-                               <!--profile photo -->
-                       <center>
-						<img src="static/all_images/default/default.jpg" alt="" class="rounded-circle" style="width:150px;height:150px;"> <br>
+           
+              			<!-- File chooser -->
+						<!-- Change Email Address -->
+				    <div class="widget change-email mb-0">
+					    <h3 class="widget-header user">Edit photo</h3>
+					<form id="profile_upload" action="/profile_upload" method="post" role="form" enctype="multipart/form-data">
+				
+						<div class="form-group choose-file">
+						<center>
+							 
+						<label for="input-file"><i class="fa fa-taxi" style="font-size:190px;"></i></label>
+						
+						
+						
+						    <input name="file" type="file"  id="input-file" hidden="true" required>
+						</center>
+						</div>
 
-					   </center>
-						<br>                      <h3>User Account </h3>
-
-                        {% for message in get_flashed_messages() %}
-                        <div text-center style="color:red;">
-                         <div class="alert-error" style="color:red;">{{ message }}</div>
-                        </div>
-                       {% endfor %}
- 
-                        </div>
-
-                        
-                        <form class="needs-validation" id="register" action="/register" method="post" role="form" validate>
-                          
-                            <div class="mb-3">
-                                <label for="username">Username *</label>
-                                <div class="input-group">
-                                    <input name="username" type="text" class="form-control" id="username" placeholder="" required>
-                                    <div class="invalid-feedback" style="width: 100%;"> Your unique username is required. </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email Address *</label>
-                                <input name="email" type="email" class="form-control" id="email" placeholder="">
-                                <div class="invalid-feedback"> Please enter a valid email address . </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="contact">Phone Number *</label>
-                                <input name="contact" type="text" class="form-control" id="contact" placeholder="" required>
-                                <div class="invalid-feedback"> Please enter your phone number. </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password">Password*</label>
-                                <input name="password" type="password" class="form-control" id="password" placeholder="" required> </div>
-                            
-                            </div>
-                            <button class="btn hvr-hover" type="submit" >NEXT </button>
-                           
-                            
-                            </form>
-                    </div>
+                        		
+						<button class="btn btn-transparent">Upload</button>
+					</form>
+				    </div>
+				    <br>     </div>
                 </div>
                 
             </div>

@@ -34,7 +34,7 @@
 -------------------------------------------------------------------*/
  body {
      color: #666666;
-     font-size: 15px;
+     font-size: 18px;
      font-family: 'Quattrocento Sans', sans-serif;
      line-height: 1.80857;
 }
@@ -674,18 +674,18 @@
      box-shadow: 0 0 8px 0 rgba(0,0,0,.12);
      border-radius: 0;
 }
- .top-search .input-group-addon{
+  .top-search .input-group-addon{
      line-height: 40px;
 }
  .top-search input.form-control{
      color: #ffffff;
 }
-/*------------------------------------------------------------------ Slider -------------------------------------------------------------------*/
- .cover-slides{
+/*------------------------------------------------------------------ Slider ------------------------------------------ */
+.cover-slides{
      height: 100vh;
 }
  .slides-navigation a {
-     background: #d33b33;
+     background: red;
      position: absolute;
      height: 70px;
      width: 70px;
@@ -696,31 +696,33 @@
      line-height: 90px;
      text-align: center;
      transition: all 1.5s ease-in-out;
+
 }
  .slides-navigation a i{
      font-size: 40px;
-}
- .slides-navigation a:hover {
+} .slides-navigation a:hover {
      background: #010101;
 }
  .cover-slides .container{
-     height: 100%;
-     position: relative;
+     height: 100vh;
+     position: center;
      z-index: 2;
 }
  .cover-slides .container > .row {
      -webkit-box-align: center;
      -ms-flex-align: center;
      align-items: center;
+     
 }
  .cover-slides .container > .row {
      height: 100%;
+     color: grey;
+     
 }
  .overlay-background {
      background: #333;
      position: absolute;
-     height: 100%;
-     width: 100%;
+     right: 0;
      left: 0;
      top: 0;
      opacity: 0.5;
@@ -729,27 +731,32 @@
      font-family: 'Montserrat', sans-serif;
      font-weight: 500;
      font-size: 54px;
-     color: #fff;
+     color: #ffff;
+
 }
  .cover-slides p{
      font-size: 18px;
-     color: #fff;
+     color: #ffff;
      padding-bottom: 30px;
+     align-self: center;
 }
  .slides-pagination a{
-     border: 2px solid #ffffff;
+     border: 0px solid #ffffff;
 }
  .slides-pagination a.current{
-     background: #d33b33;
-     border: 2px solid #d33b33;
+     background: transparent;
+     border: 0px solid #d33b33;
 }
  .cover-slides p a{
      font-size: 24px;
      color: #ffffff;
      border: none;
      text-transform: uppercase;
-     padding: 10px 20px;
+     background: white;
+
+     
 }
+
 /*------------------------------------------------------------------ Categories Shop -------------------------------------------------------------------*/
  .categories-shop{
      padding: 0px 0px;
