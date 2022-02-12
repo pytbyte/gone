@@ -25,15 +25,16 @@ DROP TABLE IF EXISTS `bids`;
 CREATE TABLE `bids` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `origin` varchar(200) NOT NULL,
-  `author` varchar(200) NOT NULL,
   `budget` varchar(200) NOT NULL,
   `quantity` varchar(200) NOT NULL,
   `details` varchar(400) NOT NULL,
   `requesttime` varchar(200) NOT NULL,
   `request_views` varchar(200) NOT NULL,
   `status` varchar(200) NOT NULL,
+  `destination` varchar(200) DEFAULT NULL,
+  `author_id` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +43,7 @@ CREATE TABLE `bids` (
 
 LOCK TABLES `bids` WRITE;
 /*!40000 ALTER TABLE `bids` DISABLE KEYS */;
+INSERT INTO `bids` VALUES (1,'rider','50','0','','','0','0','zuri Towers','James '),(2,'rider','50','0','two passangers','','0','0','zuri Towers','James '),(3,'rider','300','0','two passangers','','0','0','zuri Towers','James '),(4,'rider','300','0','two passangers','','0','0','zuri Towers','James '),(5,'rider','300','0','two passangers','','0','0','zuri Towers','24'),(6,'rider','500','2','transport for two ','','0','0','Thiririka','24'),(7,'rider','50','1','Ride for two','','0','0','Noon Booth','24'),(8,'rider','50','1','trial','','0','0','Town','24'),(9,'rider','50','1','hurry home','Tue, 01 Feb 2022 19:00:49 GMT','0','0','Maragua','24'),(10,'taxi','50','1','payload','Tue, 01 Feb 2022 19:00:49 GMT','0','0','trial','24'),(11,'truck','50','1','going somewhere','Tue, 01 Feb 2022 19:00:49 GMT','0','0','ruai','24'),(12,'rider','700','1','transport for 2.','Wed, 02 Feb 2022 13:07:40 GMT','0','0','Githurai','25'),(13,'rider','400','1','swift ride , i passanger','Wed, 02 Feb 2022 13:07:40 GMT','0','0','Drop zone ent','25'),(14,'rider','50','1','500mbs','Sat, 12 Feb 2022 10:52:31 GMT','0','0','majengo','24');
 /*!40000 ALTER TABLE `bids` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,10 +60,13 @@ CREATE TABLE `bikes` (
   `contact` varchar(200) NOT NULL,
   `make` varchar(200) NOT NULL,
   `route` varchar(200) NOT NULL,
-  `image_url` varchar(200) NOT NULL,
   `owner` varchar(200) NOT NULL,
+  `last_seen` varchar(200) DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL,
+  `registered_on` varchar(200) DEFAULT NULL,
+  `image_url` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +75,7 @@ CREATE TABLE `bikes` (
 
 LOCK TABLES `bikes` WRITE;
 /*!40000 ALTER TABLE `bikes` DISABLE KEYS */;
+INSERT INTO `bikes` VALUES (5,'kmfb 669r','0701977677','super Dayun','ndarasha','Patrick','Sat, 29 Jan 2022 17:21:17 GMT','0','Sat, 29 Jan 2022 17:21:17 GMT',NULL),(6,'kmfq 123d','0701977677','bugati','ndarasha','Patrick','Sat, 29 Jan 2022 17:28:27 GMT','0','Sat, 29 Jan 2022 17:28:27 GMT',NULL),(7,'kmfg 200k','0724731639','ranger','kingston','James ','Sun, 30 Jan 2022 16:26:01 GMT','0','Sun, 30 Jan 2022 16:26:01 GMT',NULL),(8,'kmf9 200k','0724731639','ranger','kingston','James ','Sun, 30 Jan 2022 16:30:11 GMT','0','Sun, 30 Jan 2022 16:30:11 GMT',NULL),(9,'kmf9h 200k','0724731639','ranger','kingston','James ','Sun, 30 Jan 2022 16:33:50 GMT','0','Sun, 30 Jan 2022 16:33:50 GMT',NULL),(10,'kmh 200k','0724731639','ranger','kingston','James ','Sun, 30 Jan 2022 16:44:09 GMT','0','Sun, 30 Jan 2022 16:44:09 GMT',NULL),(11,'kmnh','0724731639','njui','de','James ','Sun, 30 Jan 2022 16:54:26 GMT','0','Sun, 30 Jan 2022 16:54:26 GMT',NULL),(12,'kmnn','0724731639','njui','de','James ','Sun, 30 Jan 2022 16:56:14 GMT','0','Sun, 30 Jan 2022 16:56:14 GMT',NULL),(13,'kmno','0724731639','njui','de','James ','Sun, 30 Jan 2022 16:57:43 GMT','0','Sun, 30 Jan 2022 16:57:43 GMT',NULL),(14,'kmnog','0724731639','njui','de','James ','Sun, 30 Jan 2022 17:03:27 GMT','0','Sun, 30 Jan 2022 17:03:27 GMT',NULL),(15,'ksda','0719168752','suzuki','45','pytbyte','Mon, 31 Jan 2022 10:44:41 GMT','0','Mon, 31 Jan 2022 10:44:41 GMT','static/images/bikes/15/12daab10-095b-4680-9f21-e863ec4ade9c.jpg'),(16,'kmfr 400l','0719168752','suzuki','Mastore','pytbyte','Mon, 31 Jan 2022 10:46:20 GMT','0','Mon, 31 Jan 2022 10:46:20 GMT',NULL),(17,'kmfy 400l','0719168752','suzuki','Mastore','pytbyte','Mon, 31 Jan 2022 10:53:04 GMT','0','Mon, 31 Jan 2022 10:53:04 GMT',NULL),(18,'kmfm 400l','0719168752','suzuki','Mastore','pytbyte','Mon, 31 Jan 2022 10:54:04 GMT','0','Mon, 31 Jan 2022 10:54:04 GMT',NULL),(19,'kmdd 345','0719168752','kingsy','red','pytbyte','Mon, 31 Jan 2022 11:45:19 GMT','0','Mon, 31 Jan 2022 11:45:19 GMT',NULL),(20,'kmd 345','0719168752','kingsy','red','pytbyte','Mon, 31 Jan 2022 11:54:50 GMT','0','Mon, 31 Jan 2022 11:54:50 GMT',NULL),(21,'kmfr 567','0719168752','jingchen','45','pytbyte','Mon, 31 Jan 2022 11:59:24 GMT','0','Mon, 31 Jan 2022 11:59:24 GMT',NULL),(22,'kmfo 567','0719168752','jingchen','45','pytbyte','Mon, 31 Jan 2022 12:03:36 GMT','0','Mon, 31 Jan 2022 12:03:36 GMT',NULL),(23,'kmfg 440l','0719168752','dayun','kisii','pytbyte','Mon, 31 Jan 2022 12:24:40 GMT','0','Mon, 31 Jan 2022 12:24:40 GMT',NULL),(24,'kfmg 300n','0719168752','jingcheng','dcii','pytbyte','Mon, 31 Jan 2022 12:26:26 GMT','0','Mon, 31 Jan 2022 12:26:26 GMT',NULL),(25,'gmn 99','0719168752','iokk','bb','pytbyte','Mon, 31 Jan 2022 12:31:29 GMT','0','Mon, 31 Jan 2022 12:31:29 GMT',NULL);
 /*!40000 ALTER TABLE `bikes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +89,6 @@ DROP TABLE IF EXISTS `business`;
 CREATE TABLE `business` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `businessname` varchar(200) DEFAULT NULL,
-  `businessemail` varchar(200) NOT NULL,
   `businesscontact` varchar(200) DEFAULT NULL,
   `authenticated` tinyint(1) DEFAULT NULL,
   `businesscategory` varchar(200) DEFAULT NULL,
@@ -96,11 +101,12 @@ CREATE TABLE `business` (
   `businessdsc` varchar(500) DEFAULT NULL,
   `admin` tinyint(1) DEFAULT NULL,
   `currency` varchar(300) DEFAULT NULL,
+  `workinghours` varchar(200) DEFAULT NULL,
+  `latlng` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `businessemail` (`businessemail`),
   UNIQUE KEY `businessname` (`businessname`),
   UNIQUE KEY `businesscontact` (`businesscontact`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +115,7 @@ CREATE TABLE `business` (
 
 LOCK TABLES `business` WRITE;
 /*!40000 ALTER TABLE `business` DISABLE KEYS */;
-INSERT INTO `business` VALUES (39,'Zenge Technologies Ltd','heretolearn3@gmail.com','0701977678',0,'Fashion','Eldoret','Thu, 15 Apr 2021 00:11:50 GMT','Thu, 22 Jul 2021 07:17:44 GMT','Paulo',NULL,0,'The number one payment facilitator',1,'USD'),(40,'Alemar Adventures','kiemo@gmail.com','0720114282',0,'Tourism','Nairobi','Thu, 15 Jul 2021 12:48:23 GMT','Thu, 22 Jul 2021 07:14:44 GMT','Kiemo','static/media/business/logo/40/88402cf4-4f44-4f2e-ac2e-587f5b59a65a.jpg',0,'Travel Agency\r\n0720114282\r\n0721204120\r\n0736000955\r\n',1,'KSH'),(48,'koko fuel','koko@gmail.com','0701988766',0,'Home and Living','Kiambu','Wed, 21 Jul 2021 12:43:43 GMT','Wed, 21 Jul 2021 13:58:38 GMT','Zab','static/media/business/logo/48/1b9720ac-efa3-4e4a-8359-75427405b8d3.jpg',0,'Koko sales and refiels.',1,'KSH');
+INSERT INTO `business` VALUES (51,'Pytlabs','0701977677',0,'Software',NULL,'Tue, 04 Jan 2022 20:58:18 GMT','Tue, 04 Jan 2022 20:58:18 GMT','Patrick',NULL,0,'creating futuristic solutions with python',NULL,NULL,'24/7',NULL),(57,'fashion ke','0701900000',0,'fashion',NULL,'Tue, 04 Jan 2022 21:35:25 GMT','Tue, 04 Jan 2022 21:35:25 GMT','Patrick',NULL,0,'alot of staff',NULL,NULL,'24/7',NULL),(58,'zippys Salon','07210778995',0,'beauty',NULL,'Fri, 07 Jan 2022 14:39:01 GMT','Fri, 07 Jan 2022 14:39:01 GMT','Patrick',NULL,0,'fresh',NULL,NULL,'24/7',''),(59,'top tops','0700334998',0,'Fashion',NULL,'Sun, 09 Jan 2022 12:24:25 GMT','Sun, 09 Jan 2022 12:24:25 GMT','Patrick',NULL,0,'fashion trend',NULL,NULL,'3-3',''),(60,'yuris','070033400',0,'Fashion',NULL,'Sun, 09 Jan 2022 13:50:52 GMT','Sun, 09 Jan 2022 13:50:52 GMT','Patrick',NULL,0,'fashion trend',NULL,NULL,'3-3','');
 /*!40000 ALTER TABLE `business` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,7 +366,7 @@ CREATE TABLE `products` (
   `image_url4` varchar(200) DEFAULT NULL,
   `product_description` varchar(600) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -369,7 +375,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (119,'Boots','Fashion','4500',1,'Thu, 03 Jun 2021 11:53:54 GMT',39,NULL,NULL,'static/media/business/products/39/103da382-ff7b-4dfc-9e50-c6c619a11745.jpg','static/media/business/products/39/6fb3f596-76fa-452a-955e-dad0b3d648ed.jpg','static/media/business/products/39/2568b3de-aae7-4d68-a51b-e4108c44ea4c.jpg','static/media/business/products/39/c55af211-abbe-4af1-8bbd-4d3490e0cf9e.jpg',NULL,'Quality Boots '),(120,'Sneakers','Fashion','3000',1,'Tue, 15 Jun 2021 09:34:53 GMT',39,NULL,NULL,'static/media/business/products/39/8aaf1d9b-d5f4-4be8-bcf4-738611560c0f.jpg','static/media/business/products/39/81b513c3-8897-4087-a368-a36052f2585d.jpg','static/media/business/products/39/0e90b752-3a95-44bc-9f32-5259754cfdcf.jpg',NULL,NULL,'cool Sneakers'),(121,'LandRover Defenders','Cars','1200000',1,'Tue, 08 Jun 2021 23:14:02 GMT',39,NULL,NULL,'static/media/business/products/39/3376bebf-af29-4646-9978-cf87f7a12835.jpg','static/media/business/products/39/f60d9088-fc3f-46df-9e7f-b58b562d9125.jpg','static/media/business/products/39/36c19be8-620a-4685-a4ec-07d0855cb549.jpg',NULL,NULL,'Quality Pimp for that country road or City stroll.\r\n\r\nSame old Power drive both manual and auto.\r\nService and Maintenance provides free for 1 year.\r\nPrice: ksh 1.2M'),(122,'alot','Fashion','7000',1,'Thu, 03 Jun 2021 11:53:54 GMT',39,NULL,NULL,'static/media/business/products/39/7c7c6752-cd35-423f-ac4f-655d684d07e2.jpg','static/media/business/products/39/ec02458f-75b9-4828-974e-d14646ae72fb.jpg','static/media/business/products/39/25e5872d-0257-4aba-af75-e7521f721ee2.jpg','static/media/business/products/39/d8189606-4887-418a-8060-75702668770c.jpg',NULL,'Original and reliable staff'),(123,'LandRover Defenders','Cars','5000000',1,'Thu, 03 Jun 2021 11:53:54 GMT',39,NULL,NULL,'static/media/business/products/39/ae2fde9f-e1a8-40dd-832a-a0fcf7ba151d.jpg','static/media/business/products/39/72697608-8fe2-46cf-a21c-216142e32ef9.jpg','static/media/business/products/39/83f5502c-28a0-4eac-9a5d-c0b0d698d727.jpg','static/media/business/products/39/1cd9cf33-8e3a-47b7-9075-4e9525b6f6fd.jpg',NULL,'Tough new cars'),(124,'jmat','Fashion','4500',1,'Sat, 05 Jun 2021 15:03:03 GMT',39,NULL,NULL,'static/media/business/products/39/167c5f4a-a5c9-49ac-8c4b-bff2847bfd79.jpg','static/media/business/products/39/87e969f8-6555-409f-90df-3cd5d79bb6cc.jpg','static/media/business/products/39/9f7e668c-81db-4627-99c0-6c565964fb82.jpg','static/media/business/products/39/9dae73db-de44-4089-b6de-272a7e489e63.jpg',NULL,'mats'),(125,'Wedge','Fashion','1700',1,'Mon, 05 Jul 2021 16:51:02 GMT',39,NULL,NULL,'static/media/business/products/39/04468e52-86de-476f-9d0f-38f149feb062.jpg','static/media/business/products/39/c1ef0fb8-f848-479c-9312-a78c4d693a91.jpg','static/media/business/products/39/becde8c8-d8de-4125-953b-ce61031e250f.jpg','static/media/business/products/39/0291d475-1b00-43f3-b578-f6a8255d072c.jpg','static/media/business/products/39/89be920a-4dd4-4ba5-b12c-e12a017d8b88.jpg','Classy light Leather wedge shoes.'),(126,'Classic Official ','Fashion','2000',1,'Mon, 05 Jul 2021 16:51:02 GMT',39,NULL,NULL,'static/media/business/products/39/2b6a2811-4ae3-4a90-a77e-00a3b6df2cb1.jpg','static/media/business/products/39/9f61bd0f-e55c-4014-ab81-ba14cf85df9e.jpg','static/media/business/products/39/e2eea861-8996-488c-ac19-7d78c5386aa0.jpg','static/media/business/products/39/5c6be531-a6d5-42e1-b6ca-b18502976d56.jpg','static/media/business/products/39/b3b9f999-bf60-4f36-8d81-e4edeb98e04e.jpg','Good long lasting quality. what you see is what you get.'),(127,'Boots','Fashion','2500',1,'Mon, 05 Jul 2021 16:51:02 GMT',39,NULL,NULL,'static/media/business/products/39/d47e9932-6bff-4089-b281-0696aaf8123b.jpg','static/media/business/products/39/88dc5953-9d96-4eef-a5bb-6f392629262d.jpg','static/media/business/products/39/ac3d5270-6dc8-416f-b972-9019a52b1907.jpg','static/media/business/products/39/521d677e-145f-4eb9-bf71-0d1becb15f05.jpg',NULL,'Warm boots'),(128,'Rides','Cars','1000000',1,'Mon, 05 Jul 2021 16:51:02 GMT',39,NULL,NULL,'static/media/business/products/39/879e25c7-706f-48c7-91d9-84b2606494eb.jpg','static/media/business/products/39/1148b482-784b-47d7-8fe5-12724c77eec4.jpg','static/media/business/products/39/edcac4ab-ed53-4142-ba6f-5c83493d9c7e.jpg',NULL,NULL,'Any deal for 1m .'),(129,'Old School','Cars','2000000',1,'Mon, 05 Jul 2021 16:51:02 GMT',39,NULL,NULL,'static/media/business/products/39/4aa88886-043d-4109-98b8-d3d036c3616b.jpg','static/media/business/products/39/ea460990-519a-457b-ada0-2297cab84c88.jpg','static/media/business/products/39/ba9a7c5d-7582-4b55-b000-dd7c14f9bc09.jpg',NULL,NULL,'Pimped old school cars.'),(130,'bedsheets','Fashion','6',1,'Thu, 15 Jul 2021 08:24:22 GMT',39,NULL,NULL,'static/media/business/products/39/d413f54f-b436-4dd2-b44a-66d7feda577f.jpg',NULL,NULL,NULL,NULL,'100% COTTON'),(131,'samburu roadtrip','Choose...','3500',1,'Thu, 15 Jul 2021 14:17:45 GMT',40,NULL,NULL,'static/media/business/products/40/557d9744-61f8-460a-9610-f9c6579c1976.jpg',NULL,NULL,NULL,NULL,'track party'),(132,'TRACK PARTY','Choose...','2000',0,'Thu, 15 Jul 2021 14:17:45 GMT',40,NULL,NULL,'static/media/business/products/40/7b40ccb6-edd7-4d20-b439-e34ac9fca31d.jpg','static/media/business/products/40/398f53bc-6c67-47f3-904c-247199daeb7c.jpg',NULL,NULL,NULL,'Samburu Track Party'),(133,'zanzibar getaway','Cars','5600',0,'Sun, 18 Jul 2021 14:34:40 GMT',40,NULL,NULL,'static/media/business/products/40/1bdcf28e-edcd-4f91-9288-a8f1a49e3c5a.png','static/media/business/products/40/7dc64a2b-7b4f-4d2f-bca8-98c2ff1707a8.png',NULL,NULL,NULL,'5 days zanzibar getaway '),(134,'test1','Fashion','6000',0,'Wed, 21 Jul 2021 14:31:44 GMT',48,NULL,NULL,'static/media/business/products/43/affe624d-1ae1-45b7-8353-a1eac90980d0.jpg','static/media/business/products/43/fe5d9d20-0cb5-4e98-91a6-9facee828737.jpg','static/media/business/products/43/58426644-5a41-4836-99d9-719b44a9200f.jpg','static/media/business/products/43/9416f8c3-052c-4760-8f36-27e10e8106f8.jpg','static/media/business/products/43/e746d49b-325d-4cfd-891c-464b7b67a682.jpg','some test data'),(135,'Safari Truck','Cars','3000000',0,'Thu, 22 Jul 2021 04:56:03 GMT',40,NULL,NULL,'static/media/business/products/40/120491a3-fb52-4f13-8d51-ff8b4e336d7a.jpg',NULL,NULL,NULL,NULL,'NEW fully equipped Safari Truck.');
+INSERT INTO `products` VALUES (137,NULL,'uioo',NULL,0,'Tue, 08 Feb 2022 11:43:47 GMT',51,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'guigiuig'),(138,'0rion','hao',NULL,0,'Tue, 08 Feb 2022 12:19:05 GMT',51,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'wateja'),(139,'d','d','2',0,'Tue, 08 Feb 2022 12:19:05 GMT',51,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'dd'),(140,'fesh','vegies','56',0,'Tue, 08 Feb 2022 13:15:33 GMT',51,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'t'),(141,'UI','home','90',0,'Tue, 08 Feb 2022 13:46:03 GMT',51,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'JJJJH'),(142,'UIn','home','90',0,'Tue, 08 Feb 2022 13:46:03 GMT',51,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'JJJJH'),(143,'UInss','home','90',0,'Tue, 08 Feb 2022 13:46:03 GMT',51,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'JJJJH');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -447,12 +453,15 @@ CREATE TABLE `taxis` (
   `registration_no` varchar(200) NOT NULL,
   `contact` varchar(200) NOT NULL,
   `make` varchar(200) NOT NULL,
-  `seaters` varchar(200) NOT NULL,
   `route` varchar(200) NOT NULL,
-  `image_url` varchar(200) NOT NULL,
   `owner` varchar(200) NOT NULL,
+  `last_seen` varchar(200) DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL,
+  `registered_on` varchar(200) DEFAULT NULL,
+  `seater` varchar(200) DEFAULT NULL,
+  `image_url` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -461,6 +470,7 @@ CREATE TABLE `taxis` (
 
 LOCK TABLES `taxis` WRITE;
 /*!40000 ALTER TABLE `taxis` DISABLE KEYS */;
+INSERT INTO `taxis` VALUES (1,'KDG 4550','0719168752','Range','KARIOBANGI','pytbyte','Tue, 01 Feb 2022 04:04:29 GMT','0','Tue, 01 Feb 2022 04:04:29 GMT','','static/images/taxis/1/eb3b630b-01be-4dc4-baef-9834da12bedd.jpg'),(2,'KDS 445E','0719168752','Premio','Juja','pytbyte','Tue, 01 Feb 2022 04:09:23 GMT','0','Tue, 01 Feb 2022 04:09:23 GMT','7',NULL),(3,'KDt 445E','0719168752','Premio','Juja','pytbyte','Tue, 01 Feb 2022 04:10:53 GMT','0','Tue, 01 Feb 2022 04:10:53 GMT','7',NULL),(4,'KDA 445E','0719168752','Premio','Juja','pytbyte','Tue, 01 Feb 2022 04:14:18 GMT','0','Tue, 01 Feb 2022 04:14:18 GMT','7',NULL),(5,'KDK 445E','0719168752','Premio','Juja','pytbyte','Tue, 01 Feb 2022 04:19:07 GMT','0','Tue, 01 Feb 2022 04:19:07 GMT','7',NULL),(6,'KDM 445E','0719168752','Premio','Juja','pytbyte','Tue, 01 Feb 2022 04:36:29 GMT','0','Tue, 01 Feb 2022 04:36:29 GMT','7',NULL),(7,'KDDD 445E','0719168752','Premio','Juja','pytbyte','Tue, 01 Feb 2022 04:37:43 GMT','0','Tue, 01 Feb 2022 04:37:43 GMT','7',NULL),(8,'KDH 300P','0719168752','VITZ','KARIOBANGI','pytbyte','Tue, 01 Feb 2022 04:51:06 GMT','0','Tue, 01 Feb 2022 04:51:06 GMT','5',NULL);
 /*!40000 ALTER TABLE `taxis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -476,12 +486,14 @@ CREATE TABLE `trucks` (
   `registration_no` varchar(200) NOT NULL,
   `contact` varchar(200) NOT NULL,
   `make` varchar(200) NOT NULL,
-  `weight` varchar(200) NOT NULL,
   `route` varchar(200) NOT NULL,
-  `image_url` varchar(200) NOT NULL,
   `owner` varchar(200) NOT NULL,
+  `last_seen` varchar(200) DEFAULT NULL,
+  `image_url` varchar(200) DEFAULT NULL,
+  `status` varchar(200) DEFAULT NULL,
+  `registered_on` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -490,6 +502,7 @@ CREATE TABLE `trucks` (
 
 LOCK TABLES `trucks` WRITE;
 /*!40000 ALTER TABLE `trucks` DISABLE KEYS */;
+INSERT INTO `trucks` VALUES (1,'KGH 500M','0719168752','','Dandora','pytbyte','Tue, 01 Feb 2022 05:48:11 GMT','static/images/trucks/1/71fa0d41-528e-4f3c-b000-05e53a79be20.jpg','0','Tue, 01 Feb 2022 05:48:11 GMT'),(2,'KGS 400N','0719168752','ISUZU','yesa','pytbyte','Tue, 01 Feb 2022 05:51:08 GMT',NULL,'0','Tue, 01 Feb 2022 05:51:08 GMT'),(3,'KGN 400N','0719168752','ISUZU','yesa','pytbyte','Tue, 01 Feb 2022 05:55:22 GMT',NULL,'0','Tue, 01 Feb 2022 05:55:22 GMT'),(4,'KGN 488Z','0719168752','ISUZU','yesa','pytbyte','Tue, 01 Feb 2022 05:57:09 GMT',NULL,'0','Tue, 01 Feb 2022 05:57:09 GMT'),(5,'KMFS 544l','0719168752','Datsun','Thika','pytbyte','Tue, 01 Feb 2022 05:59:44 GMT',NULL,'0','Tue, 01 Feb 2022 05:59:44 GMT'),(6,'KMFS 540l','0719168752','Datsun','Thika','pytbyte','Tue, 01 Feb 2022 06:08:04 GMT',NULL,'0','Tue, 01 Feb 2022 06:08:04 GMT'),(7,'KMFS 547l','0719168752','Datsun','Thika','pytbyte','Tue, 01 Feb 2022 06:10:23 GMT',NULL,'0','Tue, 01 Feb 2022 06:10:23 GMT'),(8,'nht 677m','0719168752','budi','rty','pytbyte','Tue, 01 Feb 2022 06:26:30 GMT',NULL,'0','Tue, 01 Feb 2022 06:26:30 GMT');
 /*!40000 ALTER TABLE `trucks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -516,7 +529,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `contact` (`contact`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -525,7 +538,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (22,'Patrick','zabby@aqua.com','0701977677',0,'pbkdf2:sha256:150000$O5QXnEVm$3c6003d08acada16e3bc5a2b99e6779386f719ac4632c671fabf2d8f8135f762','Thu, 02 Dec 2021 18:40:29 GMT','Sun, 26 Dec 2021 20:44:31 GMT','static/images/personal/profile/22/a1a80e8f-c18c-49aa-874a-0114e2d8da35.jpg',0,NULL);
+INSERT INTO `users` VALUES (22,'Patrick','zabby@aqua.com','0701977677',0,'pbkdf2:sha256:150000$O5QXnEVm$3c6003d08acada16e3bc5a2b99e6779386f719ac4632c671fabf2d8f8135f762','Thu, 02 Dec 2021 18:40:29 GMT','Sat, 12 Feb 2022 11:03:09 GMT','static/images/personal/profile/22/a1a80e8f-c18c-49aa-874a-0114e2d8da35.jpg',0,NULL),(23,'pytbyte','hapakusoma@gmail.com','0719168752',0,'pbkdf2:sha256:150000$bv6eHAhh$d860f6ab9f410d5e76d7f38610955e01387cfb9095d76db82f710f0a7948cb7e','Sat, 29 Jan 2022 11:18:07 GMT','Fri, 04 Feb 2022 13:12:14 GMT','static/images/personal/profile/23/ad61f647-d5ee-4230-bfdf-c83df844d6c8.jpg',0,NULL),(24,'James ','james1@gmail.com','0724731639',0,'pbkdf2:sha256:150000$OPA4qdxL$71ba21f296c62163f59581267a10087058e7061c02cae7efbfa5bdd53fe050e0','Sun, 30 Jan 2022 12:49:14 GMT','Sat, 12 Feb 2022 12:03:20 GMT','static/images/personal/profile/24/897e8307-2749-4101-91cb-f2a8ebc130ae.jpg',0,NULL),(25,'Dommie Macharia','dommie@gmail.com','0745223224',0,'pbkdf2:sha256:150000$CHGRyMij$fbfb3d418aeb6c2b32dffa792df0d3fa1aa840ba59431d7482cbbffa3861ce5c','Wed, 02 Feb 2022 13:13:37 GMT','Wed, 02 Feb 2022 22:51:59 GMT','static/images/personal/profile/25/a7e2c351-ecf2-40e3-8461-524f2bca57ad.jpg',0,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -538,4 +551,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-27 14:36:33
+-- Dump completed on 2022-02-12 13:28:14
