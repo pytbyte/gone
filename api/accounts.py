@@ -16,7 +16,7 @@ import urllib.request
 from sqlalchemy import create_engine, exc,desc,or_,and_
 from flask import Flask, request, redirect, jsonify,make_response,json,Blueprint
 from werkzeug.utils import secure_filename
-#from flask_jwt_extended import ( JWTManager, jwt_required, create_access_token,get_jwt_identity)
+from flask_jwt_extended import ( JWTManager, jwt_required, create_access_token,get_jwt_identity)
 import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.model import *
@@ -33,6 +33,7 @@ sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
 
 accounts_bp = Blueprint('accounts', __name__)
 #conn = create_engine('mysql+pymysql://root:TheBl0cK!*@localhost/MyBlock')
+
 
 
 
@@ -295,21 +296,91 @@ def landing():
       return render_template('index.html')
 
 
+@accounts_bp.route('/logout', methods=("GET","POST"))
+def logout():
+    current_time = time.localtime()
+    sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
+    if request.method == 'GET':
+      logout_user()
+      session.clear()
+      return render_template('login.html')
+
+
+
+
 @accounts_bp.route('/rides', methods=("GET","POST"))
 def rides():
     current_time = time.localtime()
     sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
+    if "logged_in" not in session:
+      flash("your session has expired! kindly login")
+      return render_template("login.html")
     if request.method == 'GET':
+      bike_data =  Bikes.query.filter(and_(Bikes.owner ==session['current_user'], Bikes.status !=1)).first()
+      user_data = Users.query.filter_by(username=session["current_user"]).first() 
+      if bike_data:
+      	return render_template('bike_data.html',bike_data = bike_data, user_data =	user_data )
+
       return render_template('block.html')
 
 
+
+@accounts_bp.route('/ride', methods=("GET","POST"))
+def ride():
+    current_time = time.localtime()
+    sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
+    if "logged_in" not in session:
+      flash("your session has expired! kindly login")
+      return render_template("login.html")
+    if request.method == 'GET':
+      bikes =  Bikes.query.filter(Bikes.status !=1).all()
+      user_data = Users.query.filter_by(username=session["current_user"]).first() 
+      if bikes :
+      	return render_template('block.html',bikes = bikes, user_data =	user_data )
+
+      return render_template('block.html', bikes = bikes, user_data =	user_data )
+
+
+@accounts_bp.route('/Taxis', methods=("GET","POST"))
+def taxiz():
+    current_time = time.localtime()
+    sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
+    if "logged_in" not in session:
+      flash("your session has expired! kindly login")
+      return render_template("login.html")
+    if request.method == 'GET':
+      taxis =  Taxis.query.filter(Taxis.status !=1).all()
+      taxi_data =  Taxis.query.filter(Taxis.owner == session['current_user']).first()
+      user_data = Users.query.filter_by(username=session["current_user"]).first() 
+      if taxis :
+      	return render_template('taxi_data.html',taxi_data = taxi_data, user_data =	user_data )
+
+      return render_template('block1.html', Taxis = Taxis, user_data =	user_data )
+
+
+@accounts_bp.route('/Truck', methods=("GET","POST"))
+def truckz():
+    current_time = time.localtime()
+    sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
+    if "logged_in" not in session:
+      flash("your session has expired! kindly login")
+      return render_template("login.html")
+    if request.method == 'GET':
+      TRUCK =  Trucks.query.filter(Trucks.status !=1).all()
+      truck_data =  Trucks.query.filter(Trucks.owner == session['current_user']).first()
+      user_data = Users.query.filter_by(username=session["current_user"]).first() 
+      if truck_data :
+      	return render_template('truck_data.html',truck_data = truck_data, user_data =	user_data )
+
+      return render_template('block1.html', Trucks = TRUCK, user_data =	user_data )
 
 @accounts_bp.route('/cabs', methods=("GET","POST"))
 def drivers():
     current_time = time.localtime()
     sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
     if request.method == 'GET':
-      return render_template('block1.html')
+      taxis =  Taxis.query.filter(Taxis.status !=1).all()
+      return render_template('block1.html', taxi_data = taxis)
 
 
 @accounts_bp.route('/trucks', methods=("GET","POST"))
@@ -317,13 +388,119 @@ def trucks():
     current_time = time.localtime()
     sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
     if request.method == 'GET':
-      return render_template('truck.html')
+      truck_data =Trucks.query.filter(Trucks.status !=1).all()
+      return render_template('truck.html', truck_data = truck_data)
+
+
+
+
+@accounts_bp.route('/business', methods=("GET","POST"))
+def biz():
+    current_time = time.localtime()
+    sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
+    if request.method == 'GET':
+       # check newbusiness existance
+       if 'logged_in' in session:
+       	 business_data =  Business.query.filter(and_(Business.owner ==session['current_user'], Business.status !=1)).first()
+         if business_data:
+            return render_template('panel.html',businessdata = business_data)
+
+     
+       return render_template('businesses.html')
+
+    #variable declaration
+    latlng = request.form['latlng']
+    businessname = request.form['businessname']
+    businesscontact = request.form['contact']
+    businesscategory = request.form['businesscategory']
+    businessdsc = request.form['businessdsc']
+    workinghours = request.form['workinghours']
+      
+    status = 0,
+    last_seen =sasa
+    registered_on =sasa
+  
+    
+    # duplicate value error handling 
+
+    busines = Business.query.filter_by(status = 0).all()
+    existing_business = []
+   
+        
+
+    for business_ in busines:
+        existing_business.append(business_.businessname)
+        
+    
+ 
+    user_data =Users.query.filter_by(username = session['current_user']).first()
+    #business_data =Business.query.filter_by(owner = session['current_user']).first()
+             
+
+    #user creation
+    newbusiness = Business(
+        businessname = businessname, 
+        businesscontact =businesscontact,
+        businesscategory = businesscategory,
+        businessdsc = businessdsc,
+        workinghours = workinghours,
+        owner = session['current_user'],
+        status = 0,
+        last_seen = last_seen,
+        latlng = latlng,
+        registered_on = registered_on            
+    )   
+          
+    # check newbusiness existance
+    business_data =  Business.query.filter(and_(Business.businesscontact == businesscontact ,Business.businessname ==businessname)).first() 
+    if business_data:
+        flash(" {}, is already registered here try other contacts ".format(business_data.businessname))
+        return render_template('business.html',businessdata=business_data)
+
+
+     # check newbusiness existance
+    business_data =  Business.query.filter(and_(Business.businesscontact ==businesscontact ,Business.status ==0)).first() 
+    if business_data:
+        flash(" {}, is already registered here try other contacts ".format(business_data.businesscontact))
+        return render_template('business.html',businessdata=business_data)
+
+
+
+    #save newbusiness
+    if not business_data:
+    
+       db.session.add(newbusiness)
+       db.session.commit()
+ 
+    createdbusiness =   Business.query.filter(and_( Business.businesscontact == businesscontact ,Business.businessname ==businessname)).first() 
+    if createdbusiness.status == 0 :
+
+        dest = createdbusiness.id
+       
+        UPLOAD_ = '/home/pato/myblock-01/api/static/images/Business/profile'
+        os.chdir(UPLOAD_)
+        dest = dest
+        UPLOAD_FOLDER =UPLOAD_+str(dest)
+        app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        if not os.path.isdir("%s" % dest):
+            os.mkdir("%s" % dest)
+        flash("Welcome  {}.".format(createdbusiness.businessname))
+        return render_template('panel.html', businessdata = createdbusiness)  
+
+
+
+
+
+
 
 
 @accounts_bp.route('/dashboard', methods=("GET","POST"))
 def dashboard():
     current_time = time.localtime()
     sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
+
+
     if request.method == 'GET':
       return render_template('dashboard.html')
 
@@ -336,15 +513,19 @@ def dashboard():
 def enroll():
     current_time = time.localtime()
     sasa=time.strftime('%a, %d %b %Y %H:%M:%S GMT', current_time)
+    if "logged_in" not  in session:
+      flash("your session has expired! kindly login")
+      return render_template("login.html")
+
     if request.method == 'GET':
       return render_template('rider.html')
 
-
+  
     #variable diclaration and definations    
     
     registration_no = request.form['registration_no']
     model = request.form['motorcycle_model']
-    
+    route = request.form['route']
     status = 0,
     last_seen =sasa
     registered_on =sasa
@@ -362,7 +543,7 @@ def enroll():
         
     
         #response creation  
-        if  registration_no in existingreg_no :          
+        if  registration_no in existing_reg_no :          
                 flash(" registration_no : {} already enrolled".format(registration_no))
                 return render_template('rider.html') 
          
@@ -377,7 +558,9 @@ def enroll():
         owner = user_data.username,
         status = 0,
         last_seen = last_seen,
-        registered_on = registered_on            
+        registered_on = registered_on,
+        route = route   
+
     )   
 
           
@@ -392,12 +575,151 @@ def enroll():
        db.session.add(newbike)
        db.session.commit()
  
-    createdbike =   Bikes.query.filter(and_( Bikes.contact == contact ,Bikes.registration_no ==registration_no)).first() 
-    if createdbike.status == 0 :
+    createdbike =   Bikes.query.filter(and_( Bikes.contact == user_data.contact ,Bikes.registration_no ==registration_no)).first() 
+    
+    flash("Welcome  {}.".format(createdbike.registration_no))
+    return render_template('bike_data.html', bike_data = createdbike, user_data =user_data)  
 
-        dest = createdbike.id
+
+
+"""
+------------------  UPDATE USER --------------------
+
+"""
+
+
+@accounts_bp.route('/bike_edit', methods=('GET', 'POST', 'PUT'))
+def update_bike():
+        if "logged_in" not in session:
+           flash(" your session has expired! kindly login")
+           return render_template("login.html")
+        
+        if request.method == 'GET':
+           user_data = Users.query.filter_by(username = session['current_user']).first()
+           bike_data = Bikes.query.filter_by(owner = session['current_user']).first()
+
+           return render_template('bike_data.html', bike_data=bike_data, user_data =user_data)
+
+
+        user_data = Users.query.filter_by(username = session['current_user']).first()
+        bike_data = Bikes.query.filter_by(owner = session['current_user']).first()
+
+
+
+
+        #update user location
+
+        #latlon = request.form('latlon')
+        #user_data.latlon = latlon
+        #db.session.add(user_data)
+        #db.session.commit()      
+        #variable diclaration and definations
+        data= request.form
+        bike_id = bike_data.id
+        
+        registration_no = request.form['registration_no']
+        model = request.form['motorcycle_model']
+        route = request.form['route']
+        
+        last_seen =sasa
+        
+
+        x = session['current_user'] #get_jwt_identity()
+
+         
+
+        #  maintain values
+        bike_data=Bikes.query.filter(and_(Bikes.status == 0, Bikes.owner ==session['current_user'])).first()
+        _bike = Bikes.query.filter_by(status = 0).all()
+  
+        existing_route = []
+        existing_registration = []
+        original_route =[]  
+        original_registration =[]
+        if bike_data:
+
+	        if bike_data.registration_no == registration_no: 
+	                existing_registration.append(bike_data.registration_no)
+	                existing_route.append(bike_data.route) 
+	        if bike_data.owner == session["current_user"]:
+	                original_registration =bike_data.registration_no
+	                original_route =bike_data.route
+             
+
+	        #preserve unchanged fileds
+	        if not registration_no:
+	           registration_no =bike_data.registration_no
+	        if not route:
+	           route = ride_data.route
+            
+        # update user_dat 
+        try:
+          bike_data.registration_no = registration_no
+          bike_data.route = route
+          
+          db.session.commit()
+          session["active_bike"] = bike_data.registration_no
+
+        #handle error and retain pre edit data (rollback)
+        except exc.IntegrityError as e :
+            db.session.rollback()
+        
+
+        #check who is saving
+        if not session["current_user"]:
+            flash("you are not allowed to edit this data")
+            bike_data=Bikes.query.filter(and_(Bikes.registration_no == registration_no, Bikes.owner ==0)).first()
+            return render_template('bike_data.html', bike_data =bike_data,user_data =user_data)
+
+          
+
+        
        
-        UPLOAD_ = '/home/pato/myblock-01/api/static/images/bikes/profile'
+        
+      
+       
+        return render_template('bike_data.html', bike_data =bike_data,user_data =user_data)
+        
+
+
+
+"""
+------------------  PROFILE PHOTO --------------------
+
+""" 
+
+
+@accounts_bp.route('/bike_upload',  methods=('GET', 'POST'))
+
+def upload_bike_pic():
+    """
+    uploads profile picture to session['current_user'].
+    """
+    if 'logged_in' not in session:
+        flash("your session has expired! kindlg login")
+        return render_template("login.html")
+ 
+    #get current_user
+    username = session['current_user']
+    bike_data = Bikes.query.filter_by(owner =username).first()
+ 
+        
+
+    
+    if request.method == 'POST':
+
+
+        id = bike_data.id
+    
+        if not request.files["file"]:
+            flash(" no file seldcted for upload. ")
+            return render_template('bike_edit.html', bike_data =bike_data)
+
+        
+
+        dest = bike_data.id
+       
+        UPLOAD_ = '/home/pato/myblock-01/api/static/images/bikes/'
         os.chdir(UPLOAD_)
         dest = dest
         UPLOAD_FOLDER =UPLOAD_+str(dest)
@@ -405,8 +727,24 @@ def enroll():
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         if not os.path.isdir("%s" % dest):
             os.mkdir("%s" % dest)
-        flash("Welcome  {}.".format(createdbike.registration_no))
-        return redirect(url_for('accounts.rides'))  
+
+
+        file = request.files["file"]
+        extension = os.path.splitext(file.filename)[1]
+        f_name = str(uuid.uuid4()) + extension
+        file.save(os.path.join('/home/pato/myblock-01/api/static/images/bikes/'+str(bike_data.id)+"/", f_name))
+        if  not request.files["file"]:
+           user_data.image_url=old_image
+        if request.files["file"]:
+           bike_data.image_url = ('static/images/bikes/'+str(bike_data.id)+"/"+f_name)
+        db.session.commit()
+ 
+    bike_data = Bikes.query.filter_by(owner =username).first()
+    
+    user_data = Users.query.filter_by(username = session['current_user']).first()
+    return render_template('bike_data.html', bike_data =bike_data, user_data =	user_data)
+
+
 
 
 
@@ -431,7 +769,8 @@ def enroll_taxi():
     
     registration_no = request.form['registration_no']
     model = request.form['taxi_model']
-    
+    seater = request.form['taxi_seater']
+    route = request.form['taxi_route']
     status = 0,
     last_seen =sasa
     registered_on =sasa
@@ -449,7 +788,7 @@ def enroll_taxi():
         
     
         #response creation  
-        if  registration_no in existingreg_no :          
+        if  registration_no in existing_reg_no :          
                 flash(" registration_no : {} already enrolled".format(registration_no))
                 return render_template('taxis.html') 
          
@@ -464,6 +803,8 @@ def enroll_taxi():
         owner = user_data.username,
         status = 0,
         last_seen = last_seen,
+        seater = seater,
+        route = route,
         registered_on = registered_on            
     )   
 
@@ -479,12 +820,156 @@ def enroll_taxi():
        db.session.add(newtaxi)
        db.session.commit()
  
-    createdtaxi =   taxis.query.filter(and_( taxis.contact == contact ,taxis.registration_no ==registration_no)).first() 
-    if createdtaxi.status == 0 :
+    createdtaxi =   Taxis.query.filter(and_( Taxis.contact == user_data.contact ,Taxis.registration_no ==registration_no)).first() 
+    
+    flash("Welcome  {}.".format(createdtaxi.registration_no))
+    return render_template('taxi_data.html', taxi_data = createdtaxi, user_data= user_data)
 
-        dest = createdtaxi.id
+
+
+"""
+------------------  UPDATE TAXIS --------------------
+
+"""
+
+
+@accounts_bp.route('/taxi_edit', methods=('GET', 'POST', 'PUT'))
+def update_taxi():
+        if "logged_in" not in session:
+           flash(" your session has expired! kindly login")
+           return render_template("login.html")
+        
+        if request.method == 'GET':
+           user_data = Users.query.filter_by(username = session['current_user']).first()
+           taxi_data = Taxis.query.filter_by(owner = session['current_user']).first()
+
+           return render_template('taxi_data.html', taxi_data=taxi_data, user_data =user_data)
+
+
+        user_data = Users.query.filter_by(username = session['current_user']).first()
+        taxi_data = Taxis.query.filter_by(owner = session['current_user']).first()
+
+
+
+
+        #update user location
+
+        #latlon = request.form('latlon')
+        #user_data.latlon = latlon
+        #db.session.add(user_data)
+        #db.session.commit()      
+        #variable diclaration and definations
+        data= request.form
+        taxi_id = taxi_data.id
+        
+        registration_no = request.form['registration_no']
+        model = request.form['taxi_model']
+        seater = request.form['taxi_seater']
+        route = request.form['taxi_route']
+        
+
+        
+        last_seen =sasa
+        
+
+        x = session['current_user'] #get_jwt_identity()
+
+         
+
+        #  maintain values
+        taxi_data=Taxis.query.filter(and_(Taxis.status == 0, Taxis.owner ==session['current_user'])).first()
+        _taxi = Taxis.query.filter_by(status = 0).all()
+  
+        existing_route = []
+        existing_registration = []
+        original_route =[]  
+        original_registration =[]
+        if taxi_data:
+
+	        if taxi_data.registration_no == registration_no: 
+	                existing_registration.append(taxi_data.registration_no)
+	                existing_route.append(taxi_data.route) 
+	        if taxi_data.owner == session["current_user"]:
+	                original_registration =taxi_data.registration_no
+	                original_route =taxi_data.route
+             
+
+	        #preserve unchanged fileds
+	        if not registration_no:
+	           registration_no =taxi_data.registration_no
+	        if not route:
+	           route = taxi_data.route
+            
+        # update user_dat 
+        try:
+          taxi_data.registration_no = registration_no
+          taxi_data.route = route
+          taxi_data.make = model
+          taxi_data.seater = seater
+          
+          db.session.commit()
+          session["active_taxi"] = taxi_data.registration_no
+
+        #handle error and retain pre edit data (rollback)
+        except exc.IntegrityError as e :
+            db.session.rollback()
+        
+
+        #check who is saving
+        if not session["current_user"]:
+            flash("you are not allowed to edit this data")
+            taxi_data=Taxis.query.filter(and_(Taxis.registration_no == registration_no, Taxis.owner ==user_data.session['current_user'])).first()
+            return render_template('taxi_data.html', taxi_data =taxi_data,user_data =user_data)
+
+          
+
+        
        
-        UPLOAD_ = '/home/pato/myblock-01/api/static/images/taxis/profile'
+        
+      
+       
+        return render_template('taxi_data.html', taxi_data =taxi_data,user_data =user_data)
+        
+
+
+
+"""
+------------------  PROFILE PHOTO --------------------
+
+""" 
+
+
+@accounts_bp.route('/taxi_upload',  methods=('GET', 'POST'))
+
+def upload_taxi_pic():
+    """
+    uploads profile picture to session['current_user'].
+    """
+    if 'logged_in' not in session:
+        flash("your session has expired! kindlg login")
+        return render_template("login.html")
+ 
+    #get current_user
+    username = session['current_user']
+    taxi_data = Taxis.query.filter_by(owner =username).first()
+ 
+        
+
+    
+    if request.method == 'POST':
+
+
+        id = taxi_data.id
+    
+        if not request.files["file"]:
+            flash(" no file seldcted for upload. ")
+            return render_template('taxi_edit.html', taxi_data =taxi_data)
+
+        
+
+        dest = taxi_data.id
+       
+        UPLOAD_ = '/home/pato/myblock-01/api/static/images/taxis/'
         os.chdir(UPLOAD_)
         dest = dest
         UPLOAD_FOLDER =UPLOAD_+str(dest)
@@ -492,8 +977,23 @@ def enroll_taxi():
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         if not os.path.isdir("%s" % dest):
             os.mkdir("%s" % dest)
-        flash("Welcome  {}.".format(createdtaxi.registration_no))
-        return redirect(url_for('accounts.cabs'))  
+
+
+        file = request.files["file"]
+        extension = os.path.splitext(file.filename)[1]
+        f_name = str(uuid.uuid4()) + extension
+        file.save(os.path.join('/home/pato/myblock-01/api/static/images/taxis/'+str(taxi_data.id)+"/", f_name))
+        if  not request.files["file"]:
+           user_data.image_url=old_image
+        if request.files["file"]:
+           taxi_data.image_url = ('static/images/taxis/'+str(taxi_data.id)+"/"+f_name)
+        db.session.commit()
+ 
+    taxi_data = Taxis.query.filter_by(owner =username).first()
+    
+    user_data = Users.query.filter_by(username = session['current_user']).first()
+    return render_template('taxi_data.html', taxi_data =taxi_data, user_data =	user_data)
+
 
 
 
@@ -518,7 +1018,8 @@ def enroll_truck():
     #variable diclaration and definations    
     
     registration_no = request.form['registration_no']
-    model = request.form['truck_model']
+    model = request.form['Truck_model']
+    route = request.form['Truck_route']
     
     status = 0,
     last_seen =sasa
@@ -537,7 +1038,7 @@ def enroll_truck():
         
     
         #response creation  
-        if  registration_no in existingreg_no :          
+        if  registration_no in existing_reg_no :          
                 flash(" registration_no : {} already enrolled".format(registration_no))
                 return render_template('trucks.html') 
          
@@ -552,6 +1053,7 @@ def enroll_truck():
         owner = user_data.username,
         status = 0,
         last_seen = last_seen,
+        route = route,
         registered_on = registered_on            
     )   
 
@@ -567,12 +1069,158 @@ def enroll_truck():
        db.session.add(newtruck)
        db.session.commit()
  
-    createdtruck =   Trucks.query.filter(and_( Trucks.contact == contact ,Trucks.registration_no ==registration_no)).first() 
-    if createdtruck.status == 0 :
+    createdtruck =    Trucks.query.filter(and_(Trucks.owner ==user_data.username , Trucks.contact == user_data.contact ,Trucks.registration_no ==registration_no)).first() 
+    
+    flash("Welcome  {}.".format(createdtruck.registration_no))
+    return render_template('truck_data.html', truck_data = createdtruck, user_data = user_data) 
 
-        dest = createdtruck.id
+
+
+
+
+
+"""
+------------------  UPDATE truckS --------------------
+
+"""
+
+
+@accounts_bp.route('/truck_edit', methods=('GET', 'POST', 'PUT'))
+def update_truck():
+        if "logged_in" not in session:
+           flash(" your session has expired! kindly login")
+           return render_template("login.html")
+        
+        if request.method == 'GET':
+           user_data = Users.query.filter_by(username = session['current_user']).first()
+           truck_data = Trucks.query.filter_by(owner = session['current_user']).first()
+
+           return render_template('truck_data.html', truck_data=truck_data, user_data =user_data)
+
+
+        user_data = Users.query.filter_by(username = session['current_user']).first()
+        truck_data = Trucks.query.filter_by(owner = session['current_user']).first()
+
+
+
+
+        #update user location
+
+        #latlon = request.form('latlon')
+        #user_data.latlon = latlon
+        #db.session.add(user_data)
+        #db.session.commit()      
+        #variable diclaration and definations
+        data= request.form
+        truck_id = truck_data.id
+        
+        registration_no = request.form['registration_no']
+        model = request.form['Truck_model']
+        route = request.form['Truck_route']
+        
+
+        
+        last_seen =sasa
+        
+
+        x = session['current_user'] #get_jwt_identity()
+
+         
+
+        #  maintain values
+        truck_data=Trucks.query.filter(and_(Trucks.status == 0, Trucks.owner ==session['current_user'])).first()
+        _truck = Trucks.query.filter_by(status = 0).all()
+  
+        existing_route = []
+        existing_registration = []
+        original_route =[]  
+        original_registration =[]
+        if truck_data:
+
+	        if truck_data.registration_no == registration_no: 
+	                existing_registration.append(truck_data.registration_no)
+	                existing_route.append(truck_data.route) 
+	        if truck_data.owner == session["current_user"]:
+	                original_registration =truck_data.registration_no
+	                original_route =truck_data.route
+             
+
+	        #preserve unchanged fileds
+	        if not registration_no:
+	           registration_no =truck_data.registration_no
+	        if not route:
+	           route = truck_data.route
+            
+        # update user_dat 
+        try:
+          truck_data.registration_no = registration_no
+          truck_data.route = route
+          truck_data.make = model
+          
+          
+          db.session.commit()
+          session["active_truck"] = truck_data.registration_no
+
+        #handle error and retain pre edit data (rollback)
+        except exc.IntegrityError as e :
+            db.session.rollback()
+        
+
+        #check who is saving
+        if not session["current_user"]:
+            flash("you are not allowed to edit this data")
+            truck_data=Trucks.query.filter(and_(Trucks.registration_no == registration_no, Trucks.owner ==user_data.session['current_user'])).first()
+            return render_template('truck_data.html', truck_data =truck_data,user_data =user_data)
+
+          
+
+        
        
-        UPLOAD_ = '/home/pato/myblock-01/api/static/images/trucks/profile'
+        
+      
+       
+        return render_template('truck_data.html', truck_data =truck_data,user_data =user_data)
+        
+
+
+
+"""
+------------------  PROFILE PHOTO --------------------
+
+""" 
+
+
+@accounts_bp.route('/truck_upload',  methods=('GET', 'POST'))
+
+def upload_truck_pic():
+    """
+    uploads profile picture to session['current_user'].
+    """
+    if 'logged_in' not in session:
+        flash("your session has expired! kindlg login")
+        return render_template("login.html")
+ 
+    #get current_user
+    username = session['current_user']
+    truck_data = Trucks.query.filter_by(owner =username).first()
+ 
+        
+
+    
+    if request.method == 'POST':
+
+
+        id = truck_data.id
+    
+        if not request.files["file"]:
+            flash(" no file seldcted for upload. ")
+            return render_template('truck_edit.html', truck_data =truck_data)
+
+        
+
+        dest = truck_data.id
+       
+        UPLOAD_ = '/home/pato/myblock-01/api/static/images/trucks'
         os.chdir(UPLOAD_)
         dest = dest
         UPLOAD_FOLDER =UPLOAD_+str(dest)
@@ -580,8 +1228,23 @@ def enroll_truck():
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         if not os.path.isdir("%s" % dest):
             os.mkdir("%s" % dest)
-        flash("Welcome  {}.".format(createdtruck.registration_no))
-        return redirect(url_for('accounts.trucks'))  
+
+
+        file = request.files["file"]
+        extension = os.path.splitext(file.filename)[1]
+        f_name = str(uuid.uuid4()) + extension
+        file.save(os.path.join('/home/pato/myblock-01/api/static/images/trucks/'+str(truck_data.id)+"/", f_name))
+        if  not request.files["file"]:
+           user_data.image_url=old_image
+        if request.files["file"]:
+           truck_data.image_url = ('static/images/trucks/'+str(truck_data.id)+"/"+f_name)
+        db.session.commit()
+ 
+    truck_data = Trucks.query.filter_by(owner =username).first()
+    
+    user_data = Users.query.filter_by(username = session['current_user']).first()
+    return render_template('truck_data.html', truck_data =truck_data, user_data =	user_data)
+
 
 
 
@@ -821,8 +1484,11 @@ def update_user():
         
         if request.method == 'GET':
            user_data = Users.query.filter_by(username = session['current_user']).first()
+           id = user_data.id
+           bids = Bids.query.filter(and_(Bids.author_id == id, Bids.status == 0 )).all()
 
-           return render_template('settings.html', user_data=user_data)
+
+           return render_template('settings.html', user_data=user_data,bid_data = bids)
 
 
         user_data = Users.query.filter_by(username = session['current_user']).first()
@@ -851,7 +1517,11 @@ def update_user():
         if contact:
             if len(contact) <10 and len(contact) >13:
                 flash(" contact {{}} is invalid !".format(contact))
-                return render_template('settings.html', user_data =user_data)    
+                user_data = Users.query.filter_by(username = session['current_user']).first()
+                id = user_data.id
+                bids = Bids.query.filter(and_(Bids.author_id == id, Bids.status == 0 )).all()
+
+                return render_template('settings.html', user_data=user_data,bid_data = bids)      
 
             
 
@@ -861,9 +1531,11 @@ def update_user():
             user_ =Users.query.filter(and_(Users.contact ==contact, Users.status==0)).first()
             if user_.username != session["current_user"]:
                flash("contact {{}} is registered by {{}}!".format(contact,user_.username))
-          
+               user_data = Users.query.filter_by(username = session['current_user']).first()
+               id = user_data.id
+               bids = Bids.query.filter(and_(Bids.author_id == id, Bids.status == 0 )).all()
 
-               return render_template('settings.html', user_data =user_data)
+               return render_template('settings.html', user_data =user_data, bid_data = bids)
 
                
 
@@ -872,9 +1544,11 @@ def update_user():
             user_=Users.query.filter(and_(Users.email == email, Users.status==0)).first()
        
             flash("email {{}} is registered to {{}}.".format(email,user_.username))
-            
+            user_data = Users.query.filter_by(username = session['current_user']).first()
+            id = user_data.id
+            bids = Bids.query.filter(and_(Bids.author_id == id, Bids.status == 0 )).all()
 
-            return render_template('settings.html', user_data =user_data)
+            return render_template('settings.html', user_data =user_data, bid_data=	bids)
   
         
         regex = '^.+@[^\.].*\.[a-z]{2,}$'
@@ -884,7 +1558,9 @@ def update_user():
             if email:
                 flash("email {{}} is invalid!".format(email))
                 
-
+                user_data = Users.query.filter_by(username = session['current_user']).first()
+                id = user_data.id
+                bids = Bids.query.filter(and_(Bids.author_id == id, Bids.status == 0 )).all()
                 return render_template('settings.html', user_data =user_data)
 
               
@@ -919,7 +1595,9 @@ def update_user():
         #check who is saving
         if user_data.username != session["current_user"]:
             flash("you are not allowed to edit this data")
-            
+            user_data = Users.query.filter_by(username = session['current_user']).first()
+            id = user_data.id
+            bids = Bids.query.filter(and_(Bids.author_id == id, Bids.status == 0 )).all()
             return render_template('settings.html', user_data =user_data)
 
           
@@ -939,7 +1617,9 @@ def update_user():
         except exc.IntegrityError as e :
             db.session.rollback()
       
-       
+        user_data = Users.query.filter_by(username = session['current_user']).first()
+        id = user_data.id
+        bids = Bids.query.filter(and_(Bids.author_id == id, Bids.status == 0 )).all()
         return render_template('settings.html', user_data =user_data)
         
 
@@ -993,48 +1673,64 @@ def upload_prof_pic():
 
 
 """
-------------------  FOLLOW --------------------
+------------------  REQUEST SERVICE --------------------
 
 """
 
 
-@accounts_bp.route('/bike_request', methods=('GET', 'POST'))
+@accounts_bp.route('/service_request', methods=('GET', 'POST'))
 
 def request_data():
         if "logged_in" not in session:
            flash(" your session has expired! kindly login")
            return render_template("login.html")
 
-        user_data = Users.query.filter_by(username = session['current_user']).first()
        
+
+
+        if request.method == 'POST':
+	        timestamp = sasa  
+	        data = request.form
+	        
+	        destination = data.get("destination")
+	        author_id =  session["current_user"]
+	        budget =  data.get("budget")
+	        details =  data.get("details")
+	       
+
+	        #verify data
+	        #existing_requests = Bids.query.filter_by(status = 0).all()
+	        user_data = Users.query.filter_by(username = session['current_user']).first()
+
+	        request_data = Bids.query.filter(and_(Bids.author_id == user_data.id ,Bids.details == details, Bids.status == 0)).first()
+
+	        if request_data :
+	        	flash(" request is aleady posted and active")
+	        	return render_template('dashboard.html', user_data =user_data)
+
+	        f = Bids(
+                destination = data.get("destination"),
+                author_id =  user_data.id,
+                budget =  data.get("budget"),
+                details =  data.get("details"),
+                requesttime = sasa,
+                status = 0,
+                request_views = 0,
+                quantity = data.get('quantity'),
+                origin = data.get('origin')
+            )
+
+	        if not request_data :
+	        	db.session.add(f)
+	        	db.session.commit()
+	        user_data = Users.query.filter_by(username = session['current_user']).first()
+	        id = user_data.id
+	        existing_requests = Bids.query.filter(and_(Bids.author_id == id ,Bids.status == 0)).all()
+	        print(existing_requests)
+	        return render_template('dashboard.html',user_data =user_data, bid_data=existing_requests)
+        return render_template('dashboard.html',user_data =user_data, bid_data=existing_requests)
+
       
-
-        return render_template('dashboard.html',user_data =user_data, service_data=service_data,message_data=message_data)
-
-
-
-        timestamp = sasa  
-        data = request.form
-        destination = data.get("destination")
-        author_id =  session["current_user"]
-        budget =  data.get("budget")
-        details =  data.get("details")
-        requesttime =data.get("time")
-
-        #verify data
-        existing_requests = bike_request.query.filter_by(status = 0).all()
-
-        for req in existing_requests:
-            if req.author_id != author_id:                                   
-                f = bikeRequest(
-                    destination = data.get("destination"),
-                      author_id =  session["current_user"],
-                      budget =  data.get("budget"),
-                      details =  data.get("details"),
-                      requesttime =data.get("time")
-                    )
-                db.session.add(f)
-                db.session.commit()
  
 
 """
@@ -1203,8 +1899,16 @@ def all_users():
     return render_template('user.html',users_=users_, user_data =user_data, product_data = product_data,service_data=service_data,message_data=message_data)
 
 
+"""
+------------------  GET USER --------------------
 
+"""    
 
+@accounts_bp.route('/prod', methods=('GET', 'POST'))
+
+def prod():
+   
+    return render_template("product_list.html")
     
 """
 ------------------  GET USER --------------------
@@ -1220,6 +1924,169 @@ def get_user():
     return render_template("user.html",user_data=user_data)
     
    
+
+"""
+------------------  PRODUCT-LIST --------------------
+
+""" 
+@accounts_bp.route('/product_list',methods = ["POST","GET"])  
+def product_list():
+    if "logged_in"  not in session:
+      flash("your session has expired! kindly login")
+      return render_template("login.html")
+
+   
+    username =session["current_user"]
+    user_data =Users.query.filter_by(username= username).first()
+    business_data = Business.query.filter_by(owner = user_data.username).first()
+
+    
+    # create product  photo directory
+    UPLOAD_ = '/home/pato/myblock-01/api/static/media/business/products/'
+    os.chdir(UPLOAD_)
+    dest = business_data.id
+    UPLOAD_FOLDER =UPLOAD_+str(dest)
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    if not os.path.isdir("%s" % dest):
+        os.mkdir("%s" % dest)
+        os.chdir(BASE_DIR)
+
+    if request.method == 'POST':
+       
+
+          
+        #get  userdata
+        username =session["current_user"]
+        user_data =Users.query.filter_by(username= username).first()    
+        
+        data= request.form
+        author_id = business_data.id
+        product_title= data.get('product_name')
+        product_description = data.get('product_description')
+        product_category = data.get('product_category')
+        price = data.get('product_cost')
+        status = 0
+        timestamp =sasa
+
+        product_data = db.session.query(Products).filter(and_(Products.product_title == product_title, Products.price ==price, Products.status ==0, Products.author_id ==author_id)).first()
+        if product_data:
+          flash(" Product exists in active state, No need to repost!")
+          return render_template("dashboard.html", user_data=user_data)
+
+          
+         
+        new_product = Products(
+            product_title = product_title,
+            product_description = product_description,
+            author_id = author_id,            
+            product_category = product_category,
+            price = price,
+            status = 0,
+            timestamp = sasa
+        )
+
+        db.session.add(new_product)
+        db.session.commit()
+        product_data = db.session.query(Products).filter(and_(Products.product_title == product_title, Products.price ==price)).first()
+        username =session["current_user"]
+        user_data =Users.query.filter_by(username= username).first()
+        business_data = Business.query.filter_by(owner = user_data.username).first()
+
+
+        id = business_data.id
+        links =[]
+        if "files[]" not in request.files:
+           flash(" missing product image")
+           return render_template("product_list.html", user_data=user_data)
+
+        count = 0
+        upfile = request.files.getlist('files[]')
+        for file in upfile:
+            if file.filename != '':
+               extension = os.path.splitext(file.filename)[1]
+               f_name = str(uuid.uuid4()) + extension
+               file.save(os.path.join('/home/pato/myblock-01/api/static/media/business/products/'+str(business_data.id)+"/", f_name))
+               image_url= ('static/media/business/products/'+str(business_data.id)+"/"+f_name)
+              
+               links.append(image_url)
+        
+        stack = [string for string in links if string != ""]
+
+        if len(links) == 1:  #<  str(range(len(stack))) :
+               product_data.image_url=links[0]  
+               db.session.commit()            
+               
+        if len(links) >= 1:  #<  str(range(len(stack))) :
+               product_data.image_url=links[0]
+               db.session.commit() 
+               
+
+        if len(links) >= 2: #< str(range(len(stack))) :
+               product_data.image_url1= links[1]
+               db.session.commit() 
+              
+        if len(links) >= 3: #< str(range(len(stack))):
+               product_data.image_url2= links[2]
+               db.session.commit() 
+               
+        if len(links) >= 4: #< str (rartnge(len(stack))):
+               product_data.image_url3= links[3]
+               db.session.commit() 
+               
+        if len(links) >= 5: #<=  str(range(len(stack))):
+               product_data.image_url4= links[4]
+               db.session.commit() 
+        products = db.session.query(Products).filter(and_(Products.product_title == product_title, Products.price ==price)).first()  
+        product_data = Products.query.filter_by(author_id = user_data.id).all()   
+        business_data = Business.query.filter_by(owner = user_data.username).first()
+        #return render_template("shop-detail.html", user_data=user_data, product=products, product_data=product_data, business_data = business_data) 
+
+      
+    return render_template("dashboard.html", user_data=user_data, product=products, product_data=product_data, business_data = business_data) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 """
 ------------------  DEACTIVATE USER --------------------

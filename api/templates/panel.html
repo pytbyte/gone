@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Site Metas -->
+    <title>MyBlock</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="static/theway/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="static/theway/images/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://unpkg.com/leafvar-routing-machine@latest/dist/leafvar-routing-machine.css" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="static/theway/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="static/theway/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="static/theway/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/theway/css/custom.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leafvar/0.7.3/leafvar.css" />
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src="//cdnjs.cloudflare.com/ajax/libs/leafvar/0.7.3/leafvar.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leafvar.locatecontrol@[VERSION]/dist/L.Control.Locate.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/leafvar.locatecontrol@[VERSION]/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="css/leafvar.awesome-markers.css">
+
+<script src="http://cdn.leafvarjs.com/leafvar-0.7.3/leafvar.js"></script>
+    <script src="js/leafvar.awesome-markers.js"></script>
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/leafvar-pulse-icon@0.1.0/src/L.Icon.Pulse.css" />
+
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/leafvar-pulse-icon@0.1.0/src/L.Icon.Pulse.css" />
+<script src="https://unpkg.com/leafvar/dist/leafvar-src.js"></script>
+<script src="https://unpkg.com/leafvar-pulse-icon@0.1.0/src/L.Icon.Pulse.js"></script>
+<script src="https://unpkg.com/leafvar-routing-machine@latest/dist/leafvar-routing-machine.js"></script>
+
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.static/theway/js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+<link rel="stylesheet" href="https://unpkg.com/leafvar-routing-machine@3.2.12/dist/leafvar-routing-machine.css" />
+<script src="https://unpkg.com/leafvar-routing-machine@3.2.12/dist/leafvar-routing-machine.js"></script>
+
+
+   
+
+
+    
+
+</head>
+
+
+
+
+<body>
+ <!-- Start Main Top -->
+    <header class="main-header">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
+            <div class="container">
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                    <a class="navbar-brand" href="#" ><h1 style="color:grey; font-weight: 900; font-size: 32px">{{businessdata.businessname}}</h1><h4 style="font-size: 15px"><strong> {{businessdata.businesscategory}} </strong></h4></a>
+
+                </div>
+                <!-- End Header Navigation -->
+                 <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                       
+                        <li class="side-menu"><a href="#">
+                        <i class="fa fa-fire" style="color:red; font-size:16px;"></i>
+                            <span class="badge" style="color:green; font-size:12px;">&nbsp;&nbsp;3</span>
+                        </a></li>
+                    </ul>
+                </div>
+                <!-- End Atribute Navigation -->
+                 <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
+                        
+                         <li class="dropdown megamenu-fw">
+                            <li class="dropdown megamenu-fw">
+                            
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"><i class="fa fa-bullhorn" style="color:black; font-size:22px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;"><br>SHOWCASE</strong></i></a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#authCenter">
+                                            <h6 class="title">&nbsp;&nbsp; <i class="fa fa-gift" style="color:red; font-size: 20px"> &nbsp;&nbsp; <strong style="font-size:17px; color:black;">PRODUCT</strong></i></h6>
+                                            
+                                        </div>
+                                        <!-- end col-3 -->
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#cab">
+                                            <h6 class="title"> &nbsp;&nbsp; <i class="fa fa-handshake" style="color:red; font-size: 20px"> &nbsp;&nbsp;<strong style="font-size:17px; color:black;">SERVICE</strong></i></h6>
+                                            
+                                        </div>
+                                        <!-- end col-3 -->
+                                       
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#truck">
+                                            <h6 class="title">&nbsp;&nbsp;<i class="fa fa-registered" style="color:red; font-size:20px"> &nbsp;&nbsp; <strong style="font-size:17px; color:black;">BUSINESS PROFILE</strong></i></h6>
+                                            
+                                        </div>
+                                        <!-- end col-3 -->
+                                    </div>
+                                    <!-- end row -->
+                                </li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+
+                    <ul class="row">
+                      <li class="nav-item"><a class="nav-link" href="/settings"> <i class="fa fa-user" style="color:green; font-size:16px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;"><br>USER ACCOUNT</strong> </i></a></li>                       
+                        <li class="nav-item"><a class="nav-link" href="/logout"> <i class="fa fa-power-off" style="color:green; font-size:16px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;"><br>EXIT</strong> </i></a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+
+
+
+                <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                               
+                </div>
+                <!-- End Atribute Navigation -->
+            </div>
+            
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
+
+
+    <div id="leafvarmap"> </div>
+    <script src="https://unpkg.com/leafvar@1.2.0/dist/leafvar.js"></script>
+    <script src="leafvar-routing-machine.js"></script>
+      <br>
+
+        <!-- Modal auth-->
+<div class="modal fade" id="authCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+        <h5 class="modal-title" id="exampleModalCenterTitle"style="color:grey; font-size:15px;" > <strong> SHOWCASE PRODUCT .</strong></h5>
+       </center>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        {% for message in get_flashed_messages() %}
+                        <div text-center style="color:red;">
+                         <div class="alert-error" style="color:red;">{{ message }}</div>
+                        </div>
+                       {% endfor %}
+
+            <!-- Start Cart  -->
+    <div class="cart-box-main">
+        <div class="container">
+            
+           
+            <div class="row">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title-left">
+            
+               <!--profile photo -->
+                             
+
+                                 <h3>SHOWCASE PRODUCT </h3>
+
+                        {% for message in get_flashed_messages() %}
+                        <div text-center style="color:red;">
+                         <div class="alert-error" style="color:red;">{{ message }}</div>
+                        </div>
+                       {% endfor %}
+ 
+                        </div>
+                         <strong><output id="list" style="overflow-y:auto; height: 300px; overflow-x:hidden; display: inline-block; font-size: 20px; color: red;"></output></strong>
+                        <div>
+
+                        <center>
+
+                        <form id="profile_upload" action="/product_list" method="post" role="form" enctype="multipart/form-data">
+                
+                        <div class="form-group choose-file">
+                        <center>
+                             
+                        
+                          <div class="file-select">
+                                    <label for="files" class="mb-0"><strong> <li class="fa fa-upload"> &nbsp;&nbsp;Add Image  </li></strong></label></center>
+                                   
+                                    <input type="file" id="files" name="files[]" multiple  hidden />
+                                </div>
+
+                        </center>
+                        </div>
+
+
+                      
+                          
+                          <script type="text/javascript">
+                       
+                         function devareImage() { 
+                              var index = Array.from(document.getElementById('list').children).indexOf(event.target.parentNode)
+                                document.querySelector("#list").removeChild( document.querySelectorAll('#list span')[index]);
+                                totalFiles.splice(index, 1);
+                                console.log(totalFiles)
+                            }
+
+                            var totalFiles = [];
+                            function handleFileSelect(evt) {
+                                var files = evt.target.files; // FileList object
+
+                                // Loop through the FileList and render image files as thumbnails.
+                                for (var i = 0, f; f = files[i]; i++) {
+
+                                  // Only process image files.
+                                  if (!f.type.match('image.*')) {
+                                    continue;
+                                  }
+
+
+                                  
+                                  totalFiles.push(f)
+
+
+                                  var reader = new FileReader();
+
+                                  // Closure to capture the file information.
+                                  reader.onload = (function(theFile) {
+                                    return function(e) {
+                                      // Render thumbnail.
+                                      var span = document.createElement('span');
+                                      span.innerHTML = ['<img width=400 class="d-block w-100" src="', e.target.result,
+                                                        '" title="', escape(theFile.name), '"/>', "<li class='fa fa-trash'  onclick='devareImage()'>&nbsp;&nbsp;</li>"].join('');
+
+                                      document.getElementById('list').insertBefore(span, null);
+
+                                    };
+                                  })(f);
+
+                                  // Read in the image file as a data URL.
+                                  reader.readAsDataURL(f);
+                                  
+                                }
+                              }
+                              
+
+                              
+                              document.getElementById('files').addEventListener('change', handleFileSelect, );
+
+                        </script>
+                                  
+                     
+
+                        
+
+                       
+                         
+                         <div>
+                          
+                            <label for="product_name"> Product name *</label><br>
+                                                     
+                            <input id="product_name" name= "product_name" id="product_title" type="text"><br>
+                                                 
+                                                  
+                            <label for="product_category">  Product category *</label><br>
+                                                     
+                            <input  id="product_category"  name="product_category" type="text"><br>
+                                                    
+                                                  
+
+                                                  
+                            <label for="product_cost"> Product cost *</label><br>
+                            <input  id="product_cost"  name="product_cost" type="text"><br>
+                                                      
+                                                 
+
+                                               
+                            <label for="product_decsription">Product decsription *</label><br>
+                            <textarea  id="product_decsription" name="product_description"></textarea><br>
+                            <li><input class="mb-0" id="latlng" name="latlng" hidden="true"></input></li></div>
+                            
+                            
+                             <button id='picha' type="submit" class="btn hvr-hover">Next</button>
+                            </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+    <!-- End Cart -->
+
+                
+
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+ 
+
+
+
+             <!-- Modal auth-->
+<div class="modal fade" id="cab" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+        <p><h5 class="modal-title" id="exampleModalCenterTitle"style="color:red; font-size:20px;" > REQUEST TAXI<strong> .</strong></i></h5></p>
+       </center>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+             <div class="container">
+              <form  id="formRegister"  action="/" method="Post">
+                        <div class="form-row" >
+                         
+                            <div class="service-block-inner">
+                                <label for="destination" class="mb-0"><strong> Destination</strong></label>
+                                <input  class="form-control" name="destination" id="destination" placeholder="destination"> </div>
+
+                            
+                         
+                            <div class="service-block-inner">
+                                <label for="time" class="mb-0"><strong> Time</strong></label>
+                                <input type="time" class="form-control" name="time" id="time" placeholder="departure time"> </div>
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> Budget</strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
+                            
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> Passangers</strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
+
+                             <div class="service-block-inner">
+                                <label for="Inputdetailsm" class="mb-0"> <strong> Details </strong></label>
+                                 <li><textarea class="mb-0" id="Inputdetailsm" name="Inputdetailsm" placeholder="describe your needs" rows="4"></textarea></li></div>
+                        </div>
+                        <button type="submit" class="btn hvr-hover"><i class="fa fa-taxi"> . </i></button>
+                    </form>
+
+                 </div>
+                
+
+
+                
+            </div>
+            <br>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+ 
+
+
+      <!-- Modal auth-->
+<div class="modal fade" id="truck" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+        <p><h5 class="modal-title" id="exampleModalCenterTitle"style="color:red; font-size:20px;" > REQUEST TRUCK<strong> .</strong></i></h5></p>
+       </center>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+             <div class="container">
+              <form  id="formRegister"  action="/" method="Post">
+                        <div class="form-row" >
+                         
+                            <div class="service-block-inner">
+                                <label for="destination" class="mb-0"><strong> Destination</strong></label>
+                                <input  class="form-control" name="destination" id="destination" placeholder="destination"> </div>
+
+                            
+                         
+                            <div class="service-block-inner">
+                                <label for="time" class="mb-0"><strong> TIME</strong></label>
+                                <input type="time" class="form-control" name="time" id="time" placeholder="departure time"> </div>
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> BUDGET</strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
+                            
+
+                            <div class="service-block-inner">
+                                <label for="InputPassword1" class="mb-0"> <strong> Quantity </strong></label>
+                                <li class="quantity-box"><input type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
+
+                             <div class="service-block-inner">
+                                <label for="Inputdetailsm" class="mb-0"> <strong> DETAILS </strong></label>
+                                 <li><textarea class="mb-0" id="Inputdetailsm" name="Inputdetailsm" placeholder="describe your needs" rows="4"></textarea></li></div>
+                        </div>
+                        <button type="submit" class="btn hvr-hover"><i class="fa fa-truck"> . </i></button>
+                    </form>
+
+                 </div>
+                
+
+
+                
+            </div>
+            <br>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+
+
+
+
+
+
+
+
+
+     
+             <!-- Modal auth-->
+<div class="modal fade" id="setupshop" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+        <p><h5 class="modal-title" id="exampleModalCenterTitle"style="color:red; font-size:20px;" > SETUP SHOP<strong> .</strong></i></h5></p>
+       </center>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+             <div class="container">
+              <!-- Start Cart  -->
+    <div class="cart-box-main">
+        <div class="container">
+            
+           
+            <div class="row">
+                <div class="col-sm-6 col-lg-6 mb-3">
+                    <div class="checkout-address">
+                        <div class="title-left">
+            
+               <!--profile photo -->
+                       <center>
+            <i class="fa fa-store-alt" style="font-size:100px;"></i> <br>
+
+             </center> <br>                       
+
+                                 <h3>Business Account </h3>
+
+                        {% for message in get_flashed_messages() %}
+                        <div text-center style="color:red;">
+                         <div class="alert-error" style="color:red;">{{ message }}</div>
+                        </div>
+                       {% endfor %}
+ 
+                        </div>
+                        <div>
+                         <form id="formbusiness" action="/business" method="post" role="form" validate>
+                         <div>
+                          
+                            <div class="mb-3">
+                                <label for="businessname"> Business name *</label>
+                                <div class="input-group">
+                                    <input name="businessname" type="text" class="form-control" id="businessname" placeholder="" required>
+                                    
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contact"> Business contact *</label>
+                                <div class="input-group">
+                                    <input name="contact" type="text" class="form-control" id="contact" placeholder="" required>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="businesscategory">Business Category *</label>
+                                <input name="businesscategory" type="text" class="form-control" id="businesscategory" placeholder="" required="">
+                                
+                            </div>
+
+                             <div class="mb-3">
+                                <label for="workinghours">Working Hours *</label>
+                                <input name="workinghours" type="text" class="form-control" id="workinghours" placeholder="" required="">
+                                
+                            </div>
+                             <div class="service-block-inner">
+                                <label for="businessdsc" class="mb-0"> <strong> Business Details </strong></label>
+                                 <li><textarea class="mb-0" id="businessdsc" name="businessdsc" placeholder="describe your business" rows="4"></textarea></li>
+
+                                 <li><input class="mb-0" id="latlng" name="latlng" ></input></li></div>
+
+
+                            
+                            
+                             <button type="submit" class="btn hvr-hover">Next</button>
+                            </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+    <!-- End Cart -->
+
+                 </div>
+                
+
+
+                
+            </div>
+            <br>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+</div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+
+         <style>
+        
+
+        #leafvarmap {
+            width: 100%;
+            height: 89vh;
+
+        }
+    </style>
+
+
+    <script type="text/javascript">
+  
+        //attempt to fetch cuurnt location
+    
+
+    
+         // Creating a map object
+         var mymap =  new L.map('leafvarmap');
+         // Creating a Layer object
+        var googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+           maxZoom: 20,
+           subdomains:['mt0','mt1','mt2','mt3']
+            }).addTo(mymap);
+
+         mymap.locate({setView: true,
+                       enableHighAccuracy: true, 
+                       maxZoom: 20, 
+                       watch:false, 
+                       timeout: 60000,
+                       maximumAge:0
+                      });
+
+        L.control.scale().addTo(mymap);
+         
+         function onLocationFound(e) {
+                  var radiu = e.accuracy / 2;
+                  // js set radius to 0 decimal places.
+                  var radi = radiu / 1000
+                  var radius = radi.toFixed(2)
+                  var marker = L.marker(e.latlng)
+                  var redIcon = L.icon.pulse({ color: "red", FillColor: "red", animate: true});
+                  
+                  var latlng = e.latlng;
+                  
+
+
+                  
+                  document.getElementById("latlng").textContent = latlng;
+                  
+
+       
+                 
+                  // Adding marker to the map
+             
+                  marker.setIcon(redIcon)
+
+
+          
+marker.bindPopup('<div style="width:200px; height:190px;"><div class="col-xl-5 col-lg-5 col-md-6"><div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel"><div class="carousel-inner" role="listbox"><div class="carousel-item active"> <img class="d-block w-100" src="static/images/big-img-01.jpg"style="width:200px; height:200px;"> </div><div class="carousel-item"> <img class="d-block w-100" src="static/images/big-img-02.jpg" style="width:200px; height:200px;"> </div> <div class="carousel-item"> <img class="d-block w-100" src="static/images/big-img-03.jpg" style="width:200px; height:200px;"> </div></div></div></div> <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"><i class="fa fa-angle-left" aria-hidden="true"></i><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next"> <i class="fa fa-angle-right" aria-hidden="true"></i> <span class="sr-only">Next</span> </a></div></div></div></div><center><strong><h5><br>FashionKe <br>Christmass Luku<br><br></strong><a class="btn hvr-hover"href="/cabs" style="color:white;font-size:15px;"><strong>Request Product</strong></a> </center></h5></div>').openPopup();
+    
+           
+                  marker.addTo(mymap)
+
+
+
+                  }
+         function error() {
+            alert( 'Unable to retrieve your location');
+               }
+            mymap.on('locationfound', onLocationFound);
+
+
+        
+
+
+
+    
+</script>
+
+
+
+<script src="https://npmcdn.com/leafvar-geometryutil"></script>
+  <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+<script src="https://unpkg.com/leafvar/dist/leafvar-src.js"></script>
+<script src="https://unpkg.com/leafvar-pulse-icon@0.1.0/src/L.Icon.Pulse.js"></script>
+
+ 
+
+
+    <!-- ALL JS FILES -->
+    <script src="static/theway/js/jquery-3.2.1.min.js"></script>
+    <script src="static/theway/js/popper.min.js"></script>
+    <script src="static/theway/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="static/theway/js/jquery.superslides.min.js"></script>
+    <script src="static/theway/js/bootstrap-select.js"></script>
+    <script src="static/theway/js/inewsticker.js"></script>
+    <script src="static/theway/js/bootsnav.js."></script>
+    <script src="static/theway/js/images-loded.min.js"></script>
+    <script src="static/theway/js/isotope.min.js"></script>
+    <script src="static/theway/js/owl.carousel.min.js"></script>
+    <script src="static/theway/js/baguetteBox.min.js"></script>
+    <script src="static/theway/js/jquery-ui.js"></script>
+    <script src="static/theway/js/jquery.nicescroll.min.js"></script>
+    <script src="static/theway/js/form-validator.min.js"></script>
+    <script src="static/theway/js/contact-form-script.js"></script>
+    <script src="static/theway/js/custom.js"></script>
+</body>
+
+</html>

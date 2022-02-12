@@ -51,19 +51,61 @@
                      <a class="navbar-brand" href="#" ><h1 style="color:grey; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 15px"><strong> Simple. Reliable. Efficient </strong></h4></a>
                 </div>
                 <!-- End Header Navigation -->
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
+                 
+                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="/dashboard"> <i class="fa fa-globe" style="color:red; font-size:22px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;">EXPLORE<br>4km Radius</strong></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/riders">  <i class="fa fa-motorcycle" style=" font-size:22px;"> &nbsp;&nbsp;<strong  style="font-size:12px; color:red;">22</strong></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/taxis">  <i class="fa fa-taxi" style=" font-size:22px;"> &nbsp;&nbsp;<strong style="font-size:12px; color:red;"> 12</strong></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/trucks">  <i class="fa fa-truck" style=" font-size:22px;"> &nbsp;&nbsp;<strong style="font-size:12px; color:red;"> 2</strong></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/trucks">  <i class="fa fa-store-alt" style=" font-size:22px;"> &nbsp;&nbsp;<strong style="font-size:12px; color:red;"> 70</strong> </i></a></li>                       
-                        <li class="nav-item"><a class="nav-link" href="/login"> <i class="fa fa-power-off" style="color:red; font-size:22px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;">EXIT</strong> </i></a></li>
+                        
+                         <li class="dropdown megamenu-fw">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"><i class="fa fa-bullhorn" style="color:black; font-size:22px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;">REQUEST</strong></i></a>
+                            <ul class="dropdown-menu megamenu-content" role="menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#authCenter">
+                                            <h6 class="title">&nbsp;&nbsp; <i class="fa fa-motorcycle" style="color:red; font-size: 20px"> &nbsp;&nbsp; <strong style="font-size:17px; color:black;">RIDER</strong></i></h6>
+                                            
+                                        </div>
+                                        <!-- end col-3 -->
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#cab">
+                                            <h6 class="title"> &nbsp;&nbsp; <i class="fa fa-taxi" style="color:red; font-size: 20px"> &nbsp;&nbsp;<strong style="font-size:17px; color:black;">TAXI</strong></i></h6>
+                                            
+                                        </div>
+                                        <!-- end col-3 -->
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#truck">
+                                            <h6 class="title"> &nbsp;&nbsp;<i class="fa fa-truck" style="color:red; font-size: 20px"> &nbsp;&nbsp; <strong style="font-size:17px; color:black;">TRUCK</strong></i></h6>
+                                            
+                                        </div>
+                                        <div class="col-menu col-md-3" data-toggle="modal" data-target="#truck">
+                                            <h6 class="title">&nbsp;&nbsp;<i class="fa fa-info-circle" style="color:red; font-size:20px"> &nbsp;&nbsp; <strong style="font-size:17px; color:black;">HELP</strong></i></h6>
+                                            
+                                        </div>
+                                        <!-- end col-3 -->
+                                    </div>
+                                    <!-- end row -->
+                                </li>
+                            </ul>
+                        </li>
                         
                     </ul>
                 </div>
+                    
+
+                      <!-- Start Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                       
+                        <li class="side-menu"><a href="#" data-toggle="modal" data-target="#notice">
+                        <i class="fa fa-fire" style="color:red; font-size:16px;"></i>
+                            <span class="badge" style="color:green; font-size:12px;">&nbsp;&nbsp;</span>
+                        </a></li>
+                   
+                </div>
+                <!-- End Atribute Navigation -->
+                        
+                    
+                <!-- /.navbar-collapse -->
+
+               
                 <!-- /.navbar-collapse -->
 
                 <!-- Start Atribute Navigation -->
@@ -137,7 +179,7 @@
                        {% endfor %}
                        
 
-                      <h5> <a data-toggle="collapse" href="#formUpdate" role="button" aria-expanded="false"><i  class="fa fa-edit"style="color: red;"></i></a></h5>
+                      <h5> <a data-toggle="collapse" href="#formUpdate" role="button" aria-expanded="false"><i  class="fa fa-edit"style="color: red; font-size: 15px;"></i></a>&nbsp;&nbsp;<a  href="/business" role="button" aria-expanded="false"><i  class="fa fa-store-alt"style="color: red; font-size: 15px;"></i></a>&nbsp;&nbsp;<a  href="/rides" role="button" aria-expanded="false"><i  class="fa fa-motorcycle"style="color: red; font-size: 15px;"></i></a> &nbsp;&nbsp;<a href="/cabs" role="button" aria-expanded="false"><i  class="fa fa-taxi"style="color: red; font-size: 15px;"></i></a>&nbsp;&nbsp;<a  href="/trucks" role="button" aria-expanded="false"><i  class="fa fa-truck"style="color: red; font-size: 15px;"></i></a></h5>
 
  
                         </div>
@@ -171,7 +213,39 @@
         </div>
     </div>
     <!-- End Cart -->
+             <!-- Modal auth-->
+<div class="modal fade" id="notice" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+        <p><h5 class="modal-title" id="exampleModalCenterTitle"style="color:red; font-size:20px;" > Notifications <strong> .</strong></i></h5></p>
+       </center>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
 
+      </div>
+      <div class="modal-body">
+             <div class="container">
+               
+
+                 </div>
+                
+
+
+                
+            </div>
+            <br>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+ 
+</div>
  
 
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>

@@ -45,34 +45,25 @@
             <div class="container">
                 <!-- Start Header Navigation -->
                 <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                     <a class="navbar-brand" href="#" ><h1 style="color:grey; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 15px"><strong> Simple. Reliable. Efficient </strong></h4></a>
+                 
+                     <a class="navbar-brand" href="/" ><h1 style="color:grey; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 15px"><strong> Simple. Reliable. Efficient </strong></h4></a>
                 </div>
                 <!-- End Header Navigation -->
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbar-menu">
-                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="/dashboard"> <i class="fa fa-home" style="color:red; font-size:22px;">&nbsp;&nbsp; </i></a></li>
-                        
-                         <li class="nav-item"><a class="nav-link" href="/riders">  <i class="fa fa-motorcycle" style="color:grey"> &nbsp;&nbsp; Ridder Account</i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/trucks">  <i class="fa fa-truck" style="color:grey"> &nbsp;&nbsp; Truck Account</i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/trucks">  <i class="fa fa-shopping-cart" style="color:grey"> &nbsp;&nbsp; Business Account</i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/settings">  <i class="fa fa-user" style="color:red; font-size:12px;"> &nbsp;&nbsp; settings</i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/login"> <i class="fa fa-power-off" style="color:red; font-size:12px;">&nbsp;&nbsp; logout</i></a></li>
-                                            
-                        
-                    </ul>
-                </div>
+               
                 <!-- /.navbar-collapse -->
 
-                <!-- Start Atribute Navigation -->
+                  <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
-                               
+                    <ul>
+                       
+                        <li class="side-menu"><a href="#">
+                        <i class="fa fa-fire" style="color:red; font-size:16px;"></i>
+                            <span class="badge" style="color:green; font-size:12px;">&nbsp;&nbsp;3</span>
+                        </a></li>
+                    </ul>
                 </div>
-                <!-- End Atribute Navigation -->
+              <!--  End Atribute Navigation -->
             </div>
             
         </nav>
@@ -107,7 +98,7 @@
                        {% endfor %}
  
                         </div>
-                         <form class="needs-validation" id="register" action="/riders" method="post" role="form" validate>
+                         <form class="needs-validation" id="register" action="/taxis" method="post" role="form" validate>
                           
                             <div class="mb-3">
                                 <label for="registration_no"> Registration_no *</label>
@@ -121,6 +112,17 @@
                                 <input name="taxi_model" type="text" class="form-control" id="taxi_model" placeholder="" required="">
                                 
                             </div>
+                            <div class="mb-3">
+                                <label for="taxi_seater">passanger capacity *</label>
+                                <input name="taxi_seater" type="text" class="form-control" id="taxi_seater" placeholder="" required="">
+                                
+                            </div>
+                             <div class="mb-3">
+                                <label for="taxi_route">ROUTE  *</label>
+                                <input name="taxi_route" type="text" class="form-control" id="taxi_route" placeholder="" required="">
+                                
+                            </div>
+                            
                             
                             <button class="btn hvr-hover" type="submit" > Next</button>
                            

@@ -53,6 +53,10 @@
     <![endif]-->
 
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+
+
    
 
 
@@ -77,7 +81,7 @@
                      <a class="navbar-brand" href="#" ><h1 style="color:grey; font-weight: 900; font-size: 32px">MyBlock</h1><h4 style="font-size: 15px"><strong> Simple. Reliable. Efficient </strong></h4></a>
                 </div>
                 <!-- End Header Navigation -->
-                 <!-- Start Atribute Navigation -->
+                 <!-- Start Atribute Navigation 
                 <div class="attr-nav">
                     <ul>
                        
@@ -87,13 +91,13 @@
                         </a></li>
                     </ul>
                 </div>
-                <!-- End Atribute Navigation -->
+                End Atribute Navigation -->
                  <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                         
                          <li class="dropdown megamenu-fw">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"><i class="fa fa-bullhorn" style="color:black; font-size:22px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;">REQUEST</strong></i></a>
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown"><i class="fa fa-bullhorn" style="color:black; font-size:22px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;"><br>REQUEST SERVICE</strong></i></a>
                             <ul class="dropdown-menu megamenu-content" role="menu">
                                 <li>
                                     <div class="row">
@@ -122,15 +126,24 @@
                             </ul>
                         </li>
                         
+                        </li>
+                        
+                   
+                        
                     </ul>
-
+                  </div>
+                 
                     <ul class="row">
+                      <li class="nav-item"><a class="nav-link" href='/settings' >&nbsp;&nbsp; <i class="fa fa-user" style=" font-size:16px;"> &nbsp;<strong style="font-size:12px; color:red;"> <br>Account settings</strong></i></a></li>
+                 
 
-                     <li class="nav-item"><a class="nav-link" href="/trucks">&nbsp;&nbsp; <i class="fa fa-comment-dots" style=" font-size:16px;"> &nbsp;<strong style="font-size:12px; color:red;"> 2<br>unread messages</strong></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="/trucks">  <i class="fa fa-store-alt" style=" font-size:16px;"> &nbsp;<strong style="font-size:12px; color:red;"> 70<br>hot offers</strong> </i></a></li>                       
-                        <li class="nav-item"><a class="nav-link" href="/login"> <i class="fa fa-power-off" style="color:green; font-size:16px;">&nbsp;&nbsp;<strong style="font-size:12px; color:red;"><br>EXIT</strong> </i></a></li>
                     </ul>
+
+                     
+              
                 </div>
+
+
                 <!-- /.navbar-collapse -->
 
 
@@ -149,6 +162,8 @@
 
 
     <div id="leafletmap"> </div>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="leaflet-routing-machine.js"></script>
       <br>
 
         <!-- Modal auth-->
@@ -166,31 +181,30 @@
       </div>
       <div class="modal-body">
              <div class="container">
-              <form  id="formRegister"  action="/" method="Post">
+              <form  id="formRegister"  action="/service_request" method="Post">
                         <div class="form-row" >
                          
                             <div class="service-block-inner">
                                 <label for="destination" class="mb-0"><strong> Destination</strong></label>
                                 <input  class="form-control" name="destination" id="destination" placeholder="destination"> </div>
 
-                            
-                         
+                          
                             <div class="service-block-inner">
-                                <label for="time" class="mb-0"><strong> Time</strong></label>
-                                <input type="time" class="form-control" name="time" id="time" placeholder="departure time"> </div>
-
-                            <div class="service-block-inner">
-                                <label for="InputPassword1" class="mb-0"> <strong> Budget</strong></label>
-                                <li class="quantity-box"><input type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
+                                <label for="buget" class="mb-0"> <strong> Budget</strong></label>
+                                <li class="quantity-box"><input id="budget" name="budget" type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
                             
 
                             <div class="service-block-inner">
-                                <label for="InputPassword1" class="mb-0"> <strong> Quantity</strong></label>
-                                <li class="quantity-box"><input type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
+                                <label for="quantity" class="mb-0"> <strong> Quantity</strong></label>
+                                <li class="quantity-box"><input id="quantity" name="quantity" type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
 
                              <div class="service-block-inner">
-                                <label for="Inputdetailsm" class="mb-0"> <strong> Details </strong></label>
-                                 <li><textarea class="mb-0" id="Inputdetailsm" name="Inputdetailsm" placeholder="describe your needs" rows="4"></textarea></li></div>
+                                <label for="details" class="mb-0"> <strong> Details </strong></label>
+                                 <li><textarea class="mb-0" id="details" name="details" placeholder="describe your needs" rows="4"></textarea></li></div>
+
+                              <div class="service-block-inner" hidden="true">
+                                <label for="origin" class="mb-0"><strong> Time</strong></label>
+                                <input type="text" class="form-control"  id="origin" name="origin" value="rider" placeholder="departure time"> </div>
                         </div>
                         <button type="submit" class="btn hvr-hover"><i class="fa fa-motorcycle"> . </i></button>
                     </form>
@@ -228,35 +242,33 @@
       </div>
       <div class="modal-body">
              <div class="container">
-              <form  id="formRegister"  action="/" method="Post">
+              <form  id="formRegister"  action="/service_request" method="Post">
                         <div class="form-row" >
                          
                             <div class="service-block-inner">
                                 <label for="destination" class="mb-0"><strong> Destination</strong></label>
                                 <input  class="form-control" name="destination" id="destination" placeholder="destination"> </div>
 
-                            
-                         
+                          
                             <div class="service-block-inner">
-                                <label for="time" class="mb-0"><strong> Time</strong></label>
-                                <input type="time" class="form-control" name="time" id="time" placeholder="departure time"> </div>
-
-                            <div class="service-block-inner">
-                                <label for="InputPassword1" class="mb-0"> <strong> Budget</strong></label>
-                                <li class="quantity-box"><input type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
+                                <label for="buget" class="mb-0"> <strong> Budget</strong></label>
+                                <li class="quantity-box"><input id="budget" name="budget" type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
                             
 
                             <div class="service-block-inner">
-                                <label for="InputPassword1" class="mb-0"> <strong> Passangers</strong></label>
-                                <li class="quantity-box"><input type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
+                                <label for="quantity" class="mb-0"> <strong> Quantity</strong></label>
+                                <li class="quantity-box"><input id="quantity" name="quantity" type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
 
                              <div class="service-block-inner">
-                                <label for="Inputdetailsm" class="mb-0"> <strong> Details </strong></label>
-                                 <li><textarea class="mb-0" id="Inputdetailsm" name="Inputdetailsm" placeholder="describe your needs" rows="4"></textarea></li></div>
+                                <label for="details" class="mb-0"> <strong> Details </strong></label>
+                                 <li><textarea class="mb-0" id="details" name="details" placeholder="describe your needs" rows="4"></textarea></li></div>
+
+                              <div class="service-block-inner" hidden="true">
+                                <label for="origin" class="mb-0"><strong> Time</strong></label>
+                                <input type="text" class="form-control"  id="origin" name="origin" value="taxi" placeholder="departure time"> </div>
                         </div>
                         <button type="submit" class="btn hvr-hover"><i class="fa fa-taxi"> . </i></button>
                     </form>
-
                  </div>
                 
 
@@ -295,31 +307,30 @@
       </div>
       <div class="modal-body">
              <div class="container">
-              <form  id="formRegister"  action="/" method="Post">
+               <form  id="formRegister"  action="/service_request" method="Post">
                         <div class="form-row" >
                          
                             <div class="service-block-inner">
                                 <label for="destination" class="mb-0"><strong> Destination</strong></label>
                                 <input  class="form-control" name="destination" id="destination" placeholder="destination"> </div>
 
-                            
-                         
+                          
                             <div class="service-block-inner">
-                                <label for="time" class="mb-0"><strong> TIME</strong></label>
-                                <input type="time" class="form-control" name="time" id="time" placeholder="departure time"> </div>
-
-                            <div class="service-block-inner">
-                                <label for="InputPassword1" class="mb-0"> <strong> BUDGET</strong></label>
-                                <li class="quantity-box"><input type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
+                                <label for="buget" class="mb-0"> <strong> Budget</strong></label>
+                                <li class="quantity-box"><input id="budget" name="budget" type="number" size="3" value="50" min="50" step="50" class="c-input-text qty text"></li></div>
                             
 
                             <div class="service-block-inner">
-                                <label for="InputPassword1" class="mb-0"> <strong> Quantity </strong></label>
-                                <li class="quantity-box"><input type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
+                                <label for="quantity" class="mb-0"> <strong> Quantity</strong></label>
+                                <li class="quantity-box"><input id="quantity" name="quantity" type="number" size="3" value="1" min="1" step="1" class="c-input-text qty text"></li></div>
 
                              <div class="service-block-inner">
-                                <label for="Inputdetailsm" class="mb-0"> <strong> DETAILS </strong></label>
-                                 <li><textarea class="mb-0" id="Inputdetailsm" name="Inputdetailsm" placeholder="describe your needs" rows="4"></textarea></li></div>
+                                <label for="details" class="mb-0"> <strong> Details </strong></label>
+                                 <li><textarea class="mb-0" id="details" name="details" placeholder="describe your needs" rows="4"></textarea></li></div>
+
+                              <div class="service-block-inner" hidden="true">
+                                <label for="origin" class="mb-0"><strong> Time</strong></label>
+                                <input type="text" class="form-control"  id="origin" name="origin" value="truck" placeholder="departure time"> </div>
                         </div>
                         <button type="submit" class="btn hvr-hover"><i class="fa fa-truck"> . </i></button>
                     </form>
@@ -341,6 +352,11 @@
  
 </div>
       
+
+
+
+
+
 
 
 
@@ -416,9 +432,8 @@
                        timeout: 60000,
                        maximumAge:0
                       });
-                           
 
-
+        L.control.scale().addTo(mymap);
          
          function onLocationFound(e) {
                   var radiu = e.accuracy / 2;
@@ -429,6 +444,7 @@
                   var redIcon = L.icon.pulse({ color: "red", FillColor: "red", animate: true});
                   
                   
+                  
        
                  
                   // Adding marker to the map
@@ -437,22 +453,11 @@
 
 
           
-marker.bindPopup(' <div> <br><strong><div class="widget change-email mb-0"><h5 class="widget-header user">Edit photo</h3><form id="profile_upload" action="/profile_upload" method="post" role="form" enctype="multipart/form-data"><div class="form-group choose-file"><center><label for="input-file"><i class="fa fa-taxi" style="font-size:190px;"></i></label><input name="file" type="file"  id="input-file" hidden="true" required></center></div><button class="btn btn-transparent">Upload</button></form></div></strong><h5><a class="btn hvr-hover"href="/cabs" style="color:white; font-size:15px;"><strong>Request Product</strong></a> </center></h5><div>').openPopup();
+marker.bindPopup('<div style="width:200px; height:190px;"><div class="col-xl-5 col-lg-5 col-md-6"><div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel"><div class="carousel-inner" role="listbox"><div class="carousel-item active"> <img class="d-block w-100" src="static/images/big-img-01.jpg"style="width:200px; height:200px;"> </div><div class="carousel-item"> <img class="d-block w-100" src="static/images/big-img-02.jpg" style="width:200px; height:200px;"> </div> <div class="carousel-item"> <img class="d-block w-100" src="static/images/big-img-03.jpg" style="width:200px; height:200px;"> </div></div></div></div> <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"><i class="fa fa-angle-left" aria-hidden="true"></i><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next"> <i class="fa fa-angle-right" aria-hidden="true"></i> <span class="sr-only">Next</span> </a></div></div></div></div><center><strong><h5><br>FashionKe <br>Christmass Luku<br><br></strong><a class="btn hvr-hover"href="/cabs" style="color:white;font-size:15px;"><strong>Request Product</strong></a> </center></h5></div>').openPopup();
     
            
                   marker.addTo(mymap)
 
-                   var control = L.Routing.control({
-  waypoints: [
-    L.latLng(38.7436056, -9.2304153),
-    L.latLng(38.5334477, -0.1312811)
-  ],
-  router: new L.Routing.osrmv1({
-    language: 'en',
-    profile: 'car'
-  }),
-  geocoder: L.Control.Geocoder.nominatim({})
-}).addTo(mymap);
 
 
                   }
@@ -468,6 +473,8 @@ marker.bindPopup(' <div> <br><strong><div class="widget change-email mb-0"><h5 c
 
     
 </script>
+
+<input type="timess" class="form-control" name="time" id="time" placeholder="departure time"> </div>
 
 <script src="https://npmcdn.com/leaflet-geometryutil"></script>
   <script src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>

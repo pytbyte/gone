@@ -1,0 +1,39 @@
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+                              
+                               <center> 
+                          
+                             <div class="gallery" style="overflow-y:auto; height: 300px; overflow-x:hidden; display: inline-block;background-image: url('/static/all_images/bg/bg-1.jpg');" ></div><br>
+                              <label for="gallery-photo-add" class="mb-0"><strong> <li class="fa fa-upload"> &nbsp;&nbsp;Add Image  </li></strong></label></center>
+                             
+                             <input type="file" multiple id="gallery-photo-add" hidden="true">
+                         
+                        <script >
+                        $(function() {
+                                  // Multiple images preview in browser
+                                  var imagesPreview = function(input, placeToInsertImagePreview) {
+
+                                      if (input.files) {
+                                          var filesAmount = input.files.length;
+                                          
+
+                                          for (i = 0; i < filesAmount; i++) {
+                                              var reader = new FileReader();
+                                              
+
+
+                                              reader.onload = function(event) {
+                                                  $($.parseHTML('<img class="d-block w-100" style=" display: inline-block;">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                                              }
+
+                                              reader.readAsDataURL(input.files[i]);
+                                          }
+                                      }
+
+                                  };
+
+                                  $('#gallery-photo-add').on('change', function() {
+                                      imagesPreview(this, 'div.gallery');
+                                  });
+                              });
+                        </script>
